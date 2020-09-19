@@ -13,4 +13,4 @@ categories: jekyll update
     * `bundle exec jekyll serve`
 1. go to `http://localhost:4000`
 1. And with that done, **now you have your own website**!
-1. If you edit something and want to rebuild your site, run `jekyll build webpage`
+1. If you edit something and want to rebuild your site, run `jekyll build mywebpage`
