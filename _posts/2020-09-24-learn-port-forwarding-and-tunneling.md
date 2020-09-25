@@ -46,3 +46,17 @@ What that command does is:
 This, <u>appart from being more practical than the previous example</u> (because it is more likely to have an SSH server than having *rinetd* installed on your system), **it encrypts all the traffic between your work and your home computer**, thus making it safe, even if the network is insecure. 
 
 Now, while being at work, you can navigate to *GitHub* by going to `https://127.0.0.1:8080`.
+
+### 2.2 - Remote port forwarding
+We'll change up a little bit the previous example to explain remote port forwarding.
+
+Let's say that there is an *FTP* server (running on port 21) in the corporate network, and a <u>coworker asks me if I can help him with a bug in the *FTP* server that he's having trouble solving</u>.
+Right now I can't help him, because **the firewall blocks all connections that don't go through port 123**, and the FTP server is listening on port 21.
+
+What I can do is this:
+1. As the previous example, set up an ***SSH server*** on your home machine that <u>will listen on port 123</u>.
+1. Tell my friend to run the following commmand: `ssh a.b.c.d -p 123 -R 21:127.0.0.1:21`
+
+What this is going to do is create an ***SSH* tunnel** that will communicate a remote port in my home machine (`21:`) with the local port (`:21`) on the corporate server (`127.0.0.1`).
+
+Now I can access the corporate *FTP* server running on port 21 from my machine with this command: `ftp 127.0.0.1`
