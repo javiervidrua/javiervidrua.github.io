@@ -9,20 +9,40 @@ categories: jekyll update
 
 Let's start talking about *port forwarding*.
 
-## Port forwarding (redirection)
+## 1 - Port forwarding/redirection
 Let's explain *port forwarding* using a simple example:
 
-Supose that you are at work on your computer, and you want to navigate to *Github*, but you can't because <u>there is a firewall that only allows communications on port 53 (DNS)</u>. You try to go to *Github* but the requests get dropped by the firewall and the page doesn't load.
+Supose that you are at work on your computer, and you want to navigate to *Github*, but you can't because **there is a firewall that only allows communications on port 123 (NTP)***. You try to go to *Github* but the requests get dropped by the firewall and the page doesn't load.
 
 So what do you do?
 
-1. On your local machine, you install the tool **rinetd** with the command `apt install rinetd`
+1. On your local linux machine, you install the tool **rinetd** with the command `apt install rinetd`.
 1. You open */etc/rinetd.conf* with your favorite editor.
 1. Suposing that your work IP is *1.2.3.4*, the IP of the *Github* webpage is *5.6.7.8* and the IP of your home machine is *a.b.c.d*, you add the following line:
 ```
 #bindadress    bindport    connectaddress  connectport
- 1.2.3.4       53          5.6.7.8         80
+ 1.2.3.4       123         5.6.7.8         80
 ```
-That line tells your home system to redirect (<i>forward</i>) the packets that come from 1.2.3.4 on port 53 (the port that the firewall allows) to 5.6.7.8 on port 80, essentially **redirecting the requests you make from your computer at work to your machine at home, to the Github webpage**.
+That line tells your home system to redirect (<i>forward</i>) the packets that come from 1.2.3.4 on port 123 (the port that the firewall allows) to 5.6.7.8 on port 80, essentially **redirecting the requests you make from your computer at work (on port 123) to your machine at home (on port 123), to the Github webpage (on port 80)**.
 
-Now, while being at work, you can navigate to *GitHub* by going to `https://a.b.c.d:53`
+Now, while being at work, you can navigate to *GitHub* by going to `https://a.b.c.d:123`.
+
+## 2 - SSH Tunneling
+
+Like the name says, *SSH tunneling* is creating encrypted (<u>secure</u>) "tunnels" using the SSH protocol. This, for instance, can be used to **encrypt traffic that goes over an insecure network**, therefore making it secure.
+
+### 2.1 - Local port forwarding
+Let's use the same example as with port forwarding.
+
+Instead of installing *rinetd*, you do the following things:
+1. You set up an ***SSH server*** on your local linux machine, to <u>listen on port 123</u> (the one that is allowed by the firewall between you and your computer at work). This can be done editting the configuration file `/etc/ssh/sshd_config`.
+1. On your <u>work computer</u>, you run this command: `ssh a.b.c.d -p 123 -L 8080:5.6.7.8:80`
+
+What that command does is:
+* Connect to your home machine (*a.b.c.d*) via *SSH* (with or without ssh-key, it doesn't matter).
+* <u>Open the port 8080 on your work computer</u>.
+* **Redirect the requests to port 8080 on your work computer through SSH to your home machine, and then though port 80 to the GitHub (*5.6.7.8*) webpage**, and the same thing but backwards with the webpage responses.
+
+This, <u>appart from being more practical than the previous example</u> (because it is more likely to have an SSH server than having *rinetd* installed on your system), **it encrypts all the traffic between your work and your home computer**, thus making it safe, even if the network is insecure. 
+
+Now, while being at work, you can navigate to *GitHub* by going to `https://127.0.0.1:8080`.
