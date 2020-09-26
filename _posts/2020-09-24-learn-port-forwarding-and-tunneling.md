@@ -81,7 +81,7 @@ The first thing to do is to tell my coworker to run this command:
 Notes:
 * "`-f`" makes the session go to background. Useful for port forwarding.
 * "`-N`" tells the *SSH* client that we won't be sending commands. Useful for port forwarding.
-* "`-D`" tells the *SSH* client that we'll be doing dynamic port forwarding.
+* "`-D <port>`" tells the *SSH* client that we'll be doing dynamic port forwarding on the specified port.
 * "`-p 123`" is used because the firewall only allows that port and we have the *SSH server* listening on that port too.
 
 Now **I'm connected to the corporate network via my local port `9050`**.
