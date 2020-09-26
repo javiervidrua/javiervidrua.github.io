@@ -12,7 +12,7 @@ Let's start talking about *port forwarding*.
 ## 1 - <u>Port forwarding/redirection</u>
 Let's explain *port forwarding* using a simple example:
 
-Supose that you are at work on your computer, and you want to navigate to *Github*, but you can't because **there is a firewall that only allows communications on port 123 (NTP)***. You try to go to *Github* but the requests get dropped by the firewall and the page doesn't load.
+Suppose that you are at work on your computer, and you want to navigate to *Github*, but you can't because **there is a firewall that only allows communications on port 123 (NTP)***. You try to go to *Github* but the requests get dropped by the firewall and the page doesn't load.
 
 So what do you do?
 
@@ -43,7 +43,7 @@ What that command does is:
 * Open the port 8080 on your work computer.
 * **Redirect the requests to port 8080 on your work computer through SSH to your home machine, and then though port 80 to the GitHub (*5.6.7.8*) webpage**, and the same thing but backwards with the webpage responses.
 
-This, appart from being more practical than the previous example (because it is more likely to have an SSH server than having *rinetd* installed on your system), **it encrypts all the traffic between your work and your home computer**, thus making it safe, even if the network is insecure. 
+This, apart from being more practical than the previous example (because it is more likely to have an SSH server than having *rinetd* installed on your system), **it encrypts all the traffic between your work and your home computer**, thus making it safe, even if the network is insecure. 
 
 Now, while being at work, you can navigate to *GitHub* by going to `https://127.0.0.1:8080`.
 
@@ -72,7 +72,7 @@ Note: You can change the behaviour of *proxychains* modifying the file `/etc/pro
 
 Now that we're set up, let's use an example to explain dynamic port forwarding.
 
-Let's supose that the coworker of the last example now calls us because he needs help diagnosing two servers that are not working properly. **Each server has various services that we'll need to check**, so trying to do this kind of job using remote port forwarding would take a long time and you would have to run a lot of commands. So instead of that, you use dynamic port forwarding:
+Let's suppose that the coworker of the last example now calls us because he needs help diagnosing two servers that are not working properly. **Each server has various services that we'll need to check**, so trying to do this kind of job using remote port forwarding would take a long time and you would have to run a lot of commands. So instead of that, you use dynamic port forwarding:
 
 The first thing to do is to tell my coworker to run this command:
 
