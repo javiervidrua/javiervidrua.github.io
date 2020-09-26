@@ -76,7 +76,7 @@ Let's suppose that the coworker of the last example now calls us because he need
 
 The first thing to do is to tell my coworker to run this command:
 
-`ssh -f -N -D 9050 user@a.b.c.d -p 123`
+`ssh user@a.b.c.d -p 123 -f -N -D 9050`
 
 Notes:
 * "`-f`" makes the session go to background. Useful for port forwarding.
