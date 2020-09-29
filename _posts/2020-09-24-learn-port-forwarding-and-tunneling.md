@@ -86,7 +86,7 @@ Notes:
 
 Now **I'm connected to the corporate network via my local port `9050`**.
 
-For example, if the IP of the first server is *10.10.5.11*, I can ssh in preceding the ssh command with "*proxychains*": `proxychains ssh admin@10.10.5.11`
+For example, if the IP of the first server is *10.10.5.11*, I can ssh in preceding the ssh command with "proxychains": `proxychains ssh admin@10.10.5.11`
 
 And, for example, if you wanted to check the *http* service of that server, you can do that by runnning the command: `proxychains firefox`. **It will open firefox through *proxychains***, and now you could navigate to `http://10.10.5.11/`, because now you have access to everything that is inside of the internal, corporate network.
 
