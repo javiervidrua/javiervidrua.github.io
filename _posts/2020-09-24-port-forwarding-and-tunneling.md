@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Learn port forwarding and tunneling"
+title:  "Port forwarding and tunneling"
 date:   2020-09-24 00:00:00 +0200
 categories: jekyll update
 ---

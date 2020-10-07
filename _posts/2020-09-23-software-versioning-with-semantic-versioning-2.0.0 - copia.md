@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Learn software versioning with Semantic Versioning 2.0.0"
+title:  "Software versioning with Semantic Versioning 2.0.0"
 date:   2020-09-23 00:00:00 +0200
 categories: jekyll update
 ---
