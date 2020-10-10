@@ -71,4 +71,4 @@ You can see that the program outputs the lines that are the same in the last col
   +7
   ```
 
-As you can see, the output of the *comm* tool is more simple, so it's good for begginers and for simple tasks, while the *diff* is more complex and is used for the more serious jobs.
+As you can see, the output of the *comm* tool is more simple, so it's good for begginers and for simple tasks, while the output of the *diff* tool is more complex and is used for the more serious jobs.
