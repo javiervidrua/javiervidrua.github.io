@@ -60,6 +60,7 @@ defun - definir funciones
 * *not* - como en C
 
 * if - como en C
+
 ```
 (if argumento (hazEsto siCierto)
 	(hazEsto siFalso)
@@ -69,6 +70,7 @@ defun - definir funciones
 * *unless* - solo parte de lo falso
 
 * cond - como el switch en C, Java y el case en Bash
+
 ```
 (cond (argumento1 hazEsto1)
 	(argumento2 hazEsto2)
