@@ -59,23 +59,23 @@ defun - definir funciones
 * *or* - como en C
 * *not* - como en C
 
+* if - como en C
 ```
-if
-	(if argumento (hazEsto siCierto)
-		(hazEsto siFalso)
-	)
+(if argumento (hazEsto siCierto)
+	(hazEsto siFalso)
+)
 ```
 * *when* - solo parte de lo cierto
 * *unless* - solo parte de lo falso
 
+* cond - como el switch en C, Java y el case en Bash
 ```
-cond - como el switch en C, Java y el case en Bash
-	(cond (argumento1 hazEsto1)
-		(argumento2 hazEsto2)
-		...
-		(argumentoN hazEstoN)
-		(t hazEstoPorDefecto)
-	)
+(cond (argumento1 hazEsto1)
+	(argumento2 hazEsto2)
+	...
+	(argumentoN hazEstoN)
+	(t hazEstoPorDefecto)
+)
 ```
 
 ## RECURSIVIDAD
