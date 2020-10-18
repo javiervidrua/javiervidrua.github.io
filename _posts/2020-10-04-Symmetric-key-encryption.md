@@ -20,7 +20,7 @@ I created two very simple bash scripts, that rely on the openssl tool. To be abl
 Needless to say that **in order to be able to encrypt a file, you'll need to use a passphrase**, in case of these scripts, you'll be asked to enter it when encrypting and decrypting files.
 
 ### encrypt.sh
-```
+``` bash
 #!/bin/bash
 
 function usage(){
@@ -37,7 +37,7 @@ openssl enc -aria-256-ecb -in ${UNENCRYPTED_FILE} -out ${ENCRYPTED_FILE} -iter 6
 ```
 
 ### decrypt.sh
-```
+``` bash
 #!/bin/bash
 
 function usage(){

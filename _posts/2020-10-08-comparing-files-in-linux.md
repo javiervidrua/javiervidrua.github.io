@@ -10,7 +10,7 @@ In Linux, it's relatively easy to do, since there are various utilities for this
 
 These two are one of the most used ones:
 * **Comm**: Compares two files and outputs the content by columns. Let's show an example:
-```
+``` bash
 javier@torre:~$ cat before
 1
 2
@@ -39,7 +39,7 @@ You can see that the program outputs the lines that are the same in the last col
 
   With the "*-c*" parameter you tell *diff* that you want to see the contexts:
 
-  ```
+  ``` bash
   javier@torre:~$ diff before after -c
   *** before      2020-10-08 14:07:28.820000000 +0200
   --- after       2020-10-08 14:08:11.260000000 +0200
@@ -58,7 +58,7 @@ You can see that the program outputs the lines that are the same in the last col
   + 7
   ```
   With the "*-u*" parameter you tell *diff* that you want to see the output in unified format, that is, showing a mix of both files.
-  ```
+  ``` bash
   javier@torre:~$ diff before after -u
   --- before      2020-10-08 14:07:28.820000000 +0200
   +++ after       2020-10-08 14:08:11.260000000 +0200

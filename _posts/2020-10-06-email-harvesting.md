@@ -11,4 +11,6 @@ There is a tool called "*theHarvester*" which is available in Kali, that does a 
 
 To get only the useful part of the output, you can run this command:
 
-`theHarvester -d <DOMAIN> -b all | grep -v 'Target' | grep -E *.$1* | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"`
+``` shell
+theHarvester -d <DOMAIN> -b all | grep -v 'Target' | grep -E *.$1* | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"
+```

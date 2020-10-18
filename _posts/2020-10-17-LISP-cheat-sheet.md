@@ -23,7 +23,7 @@ categories: jekyll update
 * *assoc* - como un hashmap - (setf javier '((estatura 1.74) (peso 66))) -> (assoc 'estatura javier)
 
 ## PROCEDIMIENTOS
-```
+``` lisp
 defun - definir funciones
 	(defun miFuncion
 		(parametro1 parametro2)
@@ -40,6 +40,7 @@ defun - definir funciones
 * *listp* - es una lista?
 * *null* - el argumento es una lista vacía? - acepto que me metas lo que quieras
 * *endp* - el argumentos es una lista vacía? - solo acepto listas
+
 	**CONCLUSION**
 	() = '() = NIL = 'NIL -> **todos son átomos**
 
@@ -59,9 +60,9 @@ defun - definir funciones
 * *or* - como en C
 * *not* - como en C
 
-* if - como en C
+* *if* - como en C
 
-```
+``` lisp
 (if argumento (hazEsto siCierto)
 	(hazEsto siFalso)
 )
@@ -69,9 +70,9 @@ defun - definir funciones
 * *when* - solo parte de lo cierto
 * *unless* - solo parte de lo falso
 
-* cond - como el switch en C, Java y el case en Bash
+* *cond* - como el switch en C, Java y el case en Bash
 
-```
+``` lisp
 (cond (argumento1 hazEsto1)
 	(argumento2 hazEsto2)
 	...
@@ -82,32 +83,32 @@ defun - definir funciones
 
 ## RECURSIVIDAD
 FUNCTION FACTORIAL HECHA POR MI SIN MIRAR APUNTES :·D
-```
-(defun factorial (número)
-	(if (= número 1)
-		(* número (factorial (- número 1)))
+``` lisp
+(defun factorial (n)
+	(if (= n 1)
+		(* n (factorial (- n 1)))
 	)
 )
 ```
 
-```
-(defun fibonacci (número)
-	(cond	((= número 0) 0)
-		((= número 1) 1)
+``` lisp
+(defun fibonacci (n)
+	(cond	((= n 0) 0)
+		((= n 1) 1)
 		(t (+ (fibonacci (- n 1) (fibonacci (- n 2)))
 	)
 )
 ```
 
 ## ITERATIVIDAD
-```
+``` lisp
 (dolist (elemento lista resultadoQueDevuelveDolist)
 	(+ resultadoQueDevuelveDolist 1)
 )
 ```
 
 ## COMO HACER LA PRÁCTICA
-```
+``` lisp
 (defun atomo (var)
 	(cond ((atom var) T)
 		((eq (first var) '?) T)
@@ -117,7 +118,7 @@ FUNCTION FACTORIAL HECHA POR MI SIN MIRAR APUNTES :·D
 ```
 
 ## PROG - controlar el flujo de ejecución
-```
+``` lisp
 (prog (var1 var2 ...)
 	(cuerpo (return valor))
 )
