@@ -33,7 +33,7 @@ defun - definir funciones
 	)
 ```
 ## CONDICIONALES
-* *member* - verifica si el primer argumento forma parte del segundo - devuelve una lista a partir de ese elemento en la lista en la que buscar
+* *member* - verifica si el primer argumento forma parte del segundo - devuelve una lista a partir de ese elemento (incluído) en la lista en la que buscar
 * *atom* - es un átomo?
 * *numberp* - es un número?
 * *symbolp* - es un símbolo?
