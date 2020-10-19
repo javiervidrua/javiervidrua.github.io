@@ -120,7 +120,7 @@ FUNCTION FACTORIAL HECHA POR MI SIN MIRAR APUNTES :·D
 ## PROG - controlar el flujo de ejecución
 ``` lisp
 (prog (var1 var2 ...)
-	(cuerpo (return valor))
+	(return valor)
 )
 ```
 
