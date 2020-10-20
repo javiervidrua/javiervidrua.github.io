@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Google hacking cheatsheet"
+title:  "Google hacking cheat sheet"
 date:   2020-10-03 00:00:00 +0200
 categories: jekyll update
 ---
