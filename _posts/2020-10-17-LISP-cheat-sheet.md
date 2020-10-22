@@ -7,6 +7,11 @@ categories: jekyll update
 ## PRIMITIVAS FUNDAMENTALES
 * *setf* - asigna valores a una lista
 * *atom* - te dice si algo es átomo o no
+* *print* - sacar algo por pantalla
+* *format* - sacar lo que te de la gana por pantalla
+  ```lisp
+  (format t "~% Variable cadena tiene valor ~s ~%" cadena)
+  ```
 
 ## OPERACIONES CON LISTAS:
 * *first* - devuelve un átomo que tiene como elemento el primer elemento de la lista
