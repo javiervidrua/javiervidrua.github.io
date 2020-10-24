@@ -9,7 +9,7 @@ categories: jekyll update
 
 Let's start talking about *port forwarding*.
 
-## 1 - <u>Port forwarding/redirection</u>
+## 1 - Port forwarding/redirection
 Let's explain *port forwarding* using a simple example:
 
 Suppose that you are at work on your computer, and you want to navigate to *Github*, but you can't because **there is a firewall that only allows communications on port 123 (NTP)***. You try to go to *Github* but the requests get dropped by the firewall and the page doesn't load.
@@ -27,11 +27,11 @@ That line tells your home system to redirect (<i>forward</i>) the packets that c
 
 Now, while being at work, you can navigate to *GitHub* by going to `https://a.b.c.d:123`.
 
-## 2 - <u>SSH Tunneling</u>
+## 2 - SSH Tunneling
 
 Like the name says, *SSH tunneling* is creating encrypted (secure) "tunnels" using the SSH protocol. This, for instance, can be used to **encrypt traffic that goes over an insecure network**, therefore making it secure.
 
-### 2.1 - <u>Local port forwarding</u>
+### 2.1 - Local port forwarding
 Let's use the same example as with port forwarding.
 
 Instead of installing *rinetd*, you do the following things:
@@ -47,7 +47,7 @@ This, apart from being more practical than the previous example (because it is m
 
 Now, while being at work, you can navigate to *GitHub* by going to `https://127.0.0.1:8080`.
 
-### 2.2 - <u>Remote port forwarding</u>
+### 2.2 - Remote port forwarding
 We'll change up a little bit the previous example to explain remote port forwarding.
 
 Let's say that there is an *FTP* server (running on port 21) in the corporate network, and a coworker asks me if I can help him with a bug in the *FTP* server that he's having trouble solving.
@@ -61,7 +61,7 @@ What this is going to do is create an ***SSH* tunnel** that will communicate a r
 
 Now I can access the corporate *FTP* server running on port 21 from my machine with this command: `ftp 127.0.0.1`
 
-### 2.3 - <u>Dynamic port forwarding</u>
+### 2.3 - Dynamic port forwarding
 We have now seen local and remote port forwarding, and those are really useful features of the SSH protocol, **but what happens if you need to open a range of ports?** In that situation they aren't very practical, because you will need to be running as many commands as ports you'd like to forward. 
 
 For those situations there's yet another feature, that feature is **dynamic port forwarding**.
