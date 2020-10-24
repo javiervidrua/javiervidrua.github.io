@@ -16,7 +16,7 @@ Examples:
 * `nissan (gtr OR r34)`: This specifies that you can have:
     * `nissan gtr`
     * `nissan r34`
-    * but never `nissan gtr r34` neither `gtr r34`
+    * but never `nissan gtr r34` nor `gtr r34`
 * `nissan (gtr | r34)`: The same as the last one, using `|` instead of `OR`.
 * `nissan gtr -r34`: This will search for everything that has `nissan gtr` but does not have `r34`.
 
