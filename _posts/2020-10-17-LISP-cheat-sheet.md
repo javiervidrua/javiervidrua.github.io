@@ -19,6 +19,7 @@ categories: jekyll update
 * *last* - devuelve una lista con el ultimo elemento
 
 * *append* - combina los elementos de todas las listas
+* *remove* - elimina un elemento de una lista
 * *list* - hace una lista con lo que le pases
 * *cons* - hace una lista con el primer elemento, y añade esa lista creada a otra lista seguida del resto de los elementos (1 2) -> ((1) 2)
 
