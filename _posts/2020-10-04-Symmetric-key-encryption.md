@@ -10,7 +10,7 @@ So I though: "Do I know enough about this? Can I encrypt something, for example,
 
 The answer to that question was: "Not now, but we'll see"
 
-Pd: 10 minutes later it was done, and I wrote this post too, so that's a win for me :P.
+PD: 10 minutes later it was done, and I wrote this post too, so that's a win for me :P
 
 That said, the first thing I did was investigate to see what encryption protocol would be the best for the use. I wanted to create a script to encrypt a file, and another one to decrypt a file.
 After a Duckduckgo search I found [this](https://criptografia.webnode.es/algoritmos-simetricos/), and after looking and comparing all the encryption protocols I decided to use ARIA, because of its robustness and speed.
