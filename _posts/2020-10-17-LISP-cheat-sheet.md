@@ -13,7 +13,7 @@ categories: jekyll update
   (format t "~% Variable cadena tiene valor ~s ~%" cadena)
   ```
 
-## OPERACIONES CON LISTAS:
+## OPERACIONES CON LISTAS
 * *first* - devuelve un átomo que tiene como elemento el primer elemento de la lista
 * *rest* - devuelve una lista con todos los elementos menos el primero
 * *last* - devuelve una lista con el ultimo elemento
@@ -123,7 +123,7 @@ FUNCTION FACTORIAL HECHA POR MI SIN MIRAR APUNTES :·D
 )
 ```
 
-## PROG - controlar el flujo de ejecución
+## PROG: CONTROLAR EL FLUJO DE EJECUCIÓN
 ``` lisp
 (prog (var1 var2 ...)
 	(return valor)
