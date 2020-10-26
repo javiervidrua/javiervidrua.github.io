@@ -28,15 +28,15 @@ kex -s
 
 First you will get something like this:
 
-![install](/images/kali-win-kex-start.png)
+![start](/images/kali-win-kex-start.png)
 
 Then this:
 
-![install](/images/kali-win-kex-vnc.png)
+![vnc](/images/kali-win-kex-vnc.png)
 
 And when you enter your password the desktop will appear!
 
-![install](/images/kali-win-kex-desktop.png)
+![desktop](/images/kali-win-kex-desktop.png)
 
 ## Use Kali as normal
 
