@@ -17,7 +17,7 @@ sudo apt update && sudo apt install kali-win-kex -y
 
 The last two steps can easily be done as shown in this image:
 
-![alt text](/images/kali-win-kex-install.png "Install")
+![Install](/images/kali-win-kex-install.png "Install")
 
 ## Run *kex*
 
@@ -28,15 +28,15 @@ kex -s
 
 First you will get something like this:
 
-![alt text](/images/kali-win-kex-start.png "Start")
+![Start](/images/kali-win-kex-start.png "Start")
 
 Then this:
 
-![alt text](/images/kali-win-kex-vnc.png "Vnc")
+![Vnc](/images/kali-win-kex-vnc.png "Vnc")
 
 And when you enter your password the desktop will appear!
 
-![alt text](/images/kali-win-kex-desktop.png "Desktop")
+![Desktop](/images/kali-win-kex-desktop.png "Desktop")
 
 ## Use Kali as normal
 
