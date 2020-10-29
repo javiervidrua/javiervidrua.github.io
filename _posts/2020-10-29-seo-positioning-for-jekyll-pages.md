@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "SEO positioning jekyll pages"
+title:  "SEO positioning for jekyll pages"
 date:   2020-10-29 00:00:00 +0200
 categories: jekyll update
 ---
