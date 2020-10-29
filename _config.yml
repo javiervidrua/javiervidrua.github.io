@@ -30,6 +30,8 @@ github_username: javiervidrua
 theme: minima
 plugins:
   - jekyll-feed
+  # For SEO
+  - jekyll-seo-tag
 
 # Troubleshooting
 encoding: UTF-8
