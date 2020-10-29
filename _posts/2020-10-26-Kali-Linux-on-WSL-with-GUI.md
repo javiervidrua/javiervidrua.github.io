@@ -38,6 +38,6 @@ And when you enter your password the desktop will appear!
 
 ![Desktop](/images/kali-win-kex-desktop.png "Desktop")
 
-## Use Kali as normal
+## Use *Kali linux* as normal
 
 Now you can open graphical tools like *Burpsuite*, *Bettercap* or *Cherrytree*.
