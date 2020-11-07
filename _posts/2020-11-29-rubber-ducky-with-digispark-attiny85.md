@@ -32,7 +32,7 @@ Now we have to configure the IDE so it works with out Digispark:
   
   ![BoardsManager](/images/boardsmanager.png "BoardsManager")
   
-  Select "*Contributed*" from the drop-down menu and then install the Digistump AVR Boards package:
+  Select "*Contributed*" from the drop-down menu and then install the "*Digistump AVR Boards*" package:
 
   ![AVRboards](/images/avrboards.png "AVRboards")
 * Now go to *Tools* -> *Boards* -> *Digistump AVR Boards* -> *Digispark (Default - 16.5 mhz)*:
