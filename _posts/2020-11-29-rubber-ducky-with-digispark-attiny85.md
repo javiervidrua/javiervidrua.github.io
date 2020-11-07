@@ -52,28 +52,30 @@ void setup(){
 void loop(){
   // Start
   DigiKeyboard.sendKeyStroke(0);
-  DigiKeyboard.delay(100);
+  DigiKeyboard.delay(300);
   // Open "Run"
   DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);
-  DigiKeyboard.delay(100);
+  DigiKeyboard.delay(300);
   // Open "cmd"
   DigiKeyboard.print("cmd /k cd %UserProfile%/Desktop");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.delay(100);
+  DigiKeyboard.delay(300);
   // Create the file
   DigiKeyboard.print("echo You have been digisparked :v > digisparked.txt");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.delay(100);
+  DigiKeyboard.delay(300);
   // Close "cmd"
   DigiKeyboard.print("exit");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.delay(100);
+  DigiKeyboard.delay(300);
   // Wait
   for (;;) {
     // To wait until the Digispark gets pulled out of the computer
   }
 }
 ```
+
+What this is going to do is simulate that you press WinKey+R, open "*cmd*" and create a file on the desktop named digisparked.txt.
 
 Go to "*Tools*" -> "*Port*" and select the serial port that appears in the drop down menu. It usually is "*COM0*" or "*COM1*".
 
