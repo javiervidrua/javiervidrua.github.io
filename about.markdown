@@ -4,8 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Javier likes to learn cool things.
+Javier likes cool things.
 
-If you want to know what kind of things are those, go to:
-* [My GitHub](https://github.com/javiervidrua): Here I have the useful stuff.
-* [My Gitlab](https://gitlab.com/javiervidrua): Here I have the rest.
+He specially likes **cybersecurity** stuff.
+
+His projects:
+* [Useful](https://github.com/javiervidrua)
+* [NotSoUseful](https://gitlab.com/javiervidrua)
