@@ -107,13 +107,16 @@ python3 Duckyspark_translator.py <rubber ducky file> <digispark file>
 With it, you can take any *.duck* script and use it on your *Digispark*!
 
 ## More extra
+There is a *GitHub* project named ["*Duck2spark*"](https://github.com/mame82/duck2spark) that works somewhat like the previous tool, but this one takes the output of [*Duckencoder*](https://github.com/hak5darren/USB-Rubber-Ducky/blob/master/Encoder/encoder.jar) (which supports different types of keyboard layouts) and converts it to an Arduino Sketch that you can upload to your *Digispark*.
+
+## Even more extra
 If you want to go deep into this, here is a link to the "*digikeyboard.h*" file in the official GitHub project of digistump:
 ```
 https://github.com/digistump/DigisparkArduinoIntegration/blob/master/libraries/DigisparkKeyboard/DigiKeyboard.h
 ```
 
 And here is a link to the official "*HID usage tables*":
-````
+```
 https://www.usb.org/sites/default/files/hut1_21.pdf
 ```
 
