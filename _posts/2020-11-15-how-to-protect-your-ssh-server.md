@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Protect your SSH server"
+title:  "How to protect your SSH server"
 date:   2020-11-15 00:00:00 +0200
 categories: jekyll update
 ---
@@ -41,9 +41,9 @@ There are various ways to protect your server against bruteforce attacks:
    
    Before doing this you must have done the first option, that is, changing the default listening port of the SSH service.
   
-   Endlessh is a tool that is built to run on port 22, pretending to be a real SSH service, but in reality what it will do is send an endless, infinte banner when someone tries to connect to it.
+   Endlessh is a tool that is built to run on port 22, pretending to be a real SSH service, but in reality what it will do is send an endless, infinte banner when someone tries to login.
 
-   So when a hacker tries to hack your server by bruteforcing the SSH service, he won't be able to even try one user:password combination.
+   So **when a hacker tries to hack your server by bruteforcing the SSH service, he won't even be able to try one `user:password` combination**.
 
    To install it run the following commands:
    ```bash

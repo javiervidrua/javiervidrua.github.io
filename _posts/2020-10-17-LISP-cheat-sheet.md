@@ -13,7 +13,7 @@ categories: jekyll update
 (print "[-] Error crítico: Explosión inminente! D:")
 ```
 
-* *format* - sacar texto y datos por pantalla (printf)
+* *format* - sacar texto y datos por pantalla (como *printf* en *C*)
 
 ```lisp
 (format t "~% Variable cadena tiene valor ~s ~%" cadena)
@@ -150,4 +150,4 @@ categories: jekyll update
 )
 ```
 
-**En LISP todas las variables son globales excepto los parámetros que reciben las funciones**
+**En CLISP todas las variables son globales excepto los parámetros que reciben las funciones**
