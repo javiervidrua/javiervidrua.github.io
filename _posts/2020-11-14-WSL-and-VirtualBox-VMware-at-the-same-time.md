@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "WSL2 and VirtualBox or VMware at the same time"
+title:  "WSL2 and VirtualBox/VMware at the same time"
 date:   2020-11-14 00:00:00 +0200
 categories: jekyll update
 ---
