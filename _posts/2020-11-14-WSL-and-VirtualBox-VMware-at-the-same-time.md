@@ -21,12 +21,12 @@ The options you have are those:
 
   If you want to enable *VMware*:
   ```powershell
-  bcedit /set hypervisorlaunchtype off
+  bcdedit /set hypervisorlaunchtype off
   ```
 
   If you want to enable *Hyper-V* and *WSL2*:
   ```powershell
-  bcedit /set hypervisorlaunchtype auto
+  bcdedit /set hypervisorlaunchtype auto
   ```
 <!--
   This can easily be done:
