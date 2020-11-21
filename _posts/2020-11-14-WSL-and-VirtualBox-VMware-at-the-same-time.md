@@ -12,7 +12,7 @@ You just found that your system can't have *WSL2* and *VMware* or *VirtualBox* r
 
 At this point you might be thinking "**Wait, so you're telling me that I have to choose one or the other?!?!**"
 
-The answer is "**No, but you'll have to choose one of two options**"
+The answer is "**No, but you'll have to choose one of three options**"
 
 The options you have are those:
 * Manually change which virtual machine plattform will be possible to use at a certain time.
@@ -28,19 +28,26 @@ The options you have are those:
   ```powershell
   bcdedit /set hypervisorlaunchtype auto
   ```
-<!--
-  This can easily be done:
-  1. Create scripts to easily choose what virtualization plattform to use
-     
-     I have a GitHub project that does this automatically, you only have to run the script with Administration rights.
-  1. Once you have done the previous step, now you can run the following commands directly from the Powershell:
-     * runvmware: To enable VMware or *VirtualBox*.
-     * runhyperv: To enable Hyper-V and *WSL2*.-->
+
+  Big thanks to *Jesús Martín Juan* for fixing two typos. You can check this webpage [**here**](https://jesusemejota.github.io).
+
+* Downgrade from *WSL2* to *WSL1*.
+
+  As you may know, the first version of *WSL* is not a real kernel, instead, it acts as a translator from the *Linux* kernel to the *Windows* kernel. Thus, it is more limited than *WSL2*, but if you don't need any of the improvements that *WSL2* has over *WSL1*.
+
+  You can downgrade your virtual machines to *WSL1* with the following command:
+  ```powershell
+  wsl --set-version <distribution-name> 1
+  ```
 
 * Update *VMware* or *VirtualBox*.
 
   Many people have reached out to the developers since *WSL2* became available, and *Oracle* and *VMware* have developed their solutions for this problem.
 
-  In case of *VMware*, they released a new version that solves this problem. You can get more info about that [**here**](https://blogs.vmware.com/workstation/2020/01/vmware-workstation-tech-preview-20h1.html)
+  In case of *VMware*, they released the 15.5.6 version that solves this problem.
+
+  ![VMware-15-5-6](/images/vmware-15-5-6.png "VMware-15-5-6")
+
+  You can get more info about that [**here**](https://blogs.vmware.com/workstation/2020/01/vmware-workstation-tech-preview-20h1.html)
 
   For more info about *VirtualBox*, you can check the [**VirtualBox issue discussions in the WSL repo on GitHub**](https://github.com/MicrosoftDocs/WSL/issues?q=is%3Aissue+virtualbox+sort%3Acomments-desc) and the [**VirtualBox changelog**](https://www.virtualbox.org/wiki/Changelog-6.0)
