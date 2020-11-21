@@ -20,12 +20,12 @@ The options you have are those:
   Open the Powershell as Administrator and run:
 
   If you want to enable *VMware*:
-  ```powershell
+  ``` powershell
   bcdedit /set hypervisorlaunchtype off
   ```
 
   If you want to enable *Hyper-V* and *WSL2*:
-  ```powershell
+  ``` powershell
   bcdedit /set hypervisorlaunchtype auto
   ```
 
@@ -36,7 +36,7 @@ The options you have are those:
   As you may know, the first version of *WSL* is not a real kernel, instead, it acts as a translator from the *Linux* kernel to the *Windows* kernel. Thus, it is more limited than *WSL2*, but if you don't need any of the improvements that *WSL2* has over *WSL1*.
 
   You can downgrade your virtual machines to *WSL1* with the following command:
-  ```powershell
+  ``` powershell
   wsl --set-version <distribution-name> 1
   ```
 
