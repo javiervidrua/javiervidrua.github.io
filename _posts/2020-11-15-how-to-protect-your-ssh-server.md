@@ -10,9 +10,17 @@ Those are hackers trying to get into your server.
 
 There are various ways to protect your server against bruteforce attacks:
 
+* **Have a strong password**
+
+  As Kevin Mitnic says, you should not use passwords, but passphrases.
+  
+  That is sentences with 25 characters or more, including upper and lowercase letters and symbols.
+
 *  **Change the default SSH port**
 
    Change the listening port to one that is currently unassigned by the [IANA](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml), for example, 22022.
+
+   Note: This won't stop a hacker, since it is really easy to find the SSH service if you do a complete port scan.
 
 *  **Install Fail2ban**
 
@@ -36,6 +44,8 @@ There are various ways to protect your server against bruteforce attacks:
    # For example
    sudo fail2ban-client set sshd unbanip 74.47.129.56
    ```
+
+   Note: This is more likely to stop a hacker than the previous method.
 
 *  **Install Endlessh**
    
@@ -81,4 +91,7 @@ There are various ways to protect your server against bruteforce attacks:
 
    So now, when someone sees that you have port 22 open and tries to login, it will be endless and your server will be safe.
 
+## Conclusion
 These are some ways to quickly secure your SSH server and make it more robust.
+
+If you only change the default port or install Endlessh, it won't stop a hacker, but if you implement all, your SSH server will be much more secure and less likely to get hacked.

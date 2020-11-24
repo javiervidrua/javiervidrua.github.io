@@ -38,6 +38,6 @@ And when you enter your password the desktop will appear!
 
 ![Desktop](/images/kali-win-kex-desktop.png "Desktop")
 
-## Use *Kali linux* as normal
+## Use *Kali linux*
 
-Now you can open graphical tools like *Burpsuite*, *Bettercap* or *Cherrytree*.
+Now you can open graphical tools like *Burpsuite*, *Bettercap* or *Cherrytree*, without needing to start up a VMware or VirtualBox.
