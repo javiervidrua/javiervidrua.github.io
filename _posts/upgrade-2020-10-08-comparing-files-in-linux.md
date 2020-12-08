@@ -4,6 +4,8 @@ title:  "Comparing files in Linux"
 date:   2020-10-08 00:00:00 +0200
 categories: jekyll update
 ---
+https://www.howtogeek.com/410532/how-to-compare-two-text-files-in-the-linux-terminal/
+
 If you plan to work as a *system administrator*, *pentester*, *network engineer* *or related*, **there are lots of situations when you'll need to compare files between each other.**
 
 In Linux, it's relatively easy to do, since there are various utilities for this type of job. 
