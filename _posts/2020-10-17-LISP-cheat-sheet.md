@@ -43,12 +43,12 @@ categories: jekyll update
 * *defun* - definir funciones
 
 ``` lisp
-	(defun miFuncion
-		(parametro1 parametro2)
-		(cons
-			(first parametro1) (last parametro2)
-		)
+(defun miFuncion
+	(parametro1 parametro2)
+	(cons
+		(first parametro1) (last parametro2)
 	)
+)
 ```
 ## Condicionales
 * *member* - verifica si el primer argumento forma parte del segundo - devuelve una lista a partir de ese elemento (incluído) en la lista en la que buscar
