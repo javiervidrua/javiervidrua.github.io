@@ -28,7 +28,11 @@ General culture concepts and knowledge:
 
 ## 02-x86 ISA
 
-Text
+It is necessary to know how processors work to be able to understand how vulnerabilities can be exploited.
+
+Here will be explained the x86 and the x86_64 ISA of Intel, as Intel is the most common brand of processor (66% of the market).
+
+
 
 ## 03-Runtime attacks
 
