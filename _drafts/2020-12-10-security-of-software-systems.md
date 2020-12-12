@@ -31,7 +31,33 @@ The process of compiling a program written in C/C++ is as shown in the following
 
 ![Compilation process in C/C++](/images/sss-compilation-process.png "Compilation process in C/C++")
 
-Assembly code is written using mnemonics. To demostrate it, the following is an example of assembly code for the Motorola 6809 processor (not x86 but it was the first assembly language I learned):
+If you compile a C program with the option `-save-temps`, *gcc* won't delete *.i* and *.s* files:
+```bash
+┌─[javier@torre]─[~]
+└──╼ $cat sample.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char * argv){
+        fprintf(stdout, "[*] This is a sample program\n");
+        return 0;
+}
+┌─[javier@torre]─[~]
+└──╼ $gcc -save-temps sample.c -o sample
+┌─[javier@torre]─[~]
+└──╼ $ls -l
+total 76
+-rwxr-xr-x 1 javier javier 16656 Dec 12 23:05 sample
+-rw-r--r-- 1 javier javier   148 Dec 12 23:05 sample.c
+-rw-r--r-- 1 javier javier 42336 Dec 12 23:05 sample.i
+-rw-r--r-- 1 javier javier  1632 Dec 12 23:05 sample.o
+-rw-r--r-- 1 javier javier   593 Dec 12 23:05 sample.s
+┌─[javier@torre]─[~]
+└──╼ $./sample
+[*] This is a sample program
+```
+
+Assembly code is written using mnemonics. To demostrate it, the following is an example of assembly code for the Motorola 6809 processor (the first assembly language I learned):
 ```assembly
 ; hello.asm: Simple program that prints the string on the screen
 
@@ -216,7 +242,44 @@ After calling a function, everything that was done in the prologue is done backw
   First six arguments are loaded into RDI, RSI, RDX, RCX, R8, R9.
 
   The rest of them are passed trough the stack from right to left.
-  
+
+### Exercises
+
+1. Prepare the system:
+
+   You'll need a Linux system with *gcc*, *gdb* and *nasm* installed on it.
+   
+   You can do so by running the following command:
+   ```bash
+   apt update && apt install gcc gdb nasm -y
+   ```
+
+   Now configure *gdb* to show disassemblies in the intel format (we don't want the AT&T format) by running this command:
+   ```bash
+   echo 'set disassembly-flavor intel' >> ~/.gdbinit
+   ```
+
+   If you want to use *objdump* for disassemblies, use the option `-M intel` to get the output in the intel format.
+   
+   An example against the sample program that we compiled before:
+   ```bash
+   ┌─[javier@torre]─[~/sample]
+   └──╼ $objdump -M intel sample -d | head -15
+   
+   sample:     file format elf64-x86-64
+   
+   
+   Disassembly of section .init:
+   
+   0000000000001000 <_init>:
+       1000:       48 83 ec 08             sub    rsp,0x8
+       1004:       48 8b 05 dd 2f 00 00    mov    rax,QWORD PTR [rip+0x2fdd]        # 3fe8 <__gmon_start__>
+       100b:       48 85 c0                test   rax,rax
+       100e:       74 02                   je     1012 <_init+0x12>
+       1010:       ff d0                   call   rax
+       1012:       48 83 c4 08             add    rsp,0x8
+       1016:       c3                      ret
+   ```
 
 ## 03 - Runtime attacks
 
