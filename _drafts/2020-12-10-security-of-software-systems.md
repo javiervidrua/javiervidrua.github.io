@@ -4,9 +4,81 @@ title:  "Security of software systems"
 date:   2020-12-10 00:00:00 +0200
 categories: jekyll update
 ---
-## 01 - Introduction
-
 In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.
+
+## 01 - Cryptography
+
+### Definitions
+
+Here are some basic concepts:
+* *Cryptography*: The study of techniques of altering the representation of a message.
+* *Cleartext*: Original message. It is legible.
+* *Ciphertext*: Illegible text. It is the result of encryption performed on plaintext.
+* *Cipher*: Algorithm that transforms cleartext into ciphertext.
+* *Key*: Sequence of symbols that the ciphers use.
+
+### Symmetric cipher
+
+The cleartext is encrypted and decrypted using one key.
+
+![Symmetric cipher diagram](/images/sss-symmetric-cipher.png)
+
+This technique relies on these factors:
+* It is impossible to recover the original text knowing exclusively the ciphertext.
+* The shared key is secret.
+* It is possible to physicaly implement the algorithms.
+
+These are some classic techniques that symmetric ciphers use:
+1. **Substitution**: The symbols of the cleartext are substituted by others. There are several types:
+   * *Simple Monoalphabetic Substitution*: Each symbol of the cleartext is replaced by another one.
+
+     An example of this cipher is the caesar cipher:
+     ```
+     cleartext:         TREE
+     ciphertext:        AYLL
+     ```
+   * *Polygraphic Monoalphabetic Substitution*: Several symbols are replaced by several others.
+     
+     An example of this type of cipher is the Play Fair cipher:
+     ```
+     cleartext:         TREE
+     ciphertext:        ODKUKU
+     ```
+   * *Polyalphabetic substitution*: Use several monoalphabetic substitutions as you encrypt the cleartext.
+
+     An example of this type of cipher is the Vigenère cipher:
+     ```
+     cleartext:         TREE
+     key:               ABCD
+     ciphertext:        TSGH
+     ```
+   * *One Time Pad*: Use a key as big as the cleartext. The key is independent from the text.
+
+     To encrypt and to decrypt you use the *XOR* function:
+     ```
+     cleartext:         TREE
+     key:               QWER
+     ciphertext:        JNIV
+     key:               QWER
+     cleartext:         TREE
+     ```
+1. **Transposition**: The symbols of the cleartext get permutated. In other words, it reorders the symbols taking them by blocks.
+
+   This is tribial to cryptoanalyze, so that's no good my friend.
+
+### ENIGMA machine:
+A set of 3 cylinders that rotate on their own axis. In each cylinder there are 26 contacts (as for 26 letters), and each contact is connected to another one of the next cylinder. Each cylinder is a cryptosystem that does Polyalphabetic Substitution of period 26. Each cylinder is connected to the next, as a cascade.
+
+There are 26x26x26 = 17573 substitution alphabets before the system loops.
+
+With 5 cylinders, that number scalates up to 11881376. This is the base of the *crypt* command of *UNIX*.
+
+### Standard encryption
+
+### Asymmetric cipher
+
+
+## 01 - Introduction
 
 General culture concepts and knowledge:
 
