@@ -73,7 +73,22 @@ There are 26x26x26 = 17573 substitution alphabets before the system loops.
 
 With 5 cylinders, that number scalates up to 11881376. This is the base of the *crypt* command of *UNIX*.
 
-### Standard encryption
+### Standard cipher
+
+*DES* (which descents from the LUCIFER cipher, created by IBM) was adopted by the NIST in 1977 to be the Data Encryption Standard.
+
+It encrypts 64 bit blocks using 56 bits keys.
+
+Throughout 19 stages and 16 iterations it transforms 64 bits of the cleartext into 64 bits of the ciphertext.
+
+Being a symmetric cipher, the algorithms used in encryption and decryption are the same.
+
+The following scheme shows the bit-level algorithm:
+
+![DES diagram](/images/sss-des-diagram.gif)
+
+The DES cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:
+1. *ECB*: Stands for Electronic CodeBook: 30
 
 ### Asymmetric cipher
 
