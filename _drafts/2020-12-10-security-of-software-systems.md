@@ -73,7 +73,7 @@ There are 26x26x26 = 17573 substitution alphabets before the system loops.
 
 With 5 cylinders, that number scalates up to 11881376. This is the base of the *crypt* command of *UNIX*.
 
-### Standard cipher
+### Standard encryption
 
 *DES* (which descents from the LUCIFER cipher, created by IBM) was adopted by the NIST in 1977 to be the Data Encryption Standard.
 
