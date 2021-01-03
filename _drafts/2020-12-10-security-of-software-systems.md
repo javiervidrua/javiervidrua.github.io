@@ -67,6 +67,7 @@ These are some classic techniques that symmetric ciphers use:
    This is tribial to cryptoanalyze, so that's no good my friend.
 
 ### ENIGMA machine:
+
 A set of 3 cylinders that rotate on their own axis. In each cylinder there are 26 contacts (as for 26 letters), and each contact is connected to another one of the next cylinder. Each cylinder is a cryptosystem that does Polyalphabetic Substitution of period 26. Each cylinder is connected to the next, as a cascade.
 
 There are 26x26x26 = 17573 substitution alphabets before the system loops.
@@ -87,11 +88,40 @@ The following scheme shows the bit-level algorithm:
 
 ![DES diagram](/images/sss-des-diagram.gif)
 
-The DES cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:
-1. *ECB*: Stands for Electronic CodeBook: 30
+The *DES* cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:
+1. ***ECB***: Stands for *Electronic CodeBook*: The simplest mode, as it ciphers 64 bit blocks.
+1. ***CBC***: Stands for *Cipher Block Chaining*: Uses the last encrypted block to do a XOR operation against the current block to encrypt. For this reason, it needs an initialization block that has to be known between both the encryption and the decryption algorithm.
+1. ***CFB***: Stands for *Cipher FeedBack*: This mode allows the encryption algorithm to encrypt data of any size. As the last mode, this one needs an initialization block too, as it needs the last encrypted block to fill the empty bits of the 64 block. If the block to cipher is smaller than 64 bits, the remaining bits get filled with the bits from the previous encrypted block, resulting in a 64 bit block that can now be encrypted.
+1. ***OFB***: Stands for *Output FeedBack*: Works the same as the Cipher FeedBack, but instead of chaining the encryption after the XOR operation, it does it before it. The advantage of this mode is that a transmission error in one block does not affect the rest of the blocks.
+
+*3DES*: Stands for Triple DES, as it uses three 56 bit keys (one for each stage). Two of those keys are the same (for the even) and one is unique (for the odd).
+
+Its time complexity is 2^(120-log2(n)) such as n=plaintext lenght.
+
+### IDEA
+
+It stands for *International Data Encryption Algorithm*, uses 64 bit blocks and 128 bit keys.
+
+It has 8 iterations and a final stage that transforms everything into a 64 bit ciphertext block and the same modes of operation as the *DES* algorithm.
+
+### AES
+
+Winner of the 1997 public contest promoted by the NIST whose purpose was to replace the *3DES* algorithm.
+
+This algorithm is a part of the *Rijndael* algorithm (*Joan Daemen & Rijmen*), as the *Rijndael* allows several different block and key sizes.
+
+The official release of the AES can be found [**here**.](https://csrc.nist.gov/csrc/media/publications/fips/197/final/documents/fips-197.pdf)
+
+Some particular attributes of this algorithm are the following:
+* Works with bytes.
+* Does operations with the body F256.
+* Uses its own arithmetic operations (sum, product).
+* Key size can be 128, 192 or 256 bits.
+* Block size of 128 bits.
 
 ### Asymmetric cipher
 
+51
 
 ## 01 - Introduction
 
