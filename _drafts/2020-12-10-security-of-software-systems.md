@@ -121,7 +121,58 @@ Some particular attributes of this algorithm are the following:
 
 ### Asymmetric cipher
 
-51
+Using two keys instead of one, it supposes a revolution in cryptology, as it solves two problems that are complex to solve with a secret key:
+* Key distribution.
+* Digital signature.
+
+It is based on a series of new elemental transformations that were discovered at the time. Instead of transformations and substitutions, mathematic transformations are used.
+
+The requirements for these type of algorithms are the following:
+* The keys **can be** different.
+* One algorithm and key for encryption and another pair for decryption.
+* Impossible to compute one of the keys knowing the other one and the cipher algorithm.
+* Optionally, the keys are interchangeable.
+
+The basic scheme is presented in the next diagram:
+
+![Asymmetric cipher diagram](/images/sss-asymmetric-cipher.png)
+
+*Diffie-Hellman* rules:
+* Easy for a computer to generate a pair of keys (public and private).
+* Easy encryption, in computing terms.
+* Knowing the private key, the decryption must be easy.
+* Impossible to obtain the private key from the public key.
+* Impossible to obtain the cleartext if only the public key is known.
+* Optionally, the encryption and decryption algorithms can be applied in any order.
+
+If the last requirement is met, now we are able to use this algorithm for:
+* Authentication: Identification and validation.
+* Digital signature: The message is signed with the private key, and only if the signing person is the one that claims to be, the signature validates using the public key.
+* Does not guarantee confidentiallity.
+* Guarantees integrity.
+
+### RSA
+
+One of the most used ones, since it was created in 1977 by the *MIT* investigators Ron **R**ivest, Adi **S**hamir, Leonard **A**dleman.
+
+It basis its robustness in the complexity of big numbers factorization, wich is really good, but it has its cons:
+* It uses very long keys when compared with the ones that the symmetric encryption ciphers use.
+* The algorithm is very demanding in computing terms.
+
+#### The discrete logarithm problem
+
+Given values for *a*, *b* and *n* such as *n* is a prime number, the function *x* = *a*^*b* mod *n* is very easy to compute.
+
+But if you know the values of *x*, *a* and *n*, finding the value of *b* is very hard to compute if the values of *x*, *a* and *n* are very large.
+
+This is the basis of the public key cryptography.
+
+#### Prime tests
+
+To check if a very large number is prime takes a lot of time (with large numbers N, the estimated distance between prime numbers is ln(N)), so there are several different tests we can do:
+* Miller-Rabin probability test.
+* AKS algorithm (since 2002).
+* Extended Euclides algorithm.
 
 ## 01 - Introduction
 
