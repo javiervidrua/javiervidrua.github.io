@@ -94,7 +94,7 @@ The *DES* cipher can operate in four different modes, in order to be able to enc
 1. ***CFB***: Stands for *Cipher FeedBack*: This mode allows the encryption algorithm to encrypt data of any size. As the last mode, this one needs an initialization block too, as it needs the last encrypted block to fill the empty bits of the 64 block. If the block to cipher is smaller than 64 bits, the remaining bits get filled with the bits from the previous encrypted block, resulting in a 64 bit block that can now be encrypted.
 1. ***OFB***: Stands for *Output FeedBack*: Works the same as the Cipher FeedBack, but instead of chaining the encryption after the XOR operation, it does it before it. The advantage of this mode is that a transmission error in one block does not affect the rest of the blocks.
 
-*3DES*: Stands for Triple DES, as it uses three 56 bit keys (one for each stage). Two of those keys are the same (for the even) and one is unique (for the odd).
+*3DES*: Stands for Triple DES, as it uses three 56 bit keys (one for each stage). Two of those keys are the same (for the even stages, the first and the third) and one is unique (for the odd stage, the second).
 
 Its time complexity is 2^(120-log2(n)) such as n=plaintext lenght.
 
