@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Security of software systems"
+title:  "Draft - Security of software systems"
 date:   2020-12-10 00:00:00 +0200
 categories: jekyll update
 ---
@@ -173,6 +173,98 @@ To check if a very large number is prime takes a lot of time (with large numbers
 * Miller-Rabin probability test.
 * AKS algorithm (since 2002).
 * Extended Euclides algorithm.
+
+## 02 - Security services
+
+### Related to the message
+
+#### Confidentiality
+
+This is met with both types of encryption (symmetric and asymmetric).
+
+#### Integrity
+
+This guarantees that the received message has not been modified and is the exact same message that was sent.
+
+To do this, a one-way function (also known as hash function) generates a code that represents the message that will be sent.
+
+The hash is then stored and compared to the hash of the received message.
+
+#### Message authentication
+
+It's the ability to guarantee the identity of the sender of the message.
+
+On paper it's done via autograph.
+
+With symmetric encryption it can be done several ways:
+* Checksum.
+* MAC (Message Authentication Code).
+* Hash + key:
+  ![Hash + key diagram](/images/sss-hash+key.png)
+
+#### Non-repudiation
+
+This means that a person cannot deny:
+* That this person sent the message (this is done with digital signature).
+* That this person received the message (e.g. this is the double tick that WhatsApp has).
+
+### Related to the entity
+
+#### Entity authentication
+
+The authentication is done by using a piece of information (generally a key or a password) that the agent that wants to authenticate has.
+
+Challenge-response authentication: The verifier sends a challenge to which the response must be a function applied to that. It can be done using:
+* Public key schemes.
+* Digital signature schemes.
+
+2FA for people: After the user has successfully introduced his access credentials, the system needs more information to let the user in. This can be one of three basic categories:
+* Something that the user knows.
+* Something that the user has.
+* Something that the user is.
+
+#### Hash functions
+
+A hash is a function that assigns a fixed length value to data of any length.
+
+A good hash function must meet the following requirements:
+* H can be applied to messages of any length.
+* H produces output of a fixed length.
+* H(x) is easy to compute.
+* For a given hash *h* is not feasible to find *m*, such that H(m)=h.
+* For a given block *x* is not feasible to find *y*, such that H(x)=H(y).
+* It is computationally infeasible to find *x* and *y*, such that H(x)=H(y).
+
+#### Hash vs CRC
+
+A *hash* is a one-way function, and it is designed to make difficult to find an entry that produces certain output value.
+
+A *CRC* is designed to detect accidental changes in the data. **Its purpose is not to protect against changes, but to detect them**.
+
+#### Some hash functions
+
+MD5: Improvements over MD4 and MD2, slower but more secure. Produces 128 bit output.
+
+SHA-1: Secure Hash Algorithm, published in 1994. Similar to MD5 but this one produces 160 bit output.
+
+SHA-2: Set of functions (SHA-224, SHA-256, SHA-384, SHA-512), published in 2001.
+
+SHA-3: Set of functions published in 2015. Just a standard, not in use yet.
+
+### Digital signature
+
+Properties:
+* Able to verify author, date and time.
+* Authentify content at the time of the sign.
+* Verifiable by third parties.
+
+Requirements:
+* Bit pattern independent from the message to sign.
+* Signature issuer information to prevent falsification and impersonation and negation of the signature.
+* Easy to generate.
+* Easy to recognize and verify.
+* Impossible to fake (nor signature or message).
+* Must be practical to store a copy.
 
 ## 01 - Introduction
 
