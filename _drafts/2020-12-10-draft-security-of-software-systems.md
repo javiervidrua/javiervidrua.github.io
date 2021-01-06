@@ -266,6 +266,72 @@ Requirements:
 * Impossible to fake (nor signature or message).
 * Must be practical to store a copy.
 
+A message can be signed by more than one person, an it also can be signed by a supervisor.
+
+### Key management
+
+#### Symmetric key distribution
+
+There are several posibilities:
+* Use of session keys.
+* KDC (Key Distribution Centre).
+* 3 way protocol
+
+#### Public key distribution
+
+To distribute public keys, the possibilities are the following:
+* Public announcement: A secure channel is needed.
+* Public available directory: A big, reliable organization takes care of the manteinance.
+* Public key authority: Mantained by an authority. Need of having a trustable public key issued by the authority. The authority sends keys to the users that request them.
+* Public key certificate: X.509 certificates are a file digitally signed by a Certification Authority (CA). It links some data to an identity. Both sender and receiver trust the CA. A PKI standard is X.509.
+
+#### CA
+
+A CA is a trustable organization responsible of issuing certificates for users or servers.
+
+Local scope: Enterprise, campus or country: e.g in Spain, FNMT and DNIe. Autosigned certificates.
+
+Global scope: We trust a certificate if it is signed by a trustable authority that we all trust. Two types of certification authorities networks, tree (PKI) and distributed (keyrings).
+
+### Secure communication protocols
+
+#### SSL
+
+Standing for Secure Socket Layer, it was designed by Netscape Corporation for their Internet Browser. 
+
+Works on the transport layer (TCP).
+
+The services it offers are the following:
+* Data compression.
+* Security: (Parameter negotiation, client-server authentication, data integrity and confidentiality).
+
+Stages:
+1. Handshake: The parameters of the algorithms and the key length are determined between the both parts of the communications. The public keys are exchanged. The authentication is made via certificates.
+1. Transference: Symmetric key determination and encrypted data exchange.
+
+#### TLS
+
+Based on SSL 3.0, but not compatible with it.
+
+In contrast with SSL, TLS can reuse an already existing TCP connection, so it does not need dedicated ports to work. It is inmune to Man In The Middle type of attacks.
+
+#### IPsec
+
+Collection of security protocols at network layer (IP).
+
+Two modes of operation:
+* Transport mode: Protects the information send by the transport layer, this is, **it only protects the TCP payload.**. This mode is useful on end-to-end communications.
+* Tunnel mode: **Protects the original IP datagram, this is, everything**. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.
+
+![IPsec working modes](/images/sss-ipsec-modes.png)
+
+It has three protocols:
+* AH (Authentication Header): It provides origin authentication and integrity, but not confidentiality.
+* ESP (Encapsulating Security Payload): It provides origin authentication, integrity, and confidentiality too.
+* IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.
+
+![IPsec SA two way](/images/sss-sa-two-way.png)
+
 ## 01 - Introduction
 
 General culture concepts and knowledge:

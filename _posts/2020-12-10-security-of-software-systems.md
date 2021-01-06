@@ -173,3 +173,174 @@ To check if a very large number is prime takes a lot of time (with large numbers
 * Miller-Rabin probability test.
 * AKS algorithm (since 2002).
 * Extended Euclides algorithm.
+
+## 02 - Security services
+
+### Related to the message
+
+#### Confidentiality
+
+This is met with both types of encryption (symmetric and asymmetric).
+
+#### Integrity
+
+This guarantees that the received message has not been modified and is the exact same message that was sent.
+
+To do this, a one-way function (also known as hash function) generates a code that represents the message that will be sent.
+
+The hash is then stored and compared to the hash of the received message.
+
+#### Message authentication
+
+It's the ability to guarantee the identity of the sender of the message.
+
+On paper it's done via autograph.
+
+With symmetric encryption it can be done several ways:
+* Checksum.
+* MAC (Message Authentication Code).
+* Hash + key:
+  ![Hash + key diagram](/images/sss-hash+key.png)
+
+#### Non-repudiation
+
+This means that a person cannot deny:
+* That this person sent the message (this is done with digital signature).
+* That this person received the message (e.g. this is the double tick that WhatsApp has).
+
+### Related to the entity
+
+#### Entity authentication
+
+The authentication is done by using a piece of information (generally a key or a password) that the agent that wants to authenticate has.
+
+Challenge-response authentication: The verifier sends a challenge to which the response must be a function applied to that. It can be done using:
+* Public key schemes.
+* Digital signature schemes.
+
+2FA for people: After the user has successfully introduced his access credentials, the system needs more information to let the user in. This can be one of three basic categories:
+* Something that the user knows.
+* Something that the user has.
+* Something that the user is.
+
+#### Hash functions
+
+A hash is a function that assigns a fixed length value to data of any length.
+
+A good hash function must meet the following requirements:
+* H can be applied to messages of any length.
+* H produces output of a fixed length.
+* H(x) is easy to compute.
+* For a given hash *h* is not feasible to find *m*, such that H(m)=h.
+* For a given block *x* is not feasible to find *y*, such that H(x)=H(y).
+* It is computationally infeasible to find *x* and *y*, such that H(x)=H(y).
+
+#### Hash vs CRC
+
+A *hash* is a one-way function, and it is designed to make difficult to find an entry that produces certain output value.
+
+A *CRC* is designed to detect accidental changes in the data. **Its purpose is not to protect against changes, but to detect them**.
+
+#### Some hash functions
+
+MD5: Improvements over MD4 and MD2, slower but more secure. Produces 128 bit output.
+
+SHA-1: Secure Hash Algorithm, published in 1994. Similar to MD5 but this one produces 160 bit output.
+
+SHA-2: Set of functions (SHA-224, SHA-256, SHA-384, SHA-512), published in 2001.
+
+SHA-3: Set of functions published in 2015. Just a standard, not in use yet.
+
+### Digital signature
+
+Properties:
+* Able to verify author, date and time.
+* Authentify content at the time of the sign.
+* Verifiable by third parties.
+
+Requirements:
+* Bit pattern independent from the message to sign.
+* Signature issuer information to prevent falsification and impersonation and negation of the signature.
+* Easy to generate.
+* Easy to recognize and verify.
+* Impossible to fake (nor signature or message).
+* Must be practical to store a copy.
+
+A message can be signed by more than one person, an it also can be signed by a supervisor.
+
+### Key management
+
+#### Symmetric key distribution
+
+There are several posibilities:
+* Use of session keys.
+* KDC (Key Distribution Centre).
+* 3 way protocol
+
+#### Public key distribution
+
+To distribute public keys, the possibilities are the following:
+* Public announcement: A secure channel is needed.
+* Public available directory: A big, reliable organization takes care of the manteinance.
+* Public key authority: Mantained by an authority. Need of having a trustable public key issued by the authority. The authority sends keys to the users that request them.
+* Public key certificate: X.509 certificates are a file digitally signed by a Certification Authority (CA). It links some data to an identity. Both sender and receiver trust the CA. A PKI standard is X.509.
+
+#### CA
+
+A CA is a trustable organization responsible of issuing certificates for users or servers.
+
+Local scope: Enterprise, campus or country: e.g in Spain, FNMT and DNIe. Autosigned certificates.
+
+Global scope: We trust a certificate if it is signed by a trustable authority that we all trust. Two types of certification authorities networks, tree (PKI) and distributed (keyrings).
+
+### Secure communication protocols
+
+#### SSL
+
+Standing for Secure Socket Layer, it was designed by Netscape Corporation for their Internet Browser. 
+
+Works on the transport layer (TCP).
+
+The services it offers are the following:
+* Data compression.
+* Security: (Parameter negotiation, client-server authentication, data integrity and confidentiality).
+
+Stages:
+1. Handshake: The parameters of the algorithms and the key length are determined between the both parts of the communications. The public keys are exchanged. The authentication is made via certificates.
+1. Transference: Symmetric key determination and encrypted data exchange.
+
+#### TLS
+
+Based on SSL 3.0, but not compatible with it.
+
+In contrast with SSL, TLS can reuse an already existing TCP connection, so it does not need dedicated ports to work. It is inmune to Man In The Middle type of attacks.
+
+#### IPsec
+
+Collection of security protocols at network layer (IP).
+
+Two modes of operation:
+* Transport mode: Protects the information send by the transport layer, this is, **it only protects the TCP payload.**. This mode is useful on end-to-end communications.
+* Tunnel mode: **Protects the original IP datagram, this is, everything**. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.
+
+![IPsec working modes](/images/sss-ipsec-modes.png)
+
+It has three protocols:
+* AH (Authentication Header): It provides origin authentication and integrity, but not confidentiality.
+* ESP (Encapsulating Security Payload): It provides origin authentication, integrity, and confidentiality too.
+* IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.
+
+![IPsec SA two way](/images/sss-sa-two-way.png)
+
+## 01 - Introduction
+
+General culture concepts and knowledge:
+
+* *Mirai botnet*: Largest DDoS attack in history
+* *Wannacry*: A classic
+* *Stuxnet worm*: Targeted attack on Iranian nuclear facilities
+* *Security basis*: Confidentiality, integrity and availability
+* *Other security basis*: Authenticity, accountability and non-repudiation
+* *More security basis*: Privacy, anonymity, untraceability, unlinkability, unobservability
+* *Protection basis*: Prevention, detection, reaction
+* **Software vulnerabilities exist for a reason and cannot be completely eliminated, but they can be avoided**
