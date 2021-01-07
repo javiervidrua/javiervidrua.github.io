@@ -469,3 +469,158 @@ Types of vulnerabilities:
 * Common programming errors: Improper file management, not checking the inputs correctly, XSS...
 * SQLi: One of the most common vulnerability that webpages have. Always check the user input before doing consults to a database with it.
 * Rootkits: Persistent threat that provides the attacker root privileges when wanted. Very hard to detect, as they work at kernel level, but there are several tools like chkrootkit and rkhunter.
+
+## 04 - Network security
+
+The Internet comes with challenges that were never thought about, as it allows everything to be available from anywhere in the world 24/7.
+
+The access control becomes harder. New security needs appear, to make safe services that were not made for so. e.g. WEP, GSM.
+
+### Types of attacks
+
+Active, that can be easily detected but are very hard to prevent:
+* Interruption.
+* Fabrication.
+* Modification.
+
+Passive, that are very hard to detect, but can erradicated with encryption and protections:
+* Interruption.
+
+### Network security
+
+Only enable the necessary services and take countermeassures against their vulnerabilities.
+
+A firewall controls the packets that enter and exit the system.
+
+The network services can be:
+* Independent: Like any other program
+* Managed by *inetd*: The daemon *inetd* wakes up the process when needed, when not, it shuts them down. The behaviour can be configured in the file /etc/inetd.conf
+
+#### TCP wrappers
+
+In order for this work, the programs must be compiled with *libwrap* support.
+
+In the file /etc/hosts.deny you specifiy the denied access, and in /etc/hosts.allow you specify the allowed access.
+
+#### Sysctl
+
+This allows us to communicate with the kernel in execution time. By editing the file /etc/sysctl.conf we can do things like:
+* Ignore all ping requests: `net.ipv4.icmp_echo_ignore_all=1`
+* Ignore all ping broadcasts: `net.ipv4.icmp_echo_ignore_broadcasts=1`
+* Refuse to send packets with invalid IP addresses: `net.ipv4.conf.all.rp_filter=1` (Can be 0,1 or 2).
+* Log the packets with an invalid IP: `net.ipv4.conf.all.log_martians=1`
+
+To apply the changes run `sysctl -p`
+
+#### Service checking
+
+To check the network services that are running, tools like *netstat* and *nmap* can be used.
+
+### Attacks
+
+#### DoS
+
+Connectivity lost due to port, network or resources saturation. Up to 3 years in jail.
+
+#### IP spoofing
+
+Send packets with a fake origin IP.
+
+If you send ICMP ECHO REQUEST packages with the victim IP as the origin one, this attack is called *smurfing*.
+
+Nowadays the routers don't allow to send broadcast datagrams outside their subnets of reach.
+
+#### ARP spoofing, poisoning
+
+Change the IP linked to a MAC. This can be done in a switched LAN.
+
+To discover the hosts that are in reach: `arpscan -a`
+
+To poison two victims a tool named *arpspoof* can be used, in conjunction with `echo 1 > /proc/sys/net/ipv4/ip_forward`
+
+Countemeasures:
+* Router with static MAC.
+* Use `arpwatch` to monitorize the network.
+
+#### TCP SYN flood
+
+Takes advantage of the 3-way-handshake, as the server allocates resources when a SYN packet is received, and they are not released after 75 seconds have passed. It results in a *OOM* most of the time.
+
+This can be erradicated:
+* SYN cookies: Only allocate resources when the final message is received.
+* SYN cache: Independent structure that can't grow infinitely. By default in FreeBSD.
+
+#### UDP flood
+
+Send packets to random ports, and cause the victim to send ICMP destination unreachable messages back to the attacker (or fake the origin IP and put another target).
+
+#### DNS spoofing
+
+Return a fake IP after a DNS query is made and captured by the attacker.
+
+#### Web spoofing
+
+These days this is called phising.
+
+#### Mail spoofing
+
+Saying in an email that the sender is another person.
+
+#### MITM
+
+Signifficant attacks when Diffie-Hellman without authentication is being used.
+
+### Iptables
+
+Iptables is a tool that the Linux system provides to manage *netfilter*, which is a very powerful packet manipulation framework provided by the kernel.
+
+It is a stateful firewall. This means that it will only examine the first packet of a connection, make a decission, and treat the rest of the packets the same way.
+
+The framework consists of three main tables:
+* Filter
+* Mangle
+* Nat
+
+It also has another two tables:
+* Raw: For managing the state of packets (as netfiler is a stateful firewall).
+* Security: Only used to set internal SELinux security context marks on packets.
+
+And each table has several chains linked to it (not every tables has all the chains):
+* PREROUTING
+* INPUT
+* FORWARD
+* OUTPUT
+* POSTROUTING
+
+The following diagram represents the flow of the packets through the chains:
+
+![IPtables tables](/images/sss-iptables-tables.jfif)
+
+There are several options that can apply to a packet:
+* ACCEPT
+* DROP
+* REJECT
+* LOG
+* SNAT
+* DNAT
+* MASQUERADE
+
+### Tools
+
+*Ettercap*, now replaced by Bettercap.
+
+*Packit*: A tool to craft network packets and to do tests with.
+
+*Hping3*: Like ping, but better.
+
+### Sniffer detection
+
+This is a very hard thing to do, but there are some tools that can help you to do so, like *Sniffdet*.
+
+To make if more difficult to sniff network traffic, here are some things that can be done:
+* Network and hosts segmentation using switches (but you gotta be careful with ARP poisoning).
+* Encrypted communications.
+
+### SNORT
+
+Snort is an IDS (Intrusion Detection System), specifically a NIDS, and it's got filters, rules, abnormal events detector and a module for making reports and managing alarms.
