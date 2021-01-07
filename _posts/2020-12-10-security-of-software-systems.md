@@ -289,7 +289,7 @@ To distribute public keys, the possibilities are the following:
 
 A CA is a trustable organization responsible of issuing certificates for users or servers.
 
-Local scope: Enterprise, campus or country: e.g in Spain, FNMT and DNIe. Autosigned certificates.
+Local scope: Enterprise, campus or country: e.g. in Spain, FNMT and DNIe. Autosigned certificates.
 
 Global scope: We trust a certificate if it is signed by a trustable authority that we all trust. Two types of certification authorities networks, tree (PKI) and distributed (keyrings).
 
@@ -332,15 +332,140 @@ It has three protocols:
 
 ![IPsec SA two way](/images/sss-sa-two-way.png)
 
-## 01 - Introduction
+## 03 - Operating systems security
 
-General culture concepts and knowledge:
+### Definitions
 
-* *Mirai botnet*: Largest DDoS attack in history
-* *Wannacry*: A classic
-* *Stuxnet worm*: Targeted attack on Iranian nuclear facilities
-* *Security basis*: Confidentiality, integrity and availability
-* *Other security basis*: Authenticity, accountability and non-repudiation
-* *More security basis*: Privacy, anonymity, untraceability, unlinkability, unobservability
-* *Protection basis*: Prevention, detection, reaction
-* **Software vulnerabilities exist for a reason and cannot be completely eliminated, but they can be avoided**
+* Threat: Any situation that endangers the security.
+* Vulnerability: Weakness that is susceptible of producing an error.
+* Exploit: Technique that allows the atacker to take advantage of certain vulnerability to break the security of a system.
+* Social engineering: The art of manipulating people so they give up confidential information.
+* APT: Advanced Persisten Threat.
+* Botnets: Net of compromised, infected computers that can be used to perform distributed attacks.
+* Risk: Latent probability of a security incident taking place.
+
+### Vulnerabilities
+
+Every system has vulnerabilities.
+
+There are some strategies against them:
+* Security backups.
+* Risk analysis.
+* Suspicious events detection.
+* Constant revision of the security of the organisation.
+
+The vulnerabilities must be classified. For that we have:
+* CVE (Common Vulnerabilites and Exposures): A unique ID is assigned to every vulnerability that is found, so they can be classified and origanised. For example CVE-2017-0144 (Eternalblue).
+* CVSS (Common Vulnerability Scoring System): A system designed to classify vulnerabilities based in their attributes and their possible effects.
+
+### Operating systems
+
+Every OS provides tools and mechanisms to guarantee the security of the system.
+
+#### User management
+
+The users must have the lowest privilege they need to operate the system and they must belong to only the necessary groups.
+
+#### Filesystem
+
+Needs:
+* Confidentiality.
+* Disponibility.
+* Integrity.
+
+Protections:
+* Encrypted filesystems. They require the password at boot time.
+* Secure file deletion. Tools like Scrub and Shred.
+
+Types of alterations:
+* In the data.
+* In the programs. These ones are very dangerous.
+
+#### Random alterations
+
+Hardware alterations can be, for example:
+* Memory, disks, USBs... Those can be prevented by using RAID architecture and doing regular backups.
+* Power supply. A UPS prevents this of happening.
+
+Software alterations are caused by:
+* Bad program design.
+* Programs in an inconsistent state.
+* Users with wrong privileges.
+
+#### Alterations prevention
+
+To prevent alterations from happening, several things can be done:
+* Use digital signature to check the authenticity of a file.
+* Use CRC and hashes to verify the integrity of a file.
+* Journaling: Log almost everything that happens in the system.
+
+### Log files
+
+Their goal is to monitorize the system so in case something bad happens we can look the logs to figure out what the cause of the problem was.
+
+The logs:
+* Store important events.
+* Can be local or remote.
+* Detect errors.
+* Are produced by programs like Snare, ObserveIt, LogAnalyzer...
+* In Linux they are store in the `/var/log` directory:
+  * syslog
+  * messages
+  * auth.log
+  * utmp
+  * wtmp
+  * btmp
+  * lastlog
+  * debug
+  * apache
+  * daemon
+  * kern.log
+  * user.log
+
+### Access control
+
+The goal is to authenticate that someone is who they say they are.
+
+To do that, we check for something that:
+* They know.
+* They have.
+* They are.
+
+The authentication system must satisfy several characteristics:
+* Very reliable.
+* Economic.
+* Stand strong against certain attacks.
+* Acceptable by the users.
+
+Password authentication system:
+* Simple and cheap.
+* The responsibility lies with the user.
+* A hash of the password is stored.
+* If the passwords are not hashed with salt, the hashes can be susceptible to a Rainbow table attack.
+* To create strong passwords there are several systems out there, e.g. Diceware.
+
+Card authentication system:
+* Can be chipcards or smartcards.
+
+Biometric authentication system:
+* Iris, palm of the hand, fingerprint,...
+
+### Secure programming
+
+Secure code development, without vulnerabilities.
+
+### Vulnerabilities
+
+In order to detect them, most of the time a pentest or a security audit is necessary.
+
+Types of vulnerabilities:
+* Buffer overflow: Until 2004 they were the cause of half of the total discovered vulnerabilities.
+  
+  To get rid of them, there are several things that can be done:
+  * Never trust the user inputs.
+  * Disable code execution on the stack.
+  * Use stackguard.
+* Race conditions: Not use of critical sections. To fix them, use the tools that the operating system gives you e.g. semaphores.
+* Common programming errors: Improper file management, not checking the inputs correctly, XSS...
+* SQLi: One of the most common vulnerability that webpages have. Always check the user input before doing consults to a database with it.
+* Rootkits: Persistent threat that provides the attacker root privileges when wanted. Very hard to detect, as they work at kernel level, but there are several tools like chkrootkit and rkhunter.
