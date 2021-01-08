@@ -323,14 +323,14 @@ Two modes of operation:
 * Transport mode: Protects the information send by the transport layer, this is, **it only protects the TCP payload.**. This mode is useful on end-to-end communications.
 * Tunnel mode: **Protects the original IP datagram, this is, everything**. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.
 
-![IPsec working modes](/images/sss-ipsec-modes.png)
+![IPsec working modes](/images/sss-ipsec-modes.PNG)
 
 It has three protocols:
 * AH (Authentication Header): It provides origin authentication and integrity, but not confidentiality.
 * ESP (Encapsulating Security Payload): It provides origin authentication, integrity, and confidentiality too.
 * IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.
 
-![IPsec SA two way](/images/sss-sa-two-way.png)
+![IPsec SA two way](/images/sss-sa-two-way.PNG)
 
 ## 03 - Operating systems security
 
