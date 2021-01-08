@@ -200,7 +200,7 @@ With symmetric encryption it can be done several ways:
 * Checksum.
 * MAC (Message Authentication Code).
 * Hash + key:
-  ![Hash + key diagram](/images/sss-hash+key.png)
+  ![Hash + key diagram](/images/sss-hash+key.PNG)
 
 #### Non-repudiation
 
