@@ -88,11 +88,11 @@ Now click the "*Upload*" button and stick the *Digispark* in a *USB* port within
 As you can see, it only takes about 2 seconds to get the job done.
 
 ## Common errors
-If you get this error at compile:
+If you get this error when compiling the code:
 ```
 "DigiKeyboard.h: No such file or directory"
 ```
-Your board was likely changed when the *Arduino IDE* was reopened.
+Your board was likely changed in the settings when the *Arduino IDE* was reopened.
 
 Go back to "*Tools*" -> "*Board*" and select "*Digispark (Default - 16.5mhz)*"
 
