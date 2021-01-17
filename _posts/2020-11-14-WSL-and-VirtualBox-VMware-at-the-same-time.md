@@ -46,7 +46,7 @@ The options you have are those:
 
   In case of *VMware*, they released the 15.5.6 version that solves this problem.
 
-  ![VMware-15-5-6](/images/vmware-15-5-6.png "VMware-15-5-6")
+  ![VMware-15-5-6](/images/vmware-15-5-6.PNG "VMware-15-5-6")
 
   You can get more info about that [**here**](https://blogs.vmware.com/workstation/2020/01/vmware-workstation-tech-preview-20h1.html)
 
