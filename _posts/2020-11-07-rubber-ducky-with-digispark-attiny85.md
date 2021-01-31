@@ -99,7 +99,7 @@ Go back to "*Tools*" -> "*Board*" and select "*Digispark (Default - 16.5mhz)*"
 ## Extra
 There is a *GitHub* project named ["*Duckyspark*"](https://github.com/toxydose/Duckyspark) that converts *.duck* scripts to the *.ino* format that our *Digispark* understands. It's written in *python3* and works well.
 
-The syntax is:
+The syntax is as shown below:
 ```bash
 python3 Duckyspark_translator.py <rubber ducky file> <digispark file>
 ```
