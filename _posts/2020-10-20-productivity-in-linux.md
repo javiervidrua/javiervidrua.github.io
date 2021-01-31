@@ -197,7 +197,7 @@ Then, you can hit `n` and `shift+n` to go to the next or the previous occurrence
 1. Understand the problem. Drawing is a good way to make this step easier. Trying to explain the problem to other person is a good way too.
 1. Divide the problem into smaller problems. Make a check list. Make sure the problems are small enough, don't make them too big.
 1. If you get stuck, take it as a challenge.
-1. If all of this doesn't work, try starting over. You don't necessarily need to delete everything, you can comment everythin.
+1. If all of this doesn't work, try starting over. You don't necessarily need to delete everything, you can comment everything.
 1. Practise allday everyday.
 
 ## Run a command for each line of the output of another command

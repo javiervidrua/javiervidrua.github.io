@@ -500,7 +500,7 @@ The network services can be:
 
 In order for this work, the programs must be compiled with *libwrap* support.
 
-In the file /etc/hosts.deny you specifiy the denied access, and in /etc/hosts.allow you specify the allowed access.
+In the file */etc/hosts.deny* you specifiy the denied access, and in */etc/hosts.allow* you specify the allowed access.
 
 #### Sysctl
 

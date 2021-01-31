@@ -68,7 +68,7 @@ categories: jekyll update
 * *evenp* - es par?
 * *oddp* - es impar?
 * *\>* - orden descendente en todos los parámetros?
-* *\>* - orden ascendente en todos los parámetros?
+* *\<* - orden ascendente en todos los parámetros?
 
 * *=* - los argumentos son el mismo número?
 * *equalp* - los argumentos son iguales?
