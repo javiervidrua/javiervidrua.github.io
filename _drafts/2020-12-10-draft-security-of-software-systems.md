@@ -623,7 +623,9 @@ To make if more difficult to sniff network traffic, here are some things that ca
 
 ### SNORT
 
-Snort is an IDS (Intrusion Detection System), specifically a NIDS, and it's got filters, rules, abnormal events detector and a module for making reports and managing alarms.
+Snort is an IDS (Intrusion Detection System), specifically a NIDS.
+
+It's got filters, rules, abnormal events detector and a module for making reports and managing alarms.
 
 ## 01 - Introduction
 
