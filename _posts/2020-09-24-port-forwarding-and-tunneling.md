@@ -41,7 +41,7 @@ Instead of installing *rinetd*, you do the following things:
 What that command does is:
 * Connect to your home machine (*a.b.c.d*) via *SSH* (with or without ssh-key, it doesn't matter).
 * Open the port 8080 on your work computer.
-* **Redirect the requests to port 8080 on your work computer through SSH to your home machine, and then though port 80 to the GitHub (*5.6.7.8*) webpage**, and the same thing but backwards with the webpage responses.
+* **Redirect the requests to the port 8080 on your work computer through SSH to your home machine, and then through the port 80 to the GitHub (*5.6.7.8*) webpage**, and the same thing but backwards with the webpage responses.
 
 This, apart from being more practical than the previous example (because it is more likely to have an SSH server than having *rinetd* installed on your system), **it encrypts all the traffic between your work and your home computer**, thus making it safe, even if the network is insecure. 
 
