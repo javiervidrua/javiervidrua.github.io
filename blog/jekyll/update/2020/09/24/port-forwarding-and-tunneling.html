@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Port forwarding and tunneling | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Port forwarding and tunneling" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more." />
+<meta property="og:description" content="Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more." />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-24T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Port forwarding and tunneling" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html"},"datePublished":"2020-09-24T00:00:00+02:00","url":"https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html","description":"Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more.","headline":"Port forwarding and tunneling","dateModified":"2020-09-24T00:00:00+02:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Port forwarding and tunneling</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-24T00:00:00+02:00" itemprop="datePublished">Sep 24, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><em>Port redirection</em>, <em>tunneling</em> and <em>traffic encapsulation</em> are a <strong>must-know</strong> if you are a <em>sysadmin</em> or <em>pentester</em>, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, <strong>access restricted networkt, bypass firewall protections and much more</strong>.</p>
+
+<p>Let’s start talking about <em>port forwarding</em>.</p>
+
+<h2 id="1---port-forwardingredirection">1 - Port forwarding/redirection</h2>
+<p>Let’s explain <em>port forwarding</em> using a simple example:</p>
+
+<p>Suppose that you are at work on your computer, and you want to navigate to <em>Github</em>, but you can’t because <strong>there is a firewall that only allows communications on port 123 (NTP)</strong><em>. You try to go to *Github</em> but the requests get dropped by the firewall and the page doesn’t load.</p>
+
+<p>So what do you do?</p>
+
+<ol>
+  <li>On your local linux machine, you install the tool <strong><em>rinetd</em></strong> with the command <code class="language-plaintext highlighter-rouge">apt install rinetd</code>.</li>
+  <li>You open <em>/etc/rinetd.conf</em> with your favorite editor.</li>
+  <li>Suposing that your work IP is <em>1.2.3.4</em>, the IP of the <em>Github</em> webpage is <em>5.6.7.8</em> and the IP of your home machine is <em>a.b.c.d</em>, you add the following line:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#bindadress    bindport    connectaddress  connectport
+ 1.2.3.4       123         5.6.7.8         80
+</code></pre></div>    </div>
+    <p>That line tells your home system to redirect (<i>forward</i>) the packets that come from 1.2.3.4 on port 123 (the port that the firewall allows) to 5.6.7.8 on port 80, essentially <strong>redirecting the requests you make from your computer at work (on port 123) to your machine at home (on port 123), to the Github webpage (on port 80)</strong>.</p>
+  </li>
+</ol>
+
+<p>Now, while being at work, you can navigate to <em>GitHub</em> by going to <code class="language-plaintext highlighter-rouge">https://a.b.c.d:123</code>.</p>
+
+<h2 id="2---ssh-tunneling">2 - SSH Tunneling</h2>
+
+<p>Like the name says, <em>SSH tunneling</em> is creating encrypted (secure) “tunnels” using the SSH protocol. This, for instance, can be used to <strong>encrypt traffic that goes over an insecure network</strong>, therefore making it secure.</p>
+
+<h3 id="21---local-port-forwarding">2.1 - Local port forwarding</h3>
+<p>Let’s use the same example as with port forwarding.</p>
+
+<p>Instead of installing <em>rinetd</em>, you do the following things:</p>
+<ol>
+  <li>You set up an <strong><em>SSH server</em></strong> on your local linux machine, to listen on port 123 (the one that is allowed by the firewall between you and your computer at work). This can be done editting the configuration file <code class="language-plaintext highlighter-rouge">/etc/ssh/sshd_config</code>.</li>
+  <li>On your work computer, you run this command: <code class="language-plaintext highlighter-rouge">ssh user@a.b.c.d -p 123 -L 8080:5.6.7.8:80</code></li>
+</ol>
+
+<p>What that command does is:</p>
+<ul>
+  <li>Connect to your home machine (<em>a.b.c.d</em>) via <em>SSH</em> (with or without ssh-key, it doesn’t matter).</li>
+  <li>Open the port 8080 on your work computer.</li>
+  <li><strong>Redirect the requests to the port 8080 on your work computer through SSH to your home machine, and then through the port 80 to the GitHub (<em>5.6.7.8</em>) webpage</strong>, and the same thing but backwards with the webpage responses.</li>
+</ul>
+
+<p>This, apart from being more practical than the previous example (because it is more likely to have an SSH server than having <em>rinetd</em> installed on your system), <strong>it encrypts all the traffic between your work and your home computer</strong>, thus making it safe, even if the network is insecure.</p>
+
+<p>Now, while being at work, you can navigate to <em>GitHub</em> by going to <code class="language-plaintext highlighter-rouge">https://127.0.0.1:8080</code>.</p>
+
+<h3 id="22---remote-port-forwarding">2.2 - Remote port forwarding</h3>
+<p>We’ll change up a little bit the previous example to explain remote port forwarding.</p>
+
+<p>Let’s say that there is an <em>FTP</em> server (running on port 21) in the corporate network, and a coworker asks me if I can help him with a bug in the <em>FTP</em> server that he’s having trouble solving.
+Right now I can’t help him, because <strong>the firewall blocks all connections that don’t go through port 123</strong>, and the FTP server is listening on port 21.</p>
+
+<p>What I can do is this:</p>
+<ol>
+  <li>As the previous example, set up an <strong><em>SSH server</em></strong> on your home machine that will listen on port 123.</li>
+  <li>Tell my coworker to run the following commmand: <code class="language-plaintext highlighter-rouge">ssh user@a.b.c.d -p 123 -R 21:127.0.0.1:21</code></li>
+</ol>
+
+<p>What this is going to do is create an <strong><em>SSH</em> tunnel</strong> that will communicate a remote port in my home machine (<code class="language-plaintext highlighter-rouge">21:</code>) with the local port (<code class="language-plaintext highlighter-rouge">:21</code>) on the corporate server (<code class="language-plaintext highlighter-rouge">127.0.0.1</code>).</p>
+
+<p>Now I can access the corporate <em>FTP</em> server running on port 21 from my machine with this command: <code class="language-plaintext highlighter-rouge">ftp 127.0.0.1</code></p>
+
+<h3 id="23---dynamic-port-forwarding">2.3 - Dynamic port forwarding</h3>
+<p>We have now seen local and remote port forwarding, and those are really useful features of the SSH protocol, <strong>but what happens if you need to open a range of ports?</strong> In that situation they aren’t very practical, because you will need to be running as many commands as ports you’d like to forward.</p>
+
+<p>For those situations there’s yet another feature, that feature is <strong>dynamic port forwarding</strong>.</p>
+
+<p>To be able to use this feature, you will need to have a proxy server too. One that I like using is <strong><em>proxychains</em></strong>. You can install it by running the command: <code class="language-plaintext highlighter-rouge">apt install proxychains</code>.</p>
+
+<p>Note: You can change the behaviour of <em>proxychains</em> modifying the file <code class="language-plaintext highlighter-rouge">/etc/proxychains.conf</code>, by default, it listens on port 9050, the <em>Tor</em> port.</p>
+
+<p>Now that we’re set up, let’s use an example to explain dynamic port forwarding.</p>
+
+<p>Let’s suppose that the coworker of the last example now calls us because he needs help diagnosing two servers that are not working properly. <strong>Each server has various services that we’ll need to check</strong>, so trying to do this kind of job using remote port forwarding would take a long time and you would have to run a lot of commands. So instead of that, you use dynamic port forwarding:</p>
+
+<p>The first thing to do is to tell my coworker to run this command:</p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh user@a.b.c.d -p 123 -f -N -D 9050</code></p>
+
+<p>Notes:</p>
+<ul>
+  <li>”<code class="language-plaintext highlighter-rouge">-f</code>” makes the session go to background. Useful for port forwarding.</li>
+  <li>”<code class="language-plaintext highlighter-rouge">-N</code>” tells the <em>SSH</em> client that we won’t be sending commands. Useful for port forwarding.</li>
+  <li>”<code class="language-plaintext highlighter-rouge">-D &lt;port&gt;</code>” tells the <em>SSH</em> client that we’ll be doing dynamic port forwarding on the specified port.</li>
+  <li>”<code class="language-plaintext highlighter-rouge">-p 123</code>” is used because the firewall only allows that port and we have the <em>SSH server</em> listening on that port too.</li>
+</ul>
+
+<p>Now <strong>I’m connected to the corporate network via my local port <code class="language-plaintext highlighter-rouge">9050</code></strong>.</p>
+
+<p>For example, if the IP of the first server is <em>10.10.5.11</em>, I can ssh in preceding the ssh command with “proxychains”: <code class="language-plaintext highlighter-rouge">proxychains ssh admin@10.10.5.11</code></p>
+
+<p>And, for example, if you wanted to check the <em>http</em> service of that server, you can do that by runnning the command: <code class="language-plaintext highlighter-rouge">proxychains firefox</code>. <strong>It will open firefox through <em>proxychains</em></strong>, and now you could navigate to <code class="language-plaintext highlighter-rouge">http://10.10.5.11/</code>, because now you have access to everything that is inside of the internal, corporate network.</p>
+
+<p>You could even run an <em>nmap</em> scan, but I will warn you that <em>nmap</em> through <em>proxychains</em> takes a really long time to finish.</p>
+
+<p>If you want <strong>a pentesting example case of dynamic port forwarding</strong>, check <a href="https://netsec.ws/?p=278"><strong>this</strong></a>.</p>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

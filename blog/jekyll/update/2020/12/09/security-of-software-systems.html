@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Security of software systems | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Security of software systems" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems." />
+<meta property="og:description" content="In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems." />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-09T23:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Security of software systems" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html"},"datePublished":"2020-12-09T23:00:00+01:00","url":"https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html","description":"In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.","headline":"Security of software systems","dateModified":"2020-12-09T23:00:00+01:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Security of software systems</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-12-09T23:00:00+01:00" itemprop="datePublished">Dec 9, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.</p>
+
+<h2 id="01---cryptography">01 - Cryptography</h2>
+
+<h3 id="definitions">Definitions</h3>
+
+<p>Here are some basic concepts:</p>
+<ul>
+  <li><em>Cryptography</em>: The study of techniques of altering the representation of a message.</li>
+  <li><em>Cleartext</em>: Original message. It is legible.</li>
+  <li><em>Ciphertext</em>: Illegible text. It is the result of encryption performed on plaintext.</li>
+  <li><em>Cipher</em>: Algorithm that transforms cleartext into ciphertext.</li>
+  <li><em>Key</em>: Sequence of symbols that the ciphers use.</li>
+</ul>
+
+<h3 id="symmetric-cipher">Symmetric cipher</h3>
+
+<p>The cleartext is encrypted and decrypted using one key.</p>
+
+<p><img src="/blog/images/sss-symmetric-cipher.png" alt="Symmetric cipher diagram" /></p>
+
+<p>This technique relies on these factors:</p>
+<ul>
+  <li>It is impossible to recover the original text knowing exclusively the ciphertext.</li>
+  <li>The shared key is secret.</li>
+  <li>It is possible to physicaly implement the algorithms.</li>
+</ul>
+
+<p>These are some classic techniques that symmetric ciphers use:</p>
+<ol>
+  <li><strong>Substitution</strong>: The symbols of the cleartext are substituted by others. There are several types:
+    <ul>
+      <li>
+        <p><em>Simple Monoalphabetic Substitution</em>: Each symbol of the cleartext is replaced by another one.</p>
+
+        <p>An example of this cipher is the caesar cipher:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cleartext:         TREE
+ciphertext:        AYLL
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><em>Polygraphic Monoalphabetic Substitution</em>: Several symbols are replaced by several others.</p>
+
+        <p>An example of this type of cipher is the Play Fair cipher:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cleartext:         TREE
+ciphertext:        ODKUKU
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><em>Polyalphabetic substitution</em>: Use several monoalphabetic substitutions as you encrypt the cleartext.</p>
+
+        <p>An example of this type of cipher is the Vigenère cipher:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cleartext:         TREE
+key:               ABCD
+ciphertext:        TSGH
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><em>One Time Pad</em>: Use a key as big as the cleartext. The key is independent from the text.</p>
+
+        <p>To encrypt and to decrypt you use the <em>XOR</em> function:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cleartext:         TREE
+key:               QWER
+ciphertext:        JNIV
+key:               QWER
+cleartext:         TREE
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Transposition</strong>: The symbols of the cleartext get permutated. In other words, it reorders the symbols taking them by blocks.</p>
+
+    <p>This is tribial to cryptoanalyze, so that’s no good my friend.</p>
+  </li>
+</ol>
+
+<h3 id="enigma-machine">ENIGMA machine:</h3>
+
+<p>A set of 3 cylinders that rotate on their own axis. In each cylinder there are 26 contacts (as for 26 letters), and each contact is connected to another one of the next cylinder. Each cylinder is a cryptosystem that does Polyalphabetic Substitution of period 26. Each cylinder is connected to the next, as a cascade.</p>
+
+<p>There are 26x26x26 = 17573 substitution alphabets before the system loops.</p>
+
+<p>With 5 cylinders, that number scalates up to 11881376. This is the base of the <em>crypt</em> command of <em>UNIX</em>.</p>
+
+<h3 id="standard-encryption">Standard encryption</h3>
+
+<p><em>DES</em> (which descents from the LUCIFER cipher, created by IBM) was adopted by the NIST in 1977 to be the Data Encryption Standard.</p>
+
+<p>It encrypts 64 bit blocks using 56 bits keys.</p>
+
+<p>Throughout 19 stages and 16 iterations it transforms 64 bits of the cleartext into 64 bits of the ciphertext.</p>
+
+<p>Being a symmetric cipher, the algorithms used in encryption and decryption are the same.</p>
+
+<p>The following scheme shows the bit-level algorithm:</p>
+
+<p><img src="/blog/images/sss-des-diagram.gif" alt="DES diagram" /></p>
+
+<p>The <em>DES</em> cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:</p>
+<ol>
+  <li><strong><em>ECB</em></strong>: Stands for <em>Electronic CodeBook</em>: The simplest mode, as it ciphers 64 bit blocks.</li>
+  <li><strong><em>CBC</em></strong>: Stands for <em>Cipher Block Chaining</em>: Uses the last encrypted block to do a XOR operation against the current block to encrypt. For this reason, it needs an initialization block that has to be known between both the encryption and the decryption algorithm.</li>
+  <li><strong><em>CFB</em></strong>: Stands for <em>Cipher FeedBack</em>: This mode allows the encryption algorithm to encrypt data of any size. As the last mode, this one needs an initialization block too, as it needs the last encrypted block to fill the empty bits of the 64 block. If the block to cipher is smaller than 64 bits, the remaining bits get filled with the bits from the previous encrypted block, resulting in a 64 bit block that can now be encrypted.</li>
+  <li><strong><em>OFB</em></strong>: Stands for <em>Output FeedBack</em>: Works the same as the Cipher FeedBack, but instead of chaining the encryption after the XOR operation, it does it before it. The advantage of this mode is that a transmission error in one block does not affect the rest of the blocks.</li>
+</ol>
+
+<p><em>3DES</em>: Stands for Triple DES, as it uses three 56 bit keys (one for each stage). Two of those keys are the same (for the even stages, the first and the third) and one is unique (for the odd stage, the second).</p>
+
+<p>Its time complexity is 2^(120-log2(n)) such as n=plaintext lenght.</p>
+
+<h3 id="idea">IDEA</h3>
+
+<p>It stands for <em>International Data Encryption Algorithm</em>, uses 64 bit blocks and 128 bit keys.</p>
+
+<p>It has 8 iterations and a final stage that transforms everything into a 64 bit ciphertext block and the same modes of operation as the <em>DES</em> algorithm.</p>
+
+<h3 id="aes">AES</h3>
+
+<p>Winner of the 1997 public contest promoted by the NIST whose purpose was to replace the <em>3DES</em> algorithm.</p>
+
+<p>This algorithm is a part of the <em>Rijndael</em> algorithm (<em>Joan Daemen &amp; Rijmen</em>), as the <em>Rijndael</em> allows several different block and key sizes.</p>
+
+<p>The official release of the AES can be found <a href="https://csrc.nist.gov/csrc/media/publications/fips/197/final/documents/fips-197.pdf"><strong>here</strong>.</a></p>
+
+<p>Some particular attributes of this algorithm are the following:</p>
+<ul>
+  <li>Works with bytes.</li>
+  <li>Does operations with the body F256.</li>
+  <li>Uses its own arithmetic operations (sum, product).</li>
+  <li>Key size can be 128, 192 or 256 bits.</li>
+  <li>Block size of 128 bits.</li>
+</ul>
+
+<h3 id="asymmetric-cipher">Asymmetric cipher</h3>
+
+<p>Using two keys instead of one, it supposes a revolution in cryptology, as it solves two problems that are complex to solve with a secret key:</p>
+<ul>
+  <li>Key distribution.</li>
+  <li>Digital signature.</li>
+</ul>
+
+<p>It is based on a series of new elemental transformations that were discovered at the time. Instead of transformations and substitutions, mathematic transformations are used.</p>
+
+<p>The requirements for these type of algorithms are the following:</p>
+<ul>
+  <li>The keys <strong>can be</strong> different.</li>
+  <li>One algorithm and key for encryption and another pair for decryption.</li>
+  <li>Impossible to compute one of the keys knowing the other one and the cipher algorithm.</li>
+  <li>Optionally, the keys are interchangeable.</li>
+</ul>
+
+<p>The basic scheme is presented in the next diagram:</p>
+
+<p><img src="/blog/images/sss-asymmetric-cipher.png" alt="Asymmetric cipher diagram" /></p>
+
+<p><em>Diffie-Hellman</em> rules:</p>
+<ul>
+  <li>Easy for a computer to generate a pair of keys (public and private).</li>
+  <li>Easy encryption, in computing terms.</li>
+  <li>Knowing the private key, the decryption must be easy.</li>
+  <li>Impossible to obtain the private key from the public key.</li>
+  <li>Impossible to obtain the cleartext if only the public key is known.</li>
+  <li>Optionally, the encryption and decryption algorithms can be applied in any order.</li>
+</ul>
+
+<p>If the last requirement is met, now we are able to use this algorithm for:</p>
+<ul>
+  <li>Authentication: Identification and validation.</li>
+  <li>Digital signature: The message is signed with the private key, and only if the signing person is the one that claims to be, the signature validates using the public key.</li>
+  <li>Does not guarantee confidentiallity.</li>
+  <li>Guarantees integrity.</li>
+</ul>
+
+<h3 id="rsa">RSA</h3>
+
+<p>One of the most used ones, since it was created in 1977 by the <em>MIT</em> investigators Ron <strong>R</strong>ivest, Adi <strong>S</strong>hamir, Leonard <strong>A</strong>dleman.</p>
+
+<p>It basis its robustness in the complexity of big numbers factorization, wich is really good, but it has its cons:</p>
+<ul>
+  <li>It uses very long keys when compared with the ones that the symmetric encryption ciphers use.</li>
+  <li>The algorithm is very demanding in computing terms.</li>
+</ul>
+
+<h4 id="the-discrete-logarithm-problem">The discrete logarithm problem</h4>
+
+<p>Given values for <em>a</em>, <em>b</em> and <em>n</em> such as <em>n</em> is a prime number, the function <em>x</em> = <em>a</em>^<em>b</em> mod <em>n</em> is very easy to compute.</p>
+
+<p>But if you know the values of <em>x</em>, <em>a</em> and <em>n</em>, finding the value of <em>b</em> is very hard to compute if the values of <em>x</em>, <em>a</em> and <em>n</em> are very large.</p>
+
+<p>This is the basis of the public key cryptography.</p>
+
+<h4 id="prime-tests">Prime tests</h4>
+
+<p>To check if a very large number is prime takes a lot of time (with large numbers N, the estimated distance between prime numbers is ln(N)), so there are several different tests we can do:</p>
+<ul>
+  <li>Miller-Rabin probability test.</li>
+  <li>AKS algorithm (since 2002).</li>
+  <li>Extended Euclides algorithm.</li>
+</ul>
+
+<h2 id="02---security-services">02 - Security services</h2>
+
+<h3 id="related-to-the-message">Related to the message</h3>
+
+<h4 id="confidentiality">Confidentiality</h4>
+
+<p>This is met with both types of encryption (symmetric and asymmetric).</p>
+
+<h4 id="integrity">Integrity</h4>
+
+<p>This guarantees that the received message has not been modified and is the exact same message that was sent.</p>
+
+<p>To do this, a one-way function (also known as hash function) generates a code that represents the message that will be sent.</p>
+
+<p>The hash is then stored and compared to the hash of the received message.</p>
+
+<h4 id="message-authentication">Message authentication</h4>
+
+<p>It’s the ability to guarantee the identity of the sender of the message.</p>
+
+<p>On paper it’s done via autograph.</p>
+
+<p>With symmetric encryption it can be done several ways:</p>
+<ul>
+  <li>Checksum.</li>
+  <li>MAC (Message Authentication Code).</li>
+  <li>Hash + key:
+<img src="/blog/images/sss-hash+key.PNG" alt="Hash + key diagram" /></li>
+</ul>
+
+<h4 id="non-repudiation">Non-repudiation</h4>
+
+<p>This means that a person cannot deny:</p>
+<ul>
+  <li>That this person sent the message (this is done with digital signature).</li>
+  <li>That this person received the message (e.g. this is the double tick that WhatsApp has).</li>
+</ul>
+
+<h3 id="related-to-the-entity">Related to the entity</h3>
+
+<h4 id="entity-authentication">Entity authentication</h4>
+
+<p>The authentication is done by using a piece of information (generally a key or a password) that the agent that wants to authenticate has.</p>
+
+<p>Challenge-response authentication: The verifier sends a challenge to which the response must be a function applied to that. It can be done using:</p>
+<ul>
+  <li>Public key schemes.</li>
+  <li>Digital signature schemes.</li>
+</ul>
+
+<p>2FA for people: After the user has successfully introduced his access credentials, the system needs more information to let the user in. This can be one of three basic categories:</p>
+<ul>
+  <li>Something that the user knows.</li>
+  <li>Something that the user has.</li>
+  <li>Something that the user is.</li>
+</ul>
+
+<h4 id="hash-functions">Hash functions</h4>
+
+<p>A hash is a function that assigns a fixed length value to data of any length.</p>
+
+<p>A good hash function must meet the following requirements:</p>
+<ul>
+  <li>H can be applied to messages of any length.</li>
+  <li>H produces output of a fixed length.</li>
+  <li>H(x) is easy to compute.</li>
+  <li>For a given hash <em>h</em> is not feasible to find <em>m</em>, such that H(m)=h.</li>
+  <li>For a given block <em>x</em> is not feasible to find <em>y</em>, such that H(x)=H(y).</li>
+  <li>It is computationally infeasible to find <em>x</em> and <em>y</em>, such that H(x)=H(y).</li>
+</ul>
+
+<h4 id="hash-vs-crc">Hash vs CRC</h4>
+
+<p>A <em>hash</em> is a one-way function, and it is designed to make difficult to find an entry that produces certain output value.</p>
+
+<p>A <em>CRC</em> is designed to detect accidental changes in the data. <strong>Its purpose is not to protect against changes, but to detect them</strong>.</p>
+
+<h4 id="some-hash-functions">Some hash functions</h4>
+
+<p>MD5: Improvements over MD4 and MD2, slower but more secure. Produces 128 bit output.</p>
+
+<p>SHA-1: Secure Hash Algorithm, published in 1994. Similar to MD5 but this one produces 160 bit output.</p>
+
+<p>SHA-2: Set of functions (SHA-224, SHA-256, SHA-384, SHA-512), published in 2001.</p>
+
+<p>SHA-3: Set of functions published in 2015. Just a standard, not in use yet.</p>
+
+<h3 id="digital-signature">Digital signature</h3>
+
+<p>Properties:</p>
+<ul>
+  <li>Able to verify author, date and time.</li>
+  <li>Authentify content at the time of the sign.</li>
+  <li>Verifiable by third parties.</li>
+</ul>
+
+<p>Requirements:</p>
+<ul>
+  <li>Bit pattern independent from the message to sign.</li>
+  <li>Signature issuer information to prevent falsification and impersonation and negation of the signature.</li>
+  <li>Easy to generate.</li>
+  <li>Easy to recognize and verify.</li>
+  <li>Impossible to fake (nor signature or message).</li>
+  <li>Must be practical to store a copy.</li>
+</ul>
+
+<p>A message can be signed by more than one person, an it also can be signed by a supervisor.</p>
+
+<h3 id="key-management">Key management</h3>
+
+<h4 id="symmetric-key-distribution">Symmetric key distribution</h4>
+
+<p>There are several posibilities:</p>
+<ul>
+  <li>Use of session keys.</li>
+  <li>KDC (Key Distribution Centre).</li>
+  <li>3 way protocol</li>
+</ul>
+
+<h4 id="public-key-distribution">Public key distribution</h4>
+
+<p>To distribute public keys, the possibilities are the following:</p>
+<ul>
+  <li>Public announcement: A secure channel is needed.</li>
+  <li>Public available directory: A big, reliable organization takes care of the manteinance.</li>
+  <li>Public key authority: Mantained by an authority. Need of having a trustable public key issued by the authority. The authority sends keys to the users that request them.</li>
+  <li>Public key certificate: X.509 certificates are a file digitally signed by a Certification Authority (CA). It links some data to an identity. Both sender and receiver trust the CA. A PKI standard is X.509.</li>
+</ul>
+
+<h4 id="ca">CA</h4>
+
+<p>A CA is a trustable organization responsible of issuing certificates for users or servers.</p>
+
+<p>Local scope: Enterprise, campus or country: e.g. in Spain, FNMT and DNIe. Autosigned certificates.</p>
+
+<p>Global scope: We trust a certificate if it is signed by a trustable authority that we all trust. Two types of certification authorities networks, tree (PKI) and distributed (keyrings).</p>
+
+<h3 id="secure-communication-protocols">Secure communication protocols</h3>
+
+<h4 id="ssl">SSL</h4>
+
+<p>Standing for Secure Socket Layer, it was designed by Netscape Corporation for their Internet Browser.</p>
+
+<p>Works on the transport layer (TCP).</p>
+
+<p>The services it offers are the following:</p>
+<ul>
+  <li>Data compression.</li>
+  <li>Security: (Parameter negotiation, client-server authentication, data integrity and confidentiality).</li>
+</ul>
+
+<p>Stages:</p>
+<ol>
+  <li>Handshake: The parameters of the algorithms and the key length are determined between the both parts of the communications. The public keys are exchanged. The authentication is made via certificates.</li>
+  <li>Transference: Symmetric key determination and encrypted data exchange.</li>
+</ol>
+
+<h4 id="tls">TLS</h4>
+
+<p>Based on SSL 3.0, but not compatible with it.</p>
+
+<p>In contrast with SSL, TLS can reuse an already existing TCP connection, so it does not need dedicated ports to work. It is inmune to Man In The Middle type of attacks.</p>
+
+<h4 id="ipsec">IPsec</h4>
+
+<p>Collection of security protocols at network layer (IP).</p>
+
+<p>Two modes of operation:</p>
+<ul>
+  <li>Transport mode: Protects the information send by the transport layer, this is, <strong>it only protects the TCP payload.</strong>. This mode is useful on end-to-end communications.</li>
+  <li>Tunnel mode: <strong>Protects the original IP datagram, this is, everything</strong>. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.</li>
+</ul>
+
+<p><img src="/blog/images/sss-ipsec-modes.PNG" alt="IPsec working modes" /></p>
+
+<p>It has three protocols:</p>
+<ul>
+  <li>AH (Authentication Header): It provides origin authentication and integrity, but not confidentiality.</li>
+  <li>ESP (Encapsulating Security Payload): It provides origin authentication, integrity, and confidentiality too.</li>
+  <li>IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.</li>
+</ul>
+
+<p><img src="/blog/images/sss-sa-two-way.PNG" alt="IPsec SA two way" /></p>
+
+<h2 id="03---operating-systems-security">03 - Operating systems security</h2>
+
+<h3 id="definitions-1">Definitions</h3>
+
+<ul>
+  <li>Threat: Any situation that endangers the security.</li>
+  <li>Vulnerability: Weakness that is susceptible of producing an error.</li>
+  <li>Exploit: Technique that allows the atacker to take advantage of certain vulnerability to break the security of a system.</li>
+  <li>Social engineering: The art of manipulating people so they give up confidential information.</li>
+  <li>APT: Advanced Persisten Threat.</li>
+  <li>Botnets: Net of compromised, infected computers that can be used to perform distributed attacks.</li>
+  <li>Risk: Latent probability of a security incident taking place.</li>
+</ul>
+
+<h3 id="vulnerabilities">Vulnerabilities</h3>
+
+<p>Every system has vulnerabilities.</p>
+
+<p>There are some strategies against them:</p>
+<ul>
+  <li>Security backups.</li>
+  <li>Risk analysis.</li>
+  <li>Suspicious events detection.</li>
+  <li>Constant revision of the security of the organisation.</li>
+</ul>
+
+<p>The vulnerabilities must be classified. For that we have:</p>
+<ul>
+  <li>CVE (Common Vulnerabilites and Exposures): A unique ID is assigned to every vulnerability that is found, so they can be classified and origanised. For example CVE-2017-0144 (Eternalblue).</li>
+  <li>CVSS (Common Vulnerability Scoring System): A system designed to classify vulnerabilities based in their attributes and their possible effects.</li>
+</ul>
+
+<h3 id="operating-systems">Operating systems</h3>
+
+<p>Every OS provides tools and mechanisms to guarantee the security of the system.</p>
+
+<h4 id="user-management">User management</h4>
+
+<p>The users must have the lowest privilege they need to operate the system and they must belong to only the necessary groups.</p>
+
+<h4 id="filesystem">Filesystem</h4>
+
+<p>Needs:</p>
+<ul>
+  <li>Confidentiality.</li>
+  <li>Disponibility.</li>
+  <li>Integrity.</li>
+</ul>
+
+<p>Protections:</p>
+<ul>
+  <li>Encrypted filesystems. They require the password at boot time.</li>
+  <li>Secure file deletion. Tools like Scrub and Shred.</li>
+</ul>
+
+<p>Types of alterations:</p>
+<ul>
+  <li>In the data.</li>
+  <li>In the programs. These ones are very dangerous.</li>
+</ul>
+
+<h4 id="random-alterations">Random alterations</h4>
+
+<p>Hardware alterations can be, for example:</p>
+<ul>
+  <li>Memory, disks, USBs… Those can be prevented by using RAID architecture and doing regular backups.</li>
+  <li>Power supply. A UPS prevents this of happening.</li>
+</ul>
+
+<p>Software alterations are caused by:</p>
+<ul>
+  <li>Bad program design.</li>
+  <li>Programs in an inconsistent state.</li>
+  <li>Users with wrong privileges.</li>
+</ul>
+
+<h4 id="alterations-prevention">Alterations prevention</h4>
+
+<p>To prevent alterations from happening, several things can be done:</p>
+<ul>
+  <li>Use digital signature to check the authenticity of a file.</li>
+  <li>Use CRC and hashes to verify the integrity of a file.</li>
+  <li>Journaling: Log almost everything that happens in the system.</li>
+</ul>
+
+<h3 id="log-files">Log files</h3>
+
+<p>Their goal is to monitorize the system so in case something bad happens we can look the logs to figure out what the cause of the problem was.</p>
+
+<p>The logs:</p>
+<ul>
+  <li>Store important events.</li>
+  <li>Can be local or remote.</li>
+  <li>Detect errors.</li>
+  <li>Are produced by programs like Snare, ObserveIt, LogAnalyzer…</li>
+  <li>In Linux they are store in the <code class="language-plaintext highlighter-rouge">/var/log</code> directory:
+    <ul>
+      <li>syslog</li>
+      <li>messages</li>
+      <li>auth.log</li>
+      <li>utmp</li>
+      <li>wtmp</li>
+      <li>btmp</li>
+      <li>lastlog</li>
+      <li>debug</li>
+      <li>apache</li>
+      <li>daemon</li>
+      <li>kern.log</li>
+      <li>user.log</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="access-control">Access control</h3>
+
+<p>The goal is to authenticate that someone is who they say they are.</p>
+
+<p>To do that, we check for something that:</p>
+<ul>
+  <li>They know.</li>
+  <li>They have.</li>
+  <li>They are.</li>
+</ul>
+
+<p>The authentication system must satisfy several characteristics:</p>
+<ul>
+  <li>Very reliable.</li>
+  <li>Economic.</li>
+  <li>Stand strong against certain attacks.</li>
+  <li>Acceptable by the users.</li>
+</ul>
+
+<p>Password authentication system:</p>
+<ul>
+  <li>Simple and cheap.</li>
+  <li>The responsibility lies with the user.</li>
+  <li>A hash of the password is stored.</li>
+  <li>If the passwords are not hashed with salt, the hashes can be susceptible to a Rainbow table attack.</li>
+  <li>To create strong passwords there are several systems out there, e.g. Diceware.</li>
+</ul>
+
+<p>Card authentication system:</p>
+<ul>
+  <li>Can be chipcards or smartcards.</li>
+</ul>
+
+<p>Biometric authentication system:</p>
+<ul>
+  <li>Iris, palm of the hand, fingerprint,…</li>
+</ul>
+
+<h3 id="secure-programming">Secure programming</h3>
+
+<p>Secure code development, without vulnerabilities.</p>
+
+<h3 id="vulnerabilities-1">Vulnerabilities</h3>
+
+<p>In order to detect them, most of the time a pentest or a security audit is necessary.</p>
+
+<p>Types of vulnerabilities:</p>
+<ul>
+  <li>
+    <p>Buffer overflow: Until 2004 they were the cause of half of the total discovered vulnerabilities.</p>
+
+    <p>To get rid of them, there are several things that can be done:</p>
+    <ul>
+      <li>Never trust the user inputs.</li>
+      <li>Disable code execution on the stack.</li>
+      <li>Use stackguard.</li>
+    </ul>
+  </li>
+  <li>Race conditions: Not use of critical sections. To fix them, use the tools that the operating system gives you e.g. semaphores.</li>
+  <li>Common programming errors: Improper file management, not checking the inputs correctly, XSS…</li>
+  <li>SQLi: One of the most common vulnerability that webpages have. Always check the user input before doing consults to a database with it.</li>
+  <li>Rootkits: Persistent threat that provides the attacker root privileges when wanted. Very hard to detect, as they work at kernel level, but there are several tools like chkrootkit and rkhunter.</li>
+</ul>
+
+<h2 id="04---network-security">04 - Network security</h2>
+
+<p>The Internet comes with challenges that were never thought about, as it allows everything to be available from anywhere in the world 24/7.</p>
+
+<p>The access control becomes harder. New security needs appear, to make safe services that were not made for so. e.g. WEP, GSM.</p>
+
+<h3 id="types-of-attacks">Types of attacks</h3>
+
+<p>Active, that can be easily detected but are very hard to prevent:</p>
+<ul>
+  <li>Interruption.</li>
+  <li>Fabrication.</li>
+  <li>Modification.</li>
+</ul>
+
+<p>Passive, that are very hard to detect, but can erradicated with encryption and protections:</p>
+<ul>
+  <li>Interruption.</li>
+</ul>
+
+<h3 id="network-security">Network security</h3>
+
+<p>Only enable the necessary services and take countermeassures against their vulnerabilities.</p>
+
+<p>A firewall controls the packets that enter and exit the system.</p>
+
+<p>The network services can be:</p>
+<ul>
+  <li>Independent: Like any other program</li>
+  <li>Managed by <em>inetd</em>: The daemon <em>inetd</em> wakes up the process when needed, when not, it shuts them down. The behaviour can be configured in the file /etc/inetd.conf</li>
+</ul>
+
+<h4 id="tcp-wrappers">TCP wrappers</h4>
+
+<p>In order for this work, the programs must be compiled with <em>libwrap</em> support.</p>
+
+<p>In the file <em>/etc/hosts.deny</em> you specifiy the denied access, and in <em>/etc/hosts.allow</em> you specify the allowed access.</p>
+
+<h4 id="sysctl">Sysctl</h4>
+
+<p>This allows us to communicate with the kernel in execution time. By editing the file /etc/sysctl.conf we can do things like:</p>
+<ul>
+  <li>Ignore all ping requests: <code class="language-plaintext highlighter-rouge">net.ipv4.icmp_echo_ignore_all=1</code></li>
+  <li>Ignore all ping broadcasts: <code class="language-plaintext highlighter-rouge">net.ipv4.icmp_echo_ignore_broadcasts=1</code></li>
+  <li>Refuse to send packets with invalid IP addresses: <code class="language-plaintext highlighter-rouge">net.ipv4.conf.all.rp_filter=1</code> (Can be 0,1 or 2).</li>
+  <li>Log the packets with an invalid IP: <code class="language-plaintext highlighter-rouge">net.ipv4.conf.all.log_martians=1</code></li>
+</ul>
+
+<p>To apply the changes run <code class="language-plaintext highlighter-rouge">sysctl -p</code></p>
+
+<h4 id="service-checking">Service checking</h4>
+
+<p>To check the network services that are running, tools like <em>netstat</em> and <em>nmap</em> can be used.</p>
+
+<h3 id="attacks">Attacks</h3>
+
+<h4 id="dos">DoS</h4>
+
+<p>Connectivity lost due to port, network or resources saturation. Up to 3 years in jail.</p>
+
+<h4 id="ip-spoofing">IP spoofing</h4>
+
+<p>Send packets with a fake origin IP.</p>
+
+<p>If you send ICMP ECHO REQUEST packages with the victim IP as the origin one, this attack is called <em>smurfing</em>.</p>
+
+<p>Nowadays the routers don’t allow to send broadcast datagrams outside their subnets of reach.</p>
+
+<h4 id="arp-spoofing-poisoning">ARP spoofing, poisoning</h4>
+
+<p>Change the IP linked to a MAC. This can be done in a switched LAN.</p>
+
+<p>To discover the hosts that are in reach: <code class="language-plaintext highlighter-rouge">arpscan -a</code></p>
+
+<p>To poison two victims a tool named <em>arpspoof</em> can be used, in conjunction with <code class="language-plaintext highlighter-rouge">echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code></p>
+
+<p>Countemeasures:</p>
+<ul>
+  <li>Router with static MAC.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">arpwatch</code> to monitorize the network.</li>
+</ul>
+
+<h4 id="tcp-syn-flood">TCP SYN flood</h4>
+
+<p>Takes advantage of the 3-way-handshake, as the server allocates resources when a SYN packet is received, and they are not released after 75 seconds have passed. It results in a <em>OOM</em> most of the time.</p>
+
+<p>This can be erradicated:</p>
+<ul>
+  <li>SYN cookies: Only allocate resources when the final message is received.</li>
+  <li>SYN cache: Independent structure that can’t grow infinitely. By default in FreeBSD.</li>
+</ul>
+
+<h4 id="udp-flood">UDP flood</h4>
+
+<p>Send packets to random ports, and cause the victim to send ICMP destination unreachable messages back to the attacker (or fake the origin IP and put another target).</p>
+
+<h4 id="dns-spoofing">DNS spoofing</h4>
+
+<p>Return a fake IP after a DNS query is made and captured by the attacker.</p>
+
+<h4 id="web-spoofing">Web spoofing</h4>
+
+<p>These days this is called phising.</p>
+
+<h4 id="mail-spoofing">Mail spoofing</h4>
+
+<p>Saying in an email that the sender is another person.</p>
+
+<h4 id="mitm">MITM</h4>
+
+<p>Signifficant attacks when Diffie-Hellman without authentication is being used.</p>
+
+<h3 id="iptables">Iptables</h3>
+
+<p>Iptables is a tool that the Linux system provides to manage <em>netfilter</em>, which is a very powerful packet manipulation framework provided by the kernel.</p>
+
+<p>It is a stateful firewall. This means that it will only examine the first packet of a connection, make a decission, and treat the rest of the packets the same way.</p>
+
+<p>The framework consists of three main tables:</p>
+<ul>
+  <li>Filter</li>
+  <li>Mangle</li>
+  <li>Nat</li>
+</ul>
+
+<p>It also has another two tables:</p>
+<ul>
+  <li>Raw: For managing the state of packets (as netfiler is a stateful firewall).</li>
+  <li>Security: Only used to set internal SELinux security context marks on packets.</li>
+</ul>
+
+<p>And each table has several chains linked to it (not every tables has all the chains):</p>
+<ul>
+  <li>PREROUTING</li>
+  <li>INPUT</li>
+  <li>FORWARD</li>
+  <li>OUTPUT</li>
+  <li>POSTROUTING</li>
+</ul>
+
+<p>The following diagram represents the flow of the packets through the chains:</p>
+
+<p><img src="/blog/images/sss-iptables-tables.jfif" alt="IPtables tables" /></p>
+
+<p>There are several options that can apply to a packet:</p>
+<ul>
+  <li>ACCEPT</li>
+  <li>DROP</li>
+  <li>REJECT</li>
+  <li>LOG</li>
+  <li>SNAT</li>
+  <li>DNAT</li>
+  <li>MASQUERADE</li>
+</ul>
+
+<h3 id="tools">Tools</h3>
+
+<p><em>Ettercap</em>, now replaced by Bettercap.</p>
+
+<p><em>Packit</em>: A tool to craft network packets and to do tests with.</p>
+
+<p><em>Hping3</em>: Like ping, but better.</p>
+
+<h3 id="sniffer-detection">Sniffer detection</h3>
+
+<p>This is a very hard thing to do, but there are some tools that can help you to do so, like <em>Sniffdet</em>.</p>
+
+<p>To make if more difficult to sniff network traffic, here are some things that can be done:</p>
+<ul>
+  <li>Network and hosts segmentation using switches (but you gotta be careful with ARP poisoning).</li>
+  <li>Encrypted communications.</li>
+</ul>
+
+<h3 id="snort">SNORT</h3>
+
+<p>Snort is an IDS (Intrusion Detection System), specifically a NIDS.</p>
+
+<p>It’s got filters, rules, abnormal events detector and a module for making reports and managing alarms.</p>
+
+<h2 id="05---general-concepts">05 - General concepts</h2>
+
+<p>General culture concepts and knowledge:</p>
+
+<ul>
+  <li><em>Mirai botnet</em>: Largest DDoS attack in history</li>
+  <li><em>Wannacry</em>: A classic</li>
+  <li><em>Stuxnet worm</em>: Targeted attack on Iranian nuclear facilities</li>
+  <li><em>Security basis</em>: Confidentiality, integrity and availability</li>
+  <li><em>Other security basis</em>: Authenticity, accountability and non-repudiation</li>
+  <li><em>More security basis</em>: Privacy, anonymity, untraceability, unlinkability, unobservability</li>
+  <li><em>Protection basis</em>: Prevention, detection, reaction</li>
+  <li><strong>Software vulnerabilities exist for a reason and cannot be completely eliminated, but they can be avoided</strong></li>
+</ul>
+
+<h2 id="06---x86-isa">06 - x86 ISA</h2>
+
+<p>It is necessary to know how processors work to be able to understand how vulnerabilities can be exploited.</p>
+
+<p>Here will be explained the x86 and the x86_64 ISA of Intel processors, as Intel is the most common brand of processor (66% of the market).</p>
+
+<h3 id="program-compilation-process">Program compilation process</h3>
+
+<p>The process of compiling a program written in C/C++ is as shown in the following image:</p>
+
+<p><img src="/blog/images/sss-compilation-process.png" alt="Compilation process in C/C++" title="Compilation process in C/C++" /></p>
+
+<p>If you compile a C program with the option <code class="language-plaintext highlighter-rouge">-save-temps</code>, <em>gcc</em> won’t delete <em>.i</em> and <em>.s</em> files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─[javier@torre]─[~]
+└──╼ <span class="nv">$cat</span> sample.c
+<span class="c">#include &lt;stdio.h&gt;</span>
+<span class="c">#include &lt;stdlib.h&gt;</span>
+
+int main<span class="o">(</span>int argc, char <span class="k">*</span> argv<span class="o">){</span>
+        fprintf<span class="o">(</span>stdout, <span class="s2">"[*] This is a sample program</span><span class="se">\n</span><span class="s2">"</span><span class="o">)</span><span class="p">;</span>
+        <span class="k">return </span>0<span class="p">;</span>
+<span class="o">}</span>
+┌─[javier@torre]─[~]
+└──╼ <span class="nv">$gcc</span> <span class="nt">-save-temps</span> sample.c <span class="nt">-o</span> sample
+┌─[javier@torre]─[~]
+└──╼ <span class="nv">$ls</span> <span class="nt">-l</span>
+total 76
+<span class="nt">-rwxr-xr-x</span> 1 javier javier 16656 Dec 12 23:05 sample
+<span class="nt">-rw-r--r--</span> 1 javier javier   148 Dec 12 23:05 sample.c
+<span class="nt">-rw-r--r--</span> 1 javier javier 42336 Dec 12 23:05 sample.i
+<span class="nt">-rw-r--r--</span> 1 javier javier  1632 Dec 12 23:05 sample.o
+<span class="nt">-rw-r--r--</span> 1 javier javier   593 Dec 12 23:05 sample.s
+┌─[javier@torre]─[~]
+└──╼ <span class="nv">$.</span>/sample
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> This is a sample program
+</code></pre></div></div>
+
+<p>Assembly code is written using mnemonics. To demostrate it, the following is an example of assembly code for the Motorola 6809 processor (the first assembly language I learned):</p>
+<pre><code class="language-assembly">; hello.asm: Simple program that prints the string on the screen
+
+        .area PROG (ABS)
+
+        .org 0x100          ; Start at 0x100
+string: .ascii "Hello sir"
+        .byte   10          ; 10 = CTRL+J = \cr
+        .byte   0           ; 0  = CTRL+@ = \lf
+
+        .globl program      ; Here starts the code
+program:
+        ldx #string
+loop:   lda ,x+
+        beq end
+        sta 0xFF00          ; Print on the screen
+        bra loop
+end:    clra
+        sta 0xFF01
+
+        .org 0xFFFE         ; RESET vector
+        .word program
+
+</code></pre>
+
+<h3 id="concepts">Concepts</h3>
+
+<p>Machine code: Code that can be directly executed by the computer without further translation.</p>
+
+<p>Bytecode: Code that can be executed by a virtual machine, for example, Java creates this, and then the Java virtual machine runs it.</p>
+
+<p>Opcode: Number that represents an operation (OPeration CODE).</p>
+
+<p>Mnemonics: Instructions in assembly language. It can be a string or an opcode with zero or more arguments.</p>
+
+<h3 id="x86-registers">x86 registers</h3>
+
+<p>A register is a form of storage that the processor has. They’re really fast to access and to operate with them, and they are different from the main memory, as they are inside the processor.</p>
+
+<p>There are regiters for different kinds of things:</p>
+
+<ul>
+  <li>General purpose: Used for storing immediate values and memory addresses.</li>
+  <li>Segment: Used for identifying segments in memory.</li>
+  <li>Program status and control (flag registers): They store the flags that indicate the result of an arithmetic operation (overflow, zero, …).</li>
+  <li>Instruction pointer: Also named <em>PC</em> as for <em>Program Counter</em></li>
+</ul>
+
+<h3 id="general-purpose-registers-on-x86">General purpose registers on x86</h3>
+
+<ul>
+  <li>EAX: Extended Accumulator register.</li>
+  <li>EBX: Extended Base register, a base pointer for memory access.</li>
+  <li>ECX: Extended Counter register, counter for loop/string operations.</li>
+  <li>EDX: Extended Data register, a pointer for I/O.</li>
+  <li>ESI: Extended Source Index pointer for string operations.</li>
+  <li>EDI: Extended Destination Index pointer for string operations.</li>
+  <li>EBP: Extended Base Pointer, a pointer to data on the stack.</li>
+  <li>ESP: Extended Stack Pointer.</li>
+</ul>
+
+<p>The following image illustrates the mapping of the registers:
+<img src="/blog/images/sss-x86-general-purpose-registers.png" alt="x86 General purpose registers" title="x86 General purpose registers" /></p>
+
+<h3 id="instruction-pointer-register-on-x86">Instruction pointer register on x86</h3>
+
+<p>The EIP (Extended Instruction Pointer) points to the next instruction to be executed. It can only be accesed by using branch instructions (call, jmp, ret).</p>
+
+<h3 id="program-status-and-control-flag-registers">Program status and control (flag registers)</h3>
+
+<p>The EFLAGS register has several flags:</p>
+
+<ul>
+  <li>CF: Carry Flag.</li>
+  <li>PF: Parity Flag.</li>
+  <li>ZF: Zero Flag.</li>
+  <li>TF: Trap Flag.</li>
+  <li>OF: Overflow Flag.</li>
+  <li>SF: Sign Flag.</li>
+</ul>
+
+<h3 id="data-types">Data types</h3>
+
+<p>There are several data types, each one being the double of the previous:</p>
+
+<ul>
+  <li>Byte: 8 bits.</li>
+  <li>Word: 16 bits.</li>
+  <li>Double word: 32 bits.</li>
+  <li>Quad word: 64 bits. (Combining EDX and EAX into one)</li>
+</ul>
+
+<h3 id="x86-endianness">x86 endianness</h3>
+
+<p>The x86 uses the little endian format to store information in memory. This means that, for example, the word <code class="language-plaintext highlighter-rouge">x28A1427F</code> will be stored as <code class="language-plaintext highlighter-rouge">x7F42A128</code>.</p>
+
+<h3 id="data-movement">Data movement</h3>
+
+<p>To move data, the x86 has the MOV instruction:</p>
+
+<ul>
+  <li>Immediate to register: <code class="language-plaintext highlighter-rouge">mov eax, 0x41</code>. This will put the value 0x41 in the EAX register.</li>
+  <li>Register to register: <code class="language-plaintext highlighter-rouge">mov eax, ebx</code>. This will put whatever is on the EAX register into the EBX register.</li>
+  <li>Immediate to memory: <code class="language-plaintext highlighter-rouge">mov [eax], 0x41</code>. This will put 0x41 in the memory address that the EAX register contains.</li>
+  <li>Register to memory: <code class="language-plaintext highlighter-rouge">mov [eax], ebx</code>. This will put whatever is in the EBX register in the memory address that the EAX register contains.</li>
+  <li>Memory to register: <code class="language-plaintext highlighter-rouge">mov eax, [ebx]</code>. This will put whatever is in the memory address that the EBX register contains into the EAX register.</li>
+</ul>
+
+<h3 id="lea">LEA</h3>
+
+<p>This instruction will Load the Effective Address into a register. Example: <code class="language-plaintext highlighter-rouge">lea eax, [ebx+0x04]</code></p>
+
+<h3 id="arithmetic-instructions">Arithmetic instructions</h3>
+
+<p><code class="language-plaintext highlighter-rouge">add eax, ebx</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sub eax, ebx</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">inc edi</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">dec esi</code></p>
+
+<h3 id="bit-level-instructions">Bit-level instructions</h3>
+
+<p><code class="language-plaintext highlighter-rouge">and eax, ebx</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">or eax, ebx</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">xor ebx, eax</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">not eax</code></p>
+
+<h3 id="jump-instructions">Jump instructions</h3>
+
+<ul>
+  <li>
+    <p>Unconditional:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">jmp eax</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">jmp [ebx]</code></p>
+  </li>
+  <li>
+    <p>Conditional:</p>
+
+    <p>Preceeded by <code class="language-plaintext highlighter-rouge">cmp eax, ebx</code> most of the time.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">jle eax, ebx</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">jz ebx, 0x01</code></p>
+  </li>
+</ul>
+
+<h3 id="more-info-about-instructions">More info about instructions</h3>
+
+<ul>
+  <li>
+    <p>https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow</p>
+  </li>
+  <li>
+    <p>https://en.wikipedia.org/wiki/X86_instruction_listings</p>
+  </li>
+</ul>
+
+<h3 id="memory-segmentation-and-stack-operations">Memory segmentation and stack operations</h3>
+
+<p>In order to exploit security bugs, most of the time you’ll have to overwrite or overflow a portion of the memory into another one.</p>
+
+<p>The following image illustrates the structure of a C program:</p>
+
+<p><img src="/blog/images/sss-c-memory-diagram.png" alt="C program memory diagram" title="C program memory diagram" /></p>
+
+<h3 id="stack">Stack</h3>
+
+<p>The stack is a LIFO structure, and it grows downwards.</p>
+
+<p>It has two operations, <code class="language-plaintext highlighter-rouge">push</code> and <code class="language-plaintext highlighter-rouge">pop</code>.</p>
+
+<p>The ESP points to the address of the oldest pushed data that is currently on the stack.</p>
+
+<h3 id="function-calls">Function calls</h3>
+
+<p>To call a function, you use the <code class="language-plaintext highlighter-rouge">call</code> instruction.</p>
+
+<p>Once you call a function, the return address (next instruction after the function ends) is pushed to the stack.</p>
+
+<p>The return of the function is performed via the <code class="language-plaintext highlighter-rouge">ret</code> instruction.</p>
+
+<p>Before calling a function, there is what is called a function prologe. Its purpose is to backup the selected registers and save space for the local variables.</p>
+
+<p>After calling a function, everything that was done in the prologue is done backwards before issuing the return.</p>
+
+<h3 id="function-invocation">Function invocation</h3>
+
+<ul>
+  <li>
+    <p>Windows:</p>
+
+    <p>First four arguments are loaded into RCX, RDX, R8, R9.</p>
+
+    <p>The rest of them are passed trough the stack from right to left.</p>
+  </li>
+  <li>
+    <p>Linux:</p>
+
+    <p>First six arguments are loaded into RDI, RSI, RDX, RCX, R8, R9.</p>
+
+    <p>The rest of them are passed trough the stack from right to left.</p>
+  </li>
+</ul>
+
+<h3 id="exercises">Exercises</h3>
+
+<ol>
+  <li>
+    <p>Prepare the system:</p>
+
+    <p>You’ll need a Linux system with <em>gcc</em>, <em>gdb</em> and <em>nasm</em> installed on it.</p>
+
+    <p>You can do so by running the following command:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update <span class="o">&amp;&amp;</span> apt <span class="nb">install </span>gcc gdb nasm <span class="nt">-y</span>
+</code></pre></div>    </div>
+
+    <p>Now configure <em>gdb</em> to show disassemblies in the intel format (we don’t want the AT&amp;T format) by running this command:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'set disassembly-flavor intel'</span> <span class="o">&gt;&gt;</span> ~/.gdbinit
+</code></pre></div>    </div>
+
+    <p>If you want to use <em>objdump</em> for disassemblies, use the option <code class="language-plaintext highlighter-rouge">-M intel</code> to get the output in the intel format.</p>
+
+    <p>An example against the sample program that we compiled before:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─[javier@torre]─[~/sample]
+└──╼ <span class="nv">$objdump</span> <span class="nt">-M</span> intel sample <span class="nt">-d</span> | <span class="nb">head</span> <span class="nt">-15</span>
+   
+sample:     file format elf64-x86-64
+   
+   
+Disassembly of section .init:
+   
+0000000000001000 &lt;_init&gt;:
+    1000:       48 83 ec 08             sub    rsp,0x8
+    1004:       48 8b 05 <span class="nb">dd </span>2f 00 00    mov    rax,QWORD PTR <span class="o">[</span>rip+0x2fdd]        <span class="c"># 3fe8 &lt;__gmon_start__&gt;</span>
+    100b:       48 85 c0                <span class="nb">test   </span>rax,rax
+    100e:       74 02                   je     1012 &lt;_init+0x12&gt;
+    1010:       ff d0                   call   rax
+    1012:       48 83 c4 08             add    rsp,0x8
+    1016:       c3                      ret
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="03---runtime-attacks">03 - Runtime attacks</h2>
+
+<p>Coming soon</p>
+
+<h2 id="05---defenses-against-runtime-attacks">05 - Defenses against runtime attacks</h2>
+
+<p>Coming soon</p>
+
+<h2 id="04---code-reuse-attacks-and-defenses">04 - Code reuse: Attacks and defenses</h2>
+
+<p>Coming soon</p>
+
+<h2 id="06---web-security">06 - Web security</h2>
+
+<p>Coming soon</p>
+
+<h2 id="07---blockchain">07 - Blockchain</h2>
+
+<p>Coming soon</p>
+
+<h2 id="08---smart-contracts">08 - Smart contracts</h2>
+
+<p>Coming soon</p>
+
+<h2 id="09---side-channel-attacks">09 - Side channel attacks</h2>
+
+<p>Coming soon</p>
+
+<h2 id="10-hardware-security">10-Hardware security</h2>
+
+<p>Coming soon</p>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2020/12/09/security-of-software-systems.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

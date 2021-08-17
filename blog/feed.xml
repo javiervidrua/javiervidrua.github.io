@@ -1,0 +1,1833 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-08-17T11:07:31+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Security of software systems</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html" rel="alternate" type="text/html" title="Security of software systems" /><published>2020-12-09T23:00:00+01:00</published><updated>2020-12-09T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html">&lt;p&gt;In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.&lt;/p&gt;
+
+&lt;h2 id=&quot;01---cryptography&quot;&gt;01 - Cryptography&lt;/h2&gt;
+
+&lt;h3 id=&quot;definitions&quot;&gt;Definitions&lt;/h3&gt;
+
+&lt;p&gt;Here are some basic concepts:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Cryptography&lt;/em&gt;: The study of techniques of altering the representation of a message.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Cleartext&lt;/em&gt;: Original message. It is legible.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Ciphertext&lt;/em&gt;: Illegible text. It is the result of encryption performed on plaintext.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Cipher&lt;/em&gt;: Algorithm that transforms cleartext into ciphertext.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Key&lt;/em&gt;: Sequence of symbols that the ciphers use.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;symmetric-cipher&quot;&gt;Symmetric cipher&lt;/h3&gt;
+
+&lt;p&gt;The cleartext is encrypted and decrypted using one key.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-symmetric-cipher.png&quot; alt=&quot;Symmetric cipher diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This technique relies on these factors:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;It is impossible to recover the original text knowing exclusively the ciphertext.&lt;/li&gt;
+  &lt;li&gt;The shared key is secret.&lt;/li&gt;
+  &lt;li&gt;It is possible to physicaly implement the algorithms.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are some classic techniques that symmetric ciphers use:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Substitution&lt;/strong&gt;: The symbols of the cleartext are substituted by others. There are several types:
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;Simple Monoalphabetic Substitution&lt;/em&gt;: Each symbol of the cleartext is replaced by another one.&lt;/p&gt;
+
+        &lt;p&gt;An example of this cipher is the caesar cipher:&lt;/p&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cleartext:         TREE
+ciphertext:        AYLL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;Polygraphic Monoalphabetic Substitution&lt;/em&gt;: Several symbols are replaced by several others.&lt;/p&gt;
+
+        &lt;p&gt;An example of this type of cipher is the Play Fair cipher:&lt;/p&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cleartext:         TREE
+ciphertext:        ODKUKU
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;Polyalphabetic substitution&lt;/em&gt;: Use several monoalphabetic substitutions as you encrypt the cleartext.&lt;/p&gt;
+
+        &lt;p&gt;An example of this type of cipher is the Vigenère cipher:&lt;/p&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cleartext:         TREE
+key:               ABCD
+ciphertext:        TSGH
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;em&gt;One Time Pad&lt;/em&gt;: Use a key as big as the cleartext. The key is independent from the text.&lt;/p&gt;
+
+        &lt;p&gt;To encrypt and to decrypt you use the &lt;em&gt;XOR&lt;/em&gt; function:&lt;/p&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cleartext:         TREE
+key:               QWER
+ciphertext:        JNIV
+key:               QWER
+cleartext:         TREE
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Transposition&lt;/strong&gt;: The symbols of the cleartext get permutated. In other words, it reorders the symbols taking them by blocks.&lt;/p&gt;
+
+    &lt;p&gt;This is tribial to cryptoanalyze, so that’s no good my friend.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;enigma-machine&quot;&gt;ENIGMA machine:&lt;/h3&gt;
+
+&lt;p&gt;A set of 3 cylinders that rotate on their own axis. In each cylinder there are 26 contacts (as for 26 letters), and each contact is connected to another one of the next cylinder. Each cylinder is a cryptosystem that does Polyalphabetic Substitution of period 26. Each cylinder is connected to the next, as a cascade.&lt;/p&gt;
+
+&lt;p&gt;There are 26x26x26 = 17573 substitution alphabets before the system loops.&lt;/p&gt;
+
+&lt;p&gt;With 5 cylinders, that number scalates up to 11881376. This is the base of the &lt;em&gt;crypt&lt;/em&gt; command of &lt;em&gt;UNIX&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;standard-encryption&quot;&gt;Standard encryption&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;DES&lt;/em&gt; (which descents from the LUCIFER cipher, created by IBM) was adopted by the NIST in 1977 to be the Data Encryption Standard.&lt;/p&gt;
+
+&lt;p&gt;It encrypts 64 bit blocks using 56 bits keys.&lt;/p&gt;
+
+&lt;p&gt;Throughout 19 stages and 16 iterations it transforms 64 bits of the cleartext into 64 bits of the ciphertext.&lt;/p&gt;
+
+&lt;p&gt;Being a symmetric cipher, the algorithms used in encryption and decryption are the same.&lt;/p&gt;
+
+&lt;p&gt;The following scheme shows the bit-level algorithm:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-des-diagram.gif&quot; alt=&quot;DES diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;DES&lt;/em&gt; cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;ECB&lt;/em&gt;&lt;/strong&gt;: Stands for &lt;em&gt;Electronic CodeBook&lt;/em&gt;: The simplest mode, as it ciphers 64 bit blocks.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;CBC&lt;/em&gt;&lt;/strong&gt;: Stands for &lt;em&gt;Cipher Block Chaining&lt;/em&gt;: Uses the last encrypted block to do a XOR operation against the current block to encrypt. For this reason, it needs an initialization block that has to be known between both the encryption and the decryption algorithm.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;CFB&lt;/em&gt;&lt;/strong&gt;: Stands for &lt;em&gt;Cipher FeedBack&lt;/em&gt;: This mode allows the encryption algorithm to encrypt data of any size. As the last mode, this one needs an initialization block too, as it needs the last encrypted block to fill the empty bits of the 64 block. If the block to cipher is smaller than 64 bits, the remaining bits get filled with the bits from the previous encrypted block, resulting in a 64 bit block that can now be encrypted.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;OFB&lt;/em&gt;&lt;/strong&gt;: Stands for &lt;em&gt;Output FeedBack&lt;/em&gt;: Works the same as the Cipher FeedBack, but instead of chaining the encryption after the XOR operation, it does it before it. The advantage of this mode is that a transmission error in one block does not affect the rest of the blocks.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;3DES&lt;/em&gt;: Stands for Triple DES, as it uses three 56 bit keys (one for each stage). Two of those keys are the same (for the even stages, the first and the third) and one is unique (for the odd stage, the second).&lt;/p&gt;
+
+&lt;p&gt;Its time complexity is 2^(120-log2(n)) such as n=plaintext lenght.&lt;/p&gt;
+
+&lt;h3 id=&quot;idea&quot;&gt;IDEA&lt;/h3&gt;
+
+&lt;p&gt;It stands for &lt;em&gt;International Data Encryption Algorithm&lt;/em&gt;, uses 64 bit blocks and 128 bit keys.&lt;/p&gt;
+
+&lt;p&gt;It has 8 iterations and a final stage that transforms everything into a 64 bit ciphertext block and the same modes of operation as the &lt;em&gt;DES&lt;/em&gt; algorithm.&lt;/p&gt;
+
+&lt;h3 id=&quot;aes&quot;&gt;AES&lt;/h3&gt;
+
+&lt;p&gt;Winner of the 1997 public contest promoted by the NIST whose purpose was to replace the &lt;em&gt;3DES&lt;/em&gt; algorithm.&lt;/p&gt;
+
+&lt;p&gt;This algorithm is a part of the &lt;em&gt;Rijndael&lt;/em&gt; algorithm (&lt;em&gt;Joan Daemen &amp;amp; Rijmen&lt;/em&gt;), as the &lt;em&gt;Rijndael&lt;/em&gt; allows several different block and key sizes.&lt;/p&gt;
+
+&lt;p&gt;The official release of the AES can be found &lt;a href=&quot;https://csrc.nist.gov/csrc/media/publications/fips/197/final/documents/fips-197.pdf&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Some particular attributes of this algorithm are the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Works with bytes.&lt;/li&gt;
+  &lt;li&gt;Does operations with the body F256.&lt;/li&gt;
+  &lt;li&gt;Uses its own arithmetic operations (sum, product).&lt;/li&gt;
+  &lt;li&gt;Key size can be 128, 192 or 256 bits.&lt;/li&gt;
+  &lt;li&gt;Block size of 128 bits.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;asymmetric-cipher&quot;&gt;Asymmetric cipher&lt;/h3&gt;
+
+&lt;p&gt;Using two keys instead of one, it supposes a revolution in cryptology, as it solves two problems that are complex to solve with a secret key:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key distribution.&lt;/li&gt;
+  &lt;li&gt;Digital signature.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is based on a series of new elemental transformations that were discovered at the time. Instead of transformations and substitutions, mathematic transformations are used.&lt;/p&gt;
+
+&lt;p&gt;The requirements for these type of algorithms are the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The keys &lt;strong&gt;can be&lt;/strong&gt; different.&lt;/li&gt;
+  &lt;li&gt;One algorithm and key for encryption and another pair for decryption.&lt;/li&gt;
+  &lt;li&gt;Impossible to compute one of the keys knowing the other one and the cipher algorithm.&lt;/li&gt;
+  &lt;li&gt;Optionally, the keys are interchangeable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The basic scheme is presented in the next diagram:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-asymmetric-cipher.png&quot; alt=&quot;Asymmetric cipher diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Diffie-Hellman&lt;/em&gt; rules:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Easy for a computer to generate a pair of keys (public and private).&lt;/li&gt;
+  &lt;li&gt;Easy encryption, in computing terms.&lt;/li&gt;
+  &lt;li&gt;Knowing the private key, the decryption must be easy.&lt;/li&gt;
+  &lt;li&gt;Impossible to obtain the private key from the public key.&lt;/li&gt;
+  &lt;li&gt;Impossible to obtain the cleartext if only the public key is known.&lt;/li&gt;
+  &lt;li&gt;Optionally, the encryption and decryption algorithms can be applied in any order.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If the last requirement is met, now we are able to use this algorithm for:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Authentication: Identification and validation.&lt;/li&gt;
+  &lt;li&gt;Digital signature: The message is signed with the private key, and only if the signing person is the one that claims to be, the signature validates using the public key.&lt;/li&gt;
+  &lt;li&gt;Does not guarantee confidentiallity.&lt;/li&gt;
+  &lt;li&gt;Guarantees integrity.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;rsa&quot;&gt;RSA&lt;/h3&gt;
+
+&lt;p&gt;One of the most used ones, since it was created in 1977 by the &lt;em&gt;MIT&lt;/em&gt; investigators Ron &lt;strong&gt;R&lt;/strong&gt;ivest, Adi &lt;strong&gt;S&lt;/strong&gt;hamir, Leonard &lt;strong&gt;A&lt;/strong&gt;dleman.&lt;/p&gt;
+
+&lt;p&gt;It basis its robustness in the complexity of big numbers factorization, wich is really good, but it has its cons:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;It uses very long keys when compared with the ones that the symmetric encryption ciphers use.&lt;/li&gt;
+  &lt;li&gt;The algorithm is very demanding in computing terms.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;the-discrete-logarithm-problem&quot;&gt;The discrete logarithm problem&lt;/h4&gt;
+
+&lt;p&gt;Given values for &lt;em&gt;a&lt;/em&gt;, &lt;em&gt;b&lt;/em&gt; and &lt;em&gt;n&lt;/em&gt; such as &lt;em&gt;n&lt;/em&gt; is a prime number, the function &lt;em&gt;x&lt;/em&gt; = &lt;em&gt;a&lt;/em&gt;^&lt;em&gt;b&lt;/em&gt; mod &lt;em&gt;n&lt;/em&gt; is very easy to compute.&lt;/p&gt;
+
+&lt;p&gt;But if you know the values of &lt;em&gt;x&lt;/em&gt;, &lt;em&gt;a&lt;/em&gt; and &lt;em&gt;n&lt;/em&gt;, finding the value of &lt;em&gt;b&lt;/em&gt; is very hard to compute if the values of &lt;em&gt;x&lt;/em&gt;, &lt;em&gt;a&lt;/em&gt; and &lt;em&gt;n&lt;/em&gt; are very large.&lt;/p&gt;
+
+&lt;p&gt;This is the basis of the public key cryptography.&lt;/p&gt;
+
+&lt;h4 id=&quot;prime-tests&quot;&gt;Prime tests&lt;/h4&gt;
+
+&lt;p&gt;To check if a very large number is prime takes a lot of time (with large numbers N, the estimated distance between prime numbers is ln(N)), so there are several different tests we can do:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Miller-Rabin probability test.&lt;/li&gt;
+  &lt;li&gt;AKS algorithm (since 2002).&lt;/li&gt;
+  &lt;li&gt;Extended Euclides algorithm.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;02---security-services&quot;&gt;02 - Security services&lt;/h2&gt;
+
+&lt;h3 id=&quot;related-to-the-message&quot;&gt;Related to the message&lt;/h3&gt;
+
+&lt;h4 id=&quot;confidentiality&quot;&gt;Confidentiality&lt;/h4&gt;
+
+&lt;p&gt;This is met with both types of encryption (symmetric and asymmetric).&lt;/p&gt;
+
+&lt;h4 id=&quot;integrity&quot;&gt;Integrity&lt;/h4&gt;
+
+&lt;p&gt;This guarantees that the received message has not been modified and is the exact same message that was sent.&lt;/p&gt;
+
+&lt;p&gt;To do this, a one-way function (also known as hash function) generates a code that represents the message that will be sent.&lt;/p&gt;
+
+&lt;p&gt;The hash is then stored and compared to the hash of the received message.&lt;/p&gt;
+
+&lt;h4 id=&quot;message-authentication&quot;&gt;Message authentication&lt;/h4&gt;
+
+&lt;p&gt;It’s the ability to guarantee the identity of the sender of the message.&lt;/p&gt;
+
+&lt;p&gt;On paper it’s done via autograph.&lt;/p&gt;
+
+&lt;p&gt;With symmetric encryption it can be done several ways:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Checksum.&lt;/li&gt;
+  &lt;li&gt;MAC (Message Authentication Code).&lt;/li&gt;
+  &lt;li&gt;Hash + key:
+&lt;img src=&quot;/blog/images/sss-hash+key.PNG&quot; alt=&quot;Hash + key diagram&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;non-repudiation&quot;&gt;Non-repudiation&lt;/h4&gt;
+
+&lt;p&gt;This means that a person cannot deny:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;That this person sent the message (this is done with digital signature).&lt;/li&gt;
+  &lt;li&gt;That this person received the message (e.g. this is the double tick that WhatsApp has).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;related-to-the-entity&quot;&gt;Related to the entity&lt;/h3&gt;
+
+&lt;h4 id=&quot;entity-authentication&quot;&gt;Entity authentication&lt;/h4&gt;
+
+&lt;p&gt;The authentication is done by using a piece of information (generally a key or a password) that the agent that wants to authenticate has.&lt;/p&gt;
+
+&lt;p&gt;Challenge-response authentication: The verifier sends a challenge to which the response must be a function applied to that. It can be done using:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Public key schemes.&lt;/li&gt;
+  &lt;li&gt;Digital signature schemes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2FA for people: After the user has successfully introduced his access credentials, the system needs more information to let the user in. This can be one of three basic categories:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Something that the user knows.&lt;/li&gt;
+  &lt;li&gt;Something that the user has.&lt;/li&gt;
+  &lt;li&gt;Something that the user is.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;hash-functions&quot;&gt;Hash functions&lt;/h4&gt;
+
+&lt;p&gt;A hash is a function that assigns a fixed length value to data of any length.&lt;/p&gt;
+
+&lt;p&gt;A good hash function must meet the following requirements:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;H can be applied to messages of any length.&lt;/li&gt;
+  &lt;li&gt;H produces output of a fixed length.&lt;/li&gt;
+  &lt;li&gt;H(x) is easy to compute.&lt;/li&gt;
+  &lt;li&gt;For a given hash &lt;em&gt;h&lt;/em&gt; is not feasible to find &lt;em&gt;m&lt;/em&gt;, such that H(m)=h.&lt;/li&gt;
+  &lt;li&gt;For a given block &lt;em&gt;x&lt;/em&gt; is not feasible to find &lt;em&gt;y&lt;/em&gt;, such that H(x)=H(y).&lt;/li&gt;
+  &lt;li&gt;It is computationally infeasible to find &lt;em&gt;x&lt;/em&gt; and &lt;em&gt;y&lt;/em&gt;, such that H(x)=H(y).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;hash-vs-crc&quot;&gt;Hash vs CRC&lt;/h4&gt;
+
+&lt;p&gt;A &lt;em&gt;hash&lt;/em&gt; is a one-way function, and it is designed to make difficult to find an entry that produces certain output value.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;CRC&lt;/em&gt; is designed to detect accidental changes in the data. &lt;strong&gt;Its purpose is not to protect against changes, but to detect them&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;some-hash-functions&quot;&gt;Some hash functions&lt;/h4&gt;
+
+&lt;p&gt;MD5: Improvements over MD4 and MD2, slower but more secure. Produces 128 bit output.&lt;/p&gt;
+
+&lt;p&gt;SHA-1: Secure Hash Algorithm, published in 1994. Similar to MD5 but this one produces 160 bit output.&lt;/p&gt;
+
+&lt;p&gt;SHA-2: Set of functions (SHA-224, SHA-256, SHA-384, SHA-512), published in 2001.&lt;/p&gt;
+
+&lt;p&gt;SHA-3: Set of functions published in 2015. Just a standard, not in use yet.&lt;/p&gt;
+
+&lt;h3 id=&quot;digital-signature&quot;&gt;Digital signature&lt;/h3&gt;
+
+&lt;p&gt;Properties:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Able to verify author, date and time.&lt;/li&gt;
+  &lt;li&gt;Authentify content at the time of the sign.&lt;/li&gt;
+  &lt;li&gt;Verifiable by third parties.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Requirements:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bit pattern independent from the message to sign.&lt;/li&gt;
+  &lt;li&gt;Signature issuer information to prevent falsification and impersonation and negation of the signature.&lt;/li&gt;
+  &lt;li&gt;Easy to generate.&lt;/li&gt;
+  &lt;li&gt;Easy to recognize and verify.&lt;/li&gt;
+  &lt;li&gt;Impossible to fake (nor signature or message).&lt;/li&gt;
+  &lt;li&gt;Must be practical to store a copy.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A message can be signed by more than one person, an it also can be signed by a supervisor.&lt;/p&gt;
+
+&lt;h3 id=&quot;key-management&quot;&gt;Key management&lt;/h3&gt;
+
+&lt;h4 id=&quot;symmetric-key-distribution&quot;&gt;Symmetric key distribution&lt;/h4&gt;
+
+&lt;p&gt;There are several posibilities:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Use of session keys.&lt;/li&gt;
+  &lt;li&gt;KDC (Key Distribution Centre).&lt;/li&gt;
+  &lt;li&gt;3 way protocol&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;public-key-distribution&quot;&gt;Public key distribution&lt;/h4&gt;
+
+&lt;p&gt;To distribute public keys, the possibilities are the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Public announcement: A secure channel is needed.&lt;/li&gt;
+  &lt;li&gt;Public available directory: A big, reliable organization takes care of the manteinance.&lt;/li&gt;
+  &lt;li&gt;Public key authority: Mantained by an authority. Need of having a trustable public key issued by the authority. The authority sends keys to the users that request them.&lt;/li&gt;
+  &lt;li&gt;Public key certificate: X.509 certificates are a file digitally signed by a Certification Authority (CA). It links some data to an identity. Both sender and receiver trust the CA. A PKI standard is X.509.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;ca&quot;&gt;CA&lt;/h4&gt;
+
+&lt;p&gt;A CA is a trustable organization responsible of issuing certificates for users or servers.&lt;/p&gt;
+
+&lt;p&gt;Local scope: Enterprise, campus or country: e.g. in Spain, FNMT and DNIe. Autosigned certificates.&lt;/p&gt;
+
+&lt;p&gt;Global scope: We trust a certificate if it is signed by a trustable authority that we all trust. Two types of certification authorities networks, tree (PKI) and distributed (keyrings).&lt;/p&gt;
+
+&lt;h3 id=&quot;secure-communication-protocols&quot;&gt;Secure communication protocols&lt;/h3&gt;
+
+&lt;h4 id=&quot;ssl&quot;&gt;SSL&lt;/h4&gt;
+
+&lt;p&gt;Standing for Secure Socket Layer, it was designed by Netscape Corporation for their Internet Browser.&lt;/p&gt;
+
+&lt;p&gt;Works on the transport layer (TCP).&lt;/p&gt;
+
+&lt;p&gt;The services it offers are the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Data compression.&lt;/li&gt;
+  &lt;li&gt;Security: (Parameter negotiation, client-server authentication, data integrity and confidentiality).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Stages:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Handshake: The parameters of the algorithms and the key length are determined between the both parts of the communications. The public keys are exchanged. The authentication is made via certificates.&lt;/li&gt;
+  &lt;li&gt;Transference: Symmetric key determination and encrypted data exchange.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;tls&quot;&gt;TLS&lt;/h4&gt;
+
+&lt;p&gt;Based on SSL 3.0, but not compatible with it.&lt;/p&gt;
+
+&lt;p&gt;In contrast with SSL, TLS can reuse an already existing TCP connection, so it does not need dedicated ports to work. It is inmune to Man In The Middle type of attacks.&lt;/p&gt;
+
+&lt;h4 id=&quot;ipsec&quot;&gt;IPsec&lt;/h4&gt;
+
+&lt;p&gt;Collection of security protocols at network layer (IP).&lt;/p&gt;
+
+&lt;p&gt;Two modes of operation:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Transport mode: Protects the information send by the transport layer, this is, &lt;strong&gt;it only protects the TCP payload.&lt;/strong&gt;. This mode is useful on end-to-end communications.&lt;/li&gt;
+  &lt;li&gt;Tunnel mode: &lt;strong&gt;Protects the original IP datagram, this is, everything&lt;/strong&gt;. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-ipsec-modes.PNG&quot; alt=&quot;IPsec working modes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It has three protocols:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;AH (Authentication Header): It provides origin authentication and integrity, but not confidentiality.&lt;/li&gt;
+  &lt;li&gt;ESP (Encapsulating Security Payload): It provides origin authentication, integrity, and confidentiality too.&lt;/li&gt;
+  &lt;li&gt;IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-sa-two-way.PNG&quot; alt=&quot;IPsec SA two way&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;03---operating-systems-security&quot;&gt;03 - Operating systems security&lt;/h2&gt;
+
+&lt;h3 id=&quot;definitions-1&quot;&gt;Definitions&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Threat: Any situation that endangers the security.&lt;/li&gt;
+  &lt;li&gt;Vulnerability: Weakness that is susceptible of producing an error.&lt;/li&gt;
+  &lt;li&gt;Exploit: Technique that allows the atacker to take advantage of certain vulnerability to break the security of a system.&lt;/li&gt;
+  &lt;li&gt;Social engineering: The art of manipulating people so they give up confidential information.&lt;/li&gt;
+  &lt;li&gt;APT: Advanced Persisten Threat.&lt;/li&gt;
+  &lt;li&gt;Botnets: Net of compromised, infected computers that can be used to perform distributed attacks.&lt;/li&gt;
+  &lt;li&gt;Risk: Latent probability of a security incident taking place.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vulnerabilities&quot;&gt;Vulnerabilities&lt;/h3&gt;
+
+&lt;p&gt;Every system has vulnerabilities.&lt;/p&gt;
+
+&lt;p&gt;There are some strategies against them:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Security backups.&lt;/li&gt;
+  &lt;li&gt;Risk analysis.&lt;/li&gt;
+  &lt;li&gt;Suspicious events detection.&lt;/li&gt;
+  &lt;li&gt;Constant revision of the security of the organisation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The vulnerabilities must be classified. For that we have:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CVE (Common Vulnerabilites and Exposures): A unique ID is assigned to every vulnerability that is found, so they can be classified and origanised. For example CVE-2017-0144 (Eternalblue).&lt;/li&gt;
+  &lt;li&gt;CVSS (Common Vulnerability Scoring System): A system designed to classify vulnerabilities based in their attributes and their possible effects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;operating-systems&quot;&gt;Operating systems&lt;/h3&gt;
+
+&lt;p&gt;Every OS provides tools and mechanisms to guarantee the security of the system.&lt;/p&gt;
+
+&lt;h4 id=&quot;user-management&quot;&gt;User management&lt;/h4&gt;
+
+&lt;p&gt;The users must have the lowest privilege they need to operate the system and they must belong to only the necessary groups.&lt;/p&gt;
+
+&lt;h4 id=&quot;filesystem&quot;&gt;Filesystem&lt;/h4&gt;
+
+&lt;p&gt;Needs:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Confidentiality.&lt;/li&gt;
+  &lt;li&gt;Disponibility.&lt;/li&gt;
+  &lt;li&gt;Integrity.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Protections:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Encrypted filesystems. They require the password at boot time.&lt;/li&gt;
+  &lt;li&gt;Secure file deletion. Tools like Scrub and Shred.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Types of alterations:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;In the data.&lt;/li&gt;
+  &lt;li&gt;In the programs. These ones are very dangerous.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;random-alterations&quot;&gt;Random alterations&lt;/h4&gt;
+
+&lt;p&gt;Hardware alterations can be, for example:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Memory, disks, USBs… Those can be prevented by using RAID architecture and doing regular backups.&lt;/li&gt;
+  &lt;li&gt;Power supply. A UPS prevents this of happening.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Software alterations are caused by:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bad program design.&lt;/li&gt;
+  &lt;li&gt;Programs in an inconsistent state.&lt;/li&gt;
+  &lt;li&gt;Users with wrong privileges.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;alterations-prevention&quot;&gt;Alterations prevention&lt;/h4&gt;
+
+&lt;p&gt;To prevent alterations from happening, several things can be done:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Use digital signature to check the authenticity of a file.&lt;/li&gt;
+  &lt;li&gt;Use CRC and hashes to verify the integrity of a file.&lt;/li&gt;
+  &lt;li&gt;Journaling: Log almost everything that happens in the system.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;log-files&quot;&gt;Log files&lt;/h3&gt;
+
+&lt;p&gt;Their goal is to monitorize the system so in case something bad happens we can look the logs to figure out what the cause of the problem was.&lt;/p&gt;
+
+&lt;p&gt;The logs:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Store important events.&lt;/li&gt;
+  &lt;li&gt;Can be local or remote.&lt;/li&gt;
+  &lt;li&gt;Detect errors.&lt;/li&gt;
+  &lt;li&gt;Are produced by programs like Snare, ObserveIt, LogAnalyzer…&lt;/li&gt;
+  &lt;li&gt;In Linux they are store in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/log&lt;/code&gt; directory:
+    &lt;ul&gt;
+      &lt;li&gt;syslog&lt;/li&gt;
+      &lt;li&gt;messages&lt;/li&gt;
+      &lt;li&gt;auth.log&lt;/li&gt;
+      &lt;li&gt;utmp&lt;/li&gt;
+      &lt;li&gt;wtmp&lt;/li&gt;
+      &lt;li&gt;btmp&lt;/li&gt;
+      &lt;li&gt;lastlog&lt;/li&gt;
+      &lt;li&gt;debug&lt;/li&gt;
+      &lt;li&gt;apache&lt;/li&gt;
+      &lt;li&gt;daemon&lt;/li&gt;
+      &lt;li&gt;kern.log&lt;/li&gt;
+      &lt;li&gt;user.log&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;access-control&quot;&gt;Access control&lt;/h3&gt;
+
+&lt;p&gt;The goal is to authenticate that someone is who they say they are.&lt;/p&gt;
+
+&lt;p&gt;To do that, we check for something that:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;They know.&lt;/li&gt;
+  &lt;li&gt;They have.&lt;/li&gt;
+  &lt;li&gt;They are.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The authentication system must satisfy several characteristics:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Very reliable.&lt;/li&gt;
+  &lt;li&gt;Economic.&lt;/li&gt;
+  &lt;li&gt;Stand strong against certain attacks.&lt;/li&gt;
+  &lt;li&gt;Acceptable by the users.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Password authentication system:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simple and cheap.&lt;/li&gt;
+  &lt;li&gt;The responsibility lies with the user.&lt;/li&gt;
+  &lt;li&gt;A hash of the password is stored.&lt;/li&gt;
+  &lt;li&gt;If the passwords are not hashed with salt, the hashes can be susceptible to a Rainbow table attack.&lt;/li&gt;
+  &lt;li&gt;To create strong passwords there are several systems out there, e.g. Diceware.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Card authentication system:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Can be chipcards or smartcards.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Biometric authentication system:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Iris, palm of the hand, fingerprint,…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;secure-programming&quot;&gt;Secure programming&lt;/h3&gt;
+
+&lt;p&gt;Secure code development, without vulnerabilities.&lt;/p&gt;
+
+&lt;h3 id=&quot;vulnerabilities-1&quot;&gt;Vulnerabilities&lt;/h3&gt;
+
+&lt;p&gt;In order to detect them, most of the time a pentest or a security audit is necessary.&lt;/p&gt;
+
+&lt;p&gt;Types of vulnerabilities:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Buffer overflow: Until 2004 they were the cause of half of the total discovered vulnerabilities.&lt;/p&gt;
+
+    &lt;p&gt;To get rid of them, there are several things that can be done:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Never trust the user inputs.&lt;/li&gt;
+      &lt;li&gt;Disable code execution on the stack.&lt;/li&gt;
+      &lt;li&gt;Use stackguard.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Race conditions: Not use of critical sections. To fix them, use the tools that the operating system gives you e.g. semaphores.&lt;/li&gt;
+  &lt;li&gt;Common programming errors: Improper file management, not checking the inputs correctly, XSS…&lt;/li&gt;
+  &lt;li&gt;SQLi: One of the most common vulnerability that webpages have. Always check the user input before doing consults to a database with it.&lt;/li&gt;
+  &lt;li&gt;Rootkits: Persistent threat that provides the attacker root privileges when wanted. Very hard to detect, as they work at kernel level, but there are several tools like chkrootkit and rkhunter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;04---network-security&quot;&gt;04 - Network security&lt;/h2&gt;
+
+&lt;p&gt;The Internet comes with challenges that were never thought about, as it allows everything to be available from anywhere in the world 24/7.&lt;/p&gt;
+
+&lt;p&gt;The access control becomes harder. New security needs appear, to make safe services that were not made for so. e.g. WEP, GSM.&lt;/p&gt;
+
+&lt;h3 id=&quot;types-of-attacks&quot;&gt;Types of attacks&lt;/h3&gt;
+
+&lt;p&gt;Active, that can be easily detected but are very hard to prevent:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Interruption.&lt;/li&gt;
+  &lt;li&gt;Fabrication.&lt;/li&gt;
+  &lt;li&gt;Modification.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Passive, that are very hard to detect, but can erradicated with encryption and protections:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Interruption.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;network-security&quot;&gt;Network security&lt;/h3&gt;
+
+&lt;p&gt;Only enable the necessary services and take countermeassures against their vulnerabilities.&lt;/p&gt;
+
+&lt;p&gt;A firewall controls the packets that enter and exit the system.&lt;/p&gt;
+
+&lt;p&gt;The network services can be:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Independent: Like any other program&lt;/li&gt;
+  &lt;li&gt;Managed by &lt;em&gt;inetd&lt;/em&gt;: The daemon &lt;em&gt;inetd&lt;/em&gt; wakes up the process when needed, when not, it shuts them down. The behaviour can be configured in the file /etc/inetd.conf&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;tcp-wrappers&quot;&gt;TCP wrappers&lt;/h4&gt;
+
+&lt;p&gt;In order for this work, the programs must be compiled with &lt;em&gt;libwrap&lt;/em&gt; support.&lt;/p&gt;
+
+&lt;p&gt;In the file &lt;em&gt;/etc/hosts.deny&lt;/em&gt; you specifiy the denied access, and in &lt;em&gt;/etc/hosts.allow&lt;/em&gt; you specify the allowed access.&lt;/p&gt;
+
+&lt;h4 id=&quot;sysctl&quot;&gt;Sysctl&lt;/h4&gt;
+
+&lt;p&gt;This allows us to communicate with the kernel in execution time. By editing the file /etc/sysctl.conf we can do things like:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ignore all ping requests: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net.ipv4.icmp_echo_ignore_all=1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Ignore all ping broadcasts: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net.ipv4.icmp_echo_ignore_broadcasts=1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Refuse to send packets with invalid IP addresses: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net.ipv4.conf.all.rp_filter=1&lt;/code&gt; (Can be 0,1 or 2).&lt;/li&gt;
+  &lt;li&gt;Log the packets with an invalid IP: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net.ipv4.conf.all.log_martians=1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To apply the changes run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysctl -p&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;service-checking&quot;&gt;Service checking&lt;/h4&gt;
+
+&lt;p&gt;To check the network services that are running, tools like &lt;em&gt;netstat&lt;/em&gt; and &lt;em&gt;nmap&lt;/em&gt; can be used.&lt;/p&gt;
+
+&lt;h3 id=&quot;attacks&quot;&gt;Attacks&lt;/h3&gt;
+
+&lt;h4 id=&quot;dos&quot;&gt;DoS&lt;/h4&gt;
+
+&lt;p&gt;Connectivity lost due to port, network or resources saturation. Up to 3 years in jail.&lt;/p&gt;
+
+&lt;h4 id=&quot;ip-spoofing&quot;&gt;IP spoofing&lt;/h4&gt;
+
+&lt;p&gt;Send packets with a fake origin IP.&lt;/p&gt;
+
+&lt;p&gt;If you send ICMP ECHO REQUEST packages with the victim IP as the origin one, this attack is called &lt;em&gt;smurfing&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Nowadays the routers don’t allow to send broadcast datagrams outside their subnets of reach.&lt;/p&gt;
+
+&lt;h4 id=&quot;arp-spoofing-poisoning&quot;&gt;ARP spoofing, poisoning&lt;/h4&gt;
+
+&lt;p&gt;Change the IP linked to a MAC. This can be done in a switched LAN.&lt;/p&gt;
+
+&lt;p&gt;To discover the hosts that are in reach: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arpscan -a&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To poison two victims a tool named &lt;em&gt;arpspoof&lt;/em&gt; can be used, in conjunction with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Countemeasures:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Router with static MAC.&lt;/li&gt;
+  &lt;li&gt;Use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arpwatch&lt;/code&gt; to monitorize the network.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;tcp-syn-flood&quot;&gt;TCP SYN flood&lt;/h4&gt;
+
+&lt;p&gt;Takes advantage of the 3-way-handshake, as the server allocates resources when a SYN packet is received, and they are not released after 75 seconds have passed. It results in a &lt;em&gt;OOM&lt;/em&gt; most of the time.&lt;/p&gt;
+
+&lt;p&gt;This can be erradicated:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SYN cookies: Only allocate resources when the final message is received.&lt;/li&gt;
+  &lt;li&gt;SYN cache: Independent structure that can’t grow infinitely. By default in FreeBSD.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;udp-flood&quot;&gt;UDP flood&lt;/h4&gt;
+
+&lt;p&gt;Send packets to random ports, and cause the victim to send ICMP destination unreachable messages back to the attacker (or fake the origin IP and put another target).&lt;/p&gt;
+
+&lt;h4 id=&quot;dns-spoofing&quot;&gt;DNS spoofing&lt;/h4&gt;
+
+&lt;p&gt;Return a fake IP after a DNS query is made and captured by the attacker.&lt;/p&gt;
+
+&lt;h4 id=&quot;web-spoofing&quot;&gt;Web spoofing&lt;/h4&gt;
+
+&lt;p&gt;These days this is called phising.&lt;/p&gt;
+
+&lt;h4 id=&quot;mail-spoofing&quot;&gt;Mail spoofing&lt;/h4&gt;
+
+&lt;p&gt;Saying in an email that the sender is another person.&lt;/p&gt;
+
+&lt;h4 id=&quot;mitm&quot;&gt;MITM&lt;/h4&gt;
+
+&lt;p&gt;Signifficant attacks when Diffie-Hellman without authentication is being used.&lt;/p&gt;
+
+&lt;h3 id=&quot;iptables&quot;&gt;Iptables&lt;/h3&gt;
+
+&lt;p&gt;Iptables is a tool that the Linux system provides to manage &lt;em&gt;netfilter&lt;/em&gt;, which is a very powerful packet manipulation framework provided by the kernel.&lt;/p&gt;
+
+&lt;p&gt;It is a stateful firewall. This means that it will only examine the first packet of a connection, make a decission, and treat the rest of the packets the same way.&lt;/p&gt;
+
+&lt;p&gt;The framework consists of three main tables:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Filter&lt;/li&gt;
+  &lt;li&gt;Mangle&lt;/li&gt;
+  &lt;li&gt;Nat&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It also has another two tables:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Raw: For managing the state of packets (as netfiler is a stateful firewall).&lt;/li&gt;
+  &lt;li&gt;Security: Only used to set internal SELinux security context marks on packets.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And each table has several chains linked to it (not every tables has all the chains):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;PREROUTING&lt;/li&gt;
+  &lt;li&gt;INPUT&lt;/li&gt;
+  &lt;li&gt;FORWARD&lt;/li&gt;
+  &lt;li&gt;OUTPUT&lt;/li&gt;
+  &lt;li&gt;POSTROUTING&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following diagram represents the flow of the packets through the chains:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-iptables-tables.jfif&quot; alt=&quot;IPtables tables&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are several options that can apply to a packet:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ACCEPT&lt;/li&gt;
+  &lt;li&gt;DROP&lt;/li&gt;
+  &lt;li&gt;REJECT&lt;/li&gt;
+  &lt;li&gt;LOG&lt;/li&gt;
+  &lt;li&gt;SNAT&lt;/li&gt;
+  &lt;li&gt;DNAT&lt;/li&gt;
+  &lt;li&gt;MASQUERADE&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tools&quot;&gt;Tools&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Ettercap&lt;/em&gt;, now replaced by Bettercap.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Packit&lt;/em&gt;: A tool to craft network packets and to do tests with.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Hping3&lt;/em&gt;: Like ping, but better.&lt;/p&gt;
+
+&lt;h3 id=&quot;sniffer-detection&quot;&gt;Sniffer detection&lt;/h3&gt;
+
+&lt;p&gt;This is a very hard thing to do, but there are some tools that can help you to do so, like &lt;em&gt;Sniffdet&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;To make if more difficult to sniff network traffic, here are some things that can be done:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Network and hosts segmentation using switches (but you gotta be careful with ARP poisoning).&lt;/li&gt;
+  &lt;li&gt;Encrypted communications.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;snort&quot;&gt;SNORT&lt;/h3&gt;
+
+&lt;p&gt;Snort is an IDS (Intrusion Detection System), specifically a NIDS.&lt;/p&gt;
+
+&lt;p&gt;It’s got filters, rules, abnormal events detector and a module for making reports and managing alarms.&lt;/p&gt;
+
+&lt;h2 id=&quot;05---general-concepts&quot;&gt;05 - General concepts&lt;/h2&gt;
+
+&lt;p&gt;General culture concepts and knowledge:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Mirai botnet&lt;/em&gt;: Largest DDoS attack in history&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Wannacry&lt;/em&gt;: A classic&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Stuxnet worm&lt;/em&gt;: Targeted attack on Iranian nuclear facilities&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Security basis&lt;/em&gt;: Confidentiality, integrity and availability&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Other security basis&lt;/em&gt;: Authenticity, accountability and non-repudiation&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;More security basis&lt;/em&gt;: Privacy, anonymity, untraceability, unlinkability, unobservability&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Protection basis&lt;/em&gt;: Prevention, detection, reaction&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Software vulnerabilities exist for a reason and cannot be completely eliminated, but they can be avoided&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;06---x86-isa&quot;&gt;06 - x86 ISA&lt;/h2&gt;
+
+&lt;p&gt;It is necessary to know how processors work to be able to understand how vulnerabilities can be exploited.&lt;/p&gt;
+
+&lt;p&gt;Here will be explained the x86 and the x86_64 ISA of Intel processors, as Intel is the most common brand of processor (66% of the market).&lt;/p&gt;
+
+&lt;h3 id=&quot;program-compilation-process&quot;&gt;Program compilation process&lt;/h3&gt;
+
+&lt;p&gt;The process of compiling a program written in C/C++ is as shown in the following image:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-compilation-process.png&quot; alt=&quot;Compilation process in C/C++&quot; title=&quot;Compilation process in C/C++&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you compile a C program with the option &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-save-temps&lt;/code&gt;, &lt;em&gt;gcc&lt;/em&gt; won’t delete &lt;em&gt;.i&lt;/em&gt; and &lt;em&gt;.s&lt;/em&gt; files:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌─[javier@torre]─[~]
+└──╼ &lt;span class=&quot;nv&quot;&gt;$cat&lt;/span&gt; sample.c
+&lt;span class=&quot;c&quot;&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#include &amp;lt;stdlib.h&amp;gt;&lt;/span&gt;
+
+int main&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;int argc, char &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; argv&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+        fprintf&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;stdout, &lt;span class=&quot;s2&quot;&gt;&quot;[*] This is a sample program&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+┌─[javier@torre]─[~]
+└──╼ &lt;span class=&quot;nv&quot;&gt;$gcc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-save-temps&lt;/span&gt; sample.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; sample
+┌─[javier@torre]─[~]
+└──╼ &lt;span class=&quot;nv&quot;&gt;$ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+total 76
+&lt;span class=&quot;nt&quot;&gt;-rwxr-xr-x&lt;/span&gt; 1 javier javier 16656 Dec 12 23:05 sample
+&lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt; 1 javier javier   148 Dec 12 23:05 sample.c
+&lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt; 1 javier javier 42336 Dec 12 23:05 sample.i
+&lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt; 1 javier javier  1632 Dec 12 23:05 sample.o
+&lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt; 1 javier javier   593 Dec 12 23:05 sample.s
+┌─[javier@torre]─[~]
+└──╼ &lt;span class=&quot;nv&quot;&gt;$.&lt;/span&gt;/sample
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; This is a sample program
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Assembly code is written using mnemonics. To demostrate it, the following is an example of assembly code for the Motorola 6809 processor (the first assembly language I learned):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;; hello.asm: Simple program that prints the string on the screen
+
+        .area PROG (ABS)
+
+        .org 0x100          ; Start at 0x100
+string: .ascii &quot;Hello sir&quot;
+        .byte   10          ; 10 = CTRL+J = \cr
+        .byte   0           ; 0  = CTRL+@ = \lf
+
+        .globl program      ; Here starts the code
+program:
+        ldx #string
+loop:   lda ,x+
+        beq end
+        sta 0xFF00          ; Print on the screen
+        bra loop
+end:    clra
+        sta 0xFF01
+
+        .org 0xFFFE         ; RESET vector
+        .word program
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;concepts&quot;&gt;Concepts&lt;/h3&gt;
+
+&lt;p&gt;Machine code: Code that can be directly executed by the computer without further translation.&lt;/p&gt;
+
+&lt;p&gt;Bytecode: Code that can be executed by a virtual machine, for example, Java creates this, and then the Java virtual machine runs it.&lt;/p&gt;
+
+&lt;p&gt;Opcode: Number that represents an operation (OPeration CODE).&lt;/p&gt;
+
+&lt;p&gt;Mnemonics: Instructions in assembly language. It can be a string or an opcode with zero or more arguments.&lt;/p&gt;
+
+&lt;h3 id=&quot;x86-registers&quot;&gt;x86 registers&lt;/h3&gt;
+
+&lt;p&gt;A register is a form of storage that the processor has. They’re really fast to access and to operate with them, and they are different from the main memory, as they are inside the processor.&lt;/p&gt;
+
+&lt;p&gt;There are regiters for different kinds of things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;General purpose: Used for storing immediate values and memory addresses.&lt;/li&gt;
+  &lt;li&gt;Segment: Used for identifying segments in memory.&lt;/li&gt;
+  &lt;li&gt;Program status and control (flag registers): They store the flags that indicate the result of an arithmetic operation (overflow, zero, …).&lt;/li&gt;
+  &lt;li&gt;Instruction pointer: Also named &lt;em&gt;PC&lt;/em&gt; as for &lt;em&gt;Program Counter&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;general-purpose-registers-on-x86&quot;&gt;General purpose registers on x86&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;EAX: Extended Accumulator register.&lt;/li&gt;
+  &lt;li&gt;EBX: Extended Base register, a base pointer for memory access.&lt;/li&gt;
+  &lt;li&gt;ECX: Extended Counter register, counter for loop/string operations.&lt;/li&gt;
+  &lt;li&gt;EDX: Extended Data register, a pointer for I/O.&lt;/li&gt;
+  &lt;li&gt;ESI: Extended Source Index pointer for string operations.&lt;/li&gt;
+  &lt;li&gt;EDI: Extended Destination Index pointer for string operations.&lt;/li&gt;
+  &lt;li&gt;EBP: Extended Base Pointer, a pointer to data on the stack.&lt;/li&gt;
+  &lt;li&gt;ESP: Extended Stack Pointer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following image illustrates the mapping of the registers:
+&lt;img src=&quot;/blog/images/sss-x86-general-purpose-registers.png&quot; alt=&quot;x86 General purpose registers&quot; title=&quot;x86 General purpose registers&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;instruction-pointer-register-on-x86&quot;&gt;Instruction pointer register on x86&lt;/h3&gt;
+
+&lt;p&gt;The EIP (Extended Instruction Pointer) points to the next instruction to be executed. It can only be accesed by using branch instructions (call, jmp, ret).&lt;/p&gt;
+
+&lt;h3 id=&quot;program-status-and-control-flag-registers&quot;&gt;Program status and control (flag registers)&lt;/h3&gt;
+
+&lt;p&gt;The EFLAGS register has several flags:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CF: Carry Flag.&lt;/li&gt;
+  &lt;li&gt;PF: Parity Flag.&lt;/li&gt;
+  &lt;li&gt;ZF: Zero Flag.&lt;/li&gt;
+  &lt;li&gt;TF: Trap Flag.&lt;/li&gt;
+  &lt;li&gt;OF: Overflow Flag.&lt;/li&gt;
+  &lt;li&gt;SF: Sign Flag.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;data-types&quot;&gt;Data types&lt;/h3&gt;
+
+&lt;p&gt;There are several data types, each one being the double of the previous:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Byte: 8 bits.&lt;/li&gt;
+  &lt;li&gt;Word: 16 bits.&lt;/li&gt;
+  &lt;li&gt;Double word: 32 bits.&lt;/li&gt;
+  &lt;li&gt;Quad word: 64 bits. (Combining EDX and EAX into one)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;x86-endianness&quot;&gt;x86 endianness&lt;/h3&gt;
+
+&lt;p&gt;The x86 uses the little endian format to store information in memory. This means that, for example, the word &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x28A1427F&lt;/code&gt; will be stored as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x7F42A128&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-movement&quot;&gt;Data movement&lt;/h3&gt;
+
+&lt;p&gt;To move data, the x86 has the MOV instruction:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Immediate to register: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mov eax, 0x41&lt;/code&gt;. This will put the value 0x41 in the EAX register.&lt;/li&gt;
+  &lt;li&gt;Register to register: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mov eax, ebx&lt;/code&gt;. This will put whatever is on the EAX register into the EBX register.&lt;/li&gt;
+  &lt;li&gt;Immediate to memory: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mov [eax], 0x41&lt;/code&gt;. This will put 0x41 in the memory address that the EAX register contains.&lt;/li&gt;
+  &lt;li&gt;Register to memory: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mov [eax], ebx&lt;/code&gt;. This will put whatever is in the EBX register in the memory address that the EAX register contains.&lt;/li&gt;
+  &lt;li&gt;Memory to register: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mov eax, [ebx]&lt;/code&gt;. This will put whatever is in the memory address that the EBX register contains into the EAX register.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lea&quot;&gt;LEA&lt;/h3&gt;
+
+&lt;p&gt;This instruction will Load the Effective Address into a register. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lea eax, [ebx+0x04]&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;arithmetic-instructions&quot;&gt;Arithmetic instructions&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add eax, ebx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sub eax, ebx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inc edi&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dec esi&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;bit-level-instructions&quot;&gt;Bit-level instructions&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and eax, ebx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or eax, ebx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xor ebx, eax&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;not eax&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;jump-instructions&quot;&gt;Jump instructions&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unconditional:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jmp eax&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jmp [ebx]&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Conditional:&lt;/p&gt;
+
+    &lt;p&gt;Preceeded by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cmp eax, ebx&lt;/code&gt; most of the time.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jle eax, ebx&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jz ebx, 0x01&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;more-info-about-instructions&quot;&gt;More info about instructions&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://en.wikipedia.org/wiki/X86_instruction_listings&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;memory-segmentation-and-stack-operations&quot;&gt;Memory segmentation and stack operations&lt;/h3&gt;
+
+&lt;p&gt;In order to exploit security bugs, most of the time you’ll have to overwrite or overflow a portion of the memory into another one.&lt;/p&gt;
+
+&lt;p&gt;The following image illustrates the structure of a C program:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-c-memory-diagram.png&quot; alt=&quot;C program memory diagram&quot; title=&quot;C program memory diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;stack&quot;&gt;Stack&lt;/h3&gt;
+
+&lt;p&gt;The stack is a LIFO structure, and it grows downwards.&lt;/p&gt;
+
+&lt;p&gt;It has two operations, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;push&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pop&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The ESP points to the address of the oldest pushed data that is currently on the stack.&lt;/p&gt;
+
+&lt;h3 id=&quot;function-calls&quot;&gt;Function calls&lt;/h3&gt;
+
+&lt;p&gt;To call a function, you use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;call&lt;/code&gt; instruction.&lt;/p&gt;
+
+&lt;p&gt;Once you call a function, the return address (next instruction after the function ends) is pushed to the stack.&lt;/p&gt;
+
+&lt;p&gt;The return of the function is performed via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ret&lt;/code&gt; instruction.&lt;/p&gt;
+
+&lt;p&gt;Before calling a function, there is what is called a function prologe. Its purpose is to backup the selected registers and save space for the local variables.&lt;/p&gt;
+
+&lt;p&gt;After calling a function, everything that was done in the prologue is done backwards before issuing the return.&lt;/p&gt;
+
+&lt;h3 id=&quot;function-invocation&quot;&gt;Function invocation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Windows:&lt;/p&gt;
+
+    &lt;p&gt;First four arguments are loaded into RCX, RDX, R8, R9.&lt;/p&gt;
+
+    &lt;p&gt;The rest of them are passed trough the stack from right to left.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Linux:&lt;/p&gt;
+
+    &lt;p&gt;First six arguments are loaded into RDI, RSI, RDX, RCX, R8, R9.&lt;/p&gt;
+
+    &lt;p&gt;The rest of them are passed trough the stack from right to left.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;exercises&quot;&gt;Exercises&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Prepare the system:&lt;/p&gt;
+
+    &lt;p&gt;You’ll need a Linux system with &lt;em&gt;gcc&lt;/em&gt;, &lt;em&gt;gdb&lt;/em&gt; and &lt;em&gt;nasm&lt;/em&gt; installed on it.&lt;/p&gt;
+
+    &lt;p&gt;You can do so by running the following command:&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;gcc gdb nasm &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Now configure &lt;em&gt;gdb&lt;/em&gt; to show disassemblies in the intel format (we don’t want the AT&amp;amp;T format) by running this command:&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'set disassembly-flavor intel'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.gdbinit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;If you want to use &lt;em&gt;objdump&lt;/em&gt; for disassemblies, use the option &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-M intel&lt;/code&gt; to get the output in the intel format.&lt;/p&gt;
+
+    &lt;p&gt;An example against the sample program that we compiled before:&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌─[javier@torre]─[~/sample]
+└──╼ &lt;span class=&quot;nv&quot;&gt;$objdump&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-M&lt;/span&gt; intel sample &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-15&lt;/span&gt;
+   
+sample:     file format elf64-x86-64
+   
+   
+Disassembly of section .init:
+   
+0000000000001000 &amp;lt;_init&amp;gt;:
+    1000:       48 83 ec 08             sub    rsp,0x8
+    1004:       48 8b 05 &lt;span class=&quot;nb&quot;&gt;dd &lt;/span&gt;2f 00 00    mov    rax,QWORD PTR &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;rip+0x2fdd]        &lt;span class=&quot;c&quot;&gt;# 3fe8 &amp;lt;__gmon_start__&amp;gt;&lt;/span&gt;
+    100b:       48 85 c0                &lt;span class=&quot;nb&quot;&gt;test   &lt;/span&gt;rax,rax
+    100e:       74 02                   je     1012 &amp;lt;_init+0x12&amp;gt;
+    1010:       ff d0                   call   rax
+    1012:       48 83 c4 08             add    rsp,0x8
+    1016:       c3                      ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;03---runtime-attacks&quot;&gt;03 - Runtime attacks&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;05---defenses-against-runtime-attacks&quot;&gt;05 - Defenses against runtime attacks&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;04---code-reuse-attacks-and-defenses&quot;&gt;04 - Code reuse: Attacks and defenses&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;06---web-security&quot;&gt;06 - Web security&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;07---blockchain&quot;&gt;07 - Blockchain&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;08---smart-contracts&quot;&gt;08 - Smart contracts&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;09---side-channel-attacks&quot;&gt;09 - Side channel attacks&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;
+
+&lt;h2 id=&quot;10-hardware-security&quot;&gt;10-Hardware security&lt;/h2&gt;
+
+&lt;p&gt;Coming soon&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.</summary></entry><entry><title type="html">WSL2 and VirtualBox/VMware at the same time</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/11/13/WSL-and-VirtualBox-VMware-at-the-same-time.html" rel="alternate" type="text/html" title="WSL2 and VirtualBox/VMware at the same time" /><published>2020-11-13T23:00:00+01:00</published><updated>2020-11-13T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/11/13/WSL-and-VirtualBox-VMware-at-the-same-time</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/11/13/WSL-and-VirtualBox-VMware-at-the-same-time.html">&lt;p&gt;If after installing &lt;em&gt;WSL2&lt;/em&gt; on a system that had &lt;em&gt;VMware&lt;/em&gt; or &lt;em&gt;VirtualBox&lt;/em&gt; previously installed, you get an error that says something like this one:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.stack.imgur.com%2FKxtXR.png&amp;amp;f=1&amp;amp;nofb=1&quot; alt=&quot;CredentialGuard&quot; title=&quot;CredentialGuard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You just found that your system can’t have &lt;em&gt;WSL2&lt;/em&gt; and &lt;em&gt;VMware&lt;/em&gt; or &lt;em&gt;VirtualBox&lt;/em&gt; running at the same time, because &lt;em&gt;WSL2&lt;/em&gt; uses the Hyper-V architecture for its virtualization, and some third party tools such as the mentioned before cannot work when Hyper-V is in use.&lt;/p&gt;
+
+&lt;p&gt;At this point you might be thinking “&lt;strong&gt;Wait, so you’re telling me that I have to choose one or the other?!?!&lt;/strong&gt;”&lt;/p&gt;
+
+&lt;p&gt;The answer is “&lt;strong&gt;No, but you’ll have to choose one of three options&lt;/strong&gt;”&lt;/p&gt;
+
+&lt;p&gt;The options you have are those:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Manually change which virtual machine plattform will be possible to use at a certain time.&lt;/p&gt;
+
+    &lt;p&gt;Open the Powershell as Administrator and run:&lt;/p&gt;
+
+    &lt;p&gt;If you want to enable &lt;em&gt;VMware&lt;/em&gt;:&lt;/p&gt;
+    &lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;bcdedit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/set&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hypervisorlaunchtype&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;If you want to enable &lt;em&gt;Hyper-V&lt;/em&gt; and &lt;em&gt;WSL2&lt;/em&gt;:&lt;/p&gt;
+    &lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;bcdedit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/set&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hypervisorlaunchtype&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Big thanks to &lt;em&gt;Jesús Martín Juan&lt;/em&gt; for fixing two typos. You can check this webpage &lt;a href=&quot;https://jesusemejota.github.io&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Downgrade from &lt;em&gt;WSL2&lt;/em&gt; to &lt;em&gt;WSL1&lt;/em&gt;.&lt;/p&gt;
+
+    &lt;p&gt;As you may know, the first version of &lt;em&gt;WSL&lt;/em&gt; is not a real kernel, instead, it acts as a translator from the &lt;em&gt;Linux&lt;/em&gt; kernel to the &lt;em&gt;Windows&lt;/em&gt; kernel. Thus, it is more limited than &lt;em&gt;WSL2&lt;/em&gt;, but if you don’t need any of the improvements that &lt;em&gt;WSL2&lt;/em&gt; has over &lt;em&gt;WSL1&lt;/em&gt;.&lt;/p&gt;
+
+    &lt;p&gt;You can downgrade your virtual machines to &lt;em&gt;WSL1&lt;/em&gt; with the following command:&lt;/p&gt;
+    &lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--set-version&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Update &lt;em&gt;VMware&lt;/em&gt; or &lt;em&gt;VirtualBox&lt;/em&gt;.&lt;/p&gt;
+
+    &lt;p&gt;Many people have reached out to the developers since &lt;em&gt;WSL2&lt;/em&gt; became available, and &lt;em&gt;Oracle&lt;/em&gt; and &lt;em&gt;VMware&lt;/em&gt; have developed their solutions for this problem.&lt;/p&gt;
+
+    &lt;p&gt;In case of &lt;em&gt;VMware&lt;/em&gt;, they released the 15.5.6 version that solves this problem.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/blog/images/vmware-15-5-6.PNG&quot; alt=&quot;VMware-15-5-6&quot; title=&quot;VMware-15-5-6&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;You can get more info about that &lt;a href=&quot;https://blogs.vmware.com/workstation/2020/01/vmware-workstation-tech-preview-20h1.html&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;For more info about &lt;em&gt;VirtualBox&lt;/em&gt;, you can check the &lt;a href=&quot;https://github.com/MicrosoftDocs/WSL/issues?q=is%3Aissue+virtualbox+sort%3Acomments-desc&quot;&gt;&lt;strong&gt;VirtualBox issue discussions in the WSL repo on GitHub&lt;/strong&gt;&lt;/a&gt; and the &lt;a href=&quot;https://www.virtualbox.org/wiki/Changelog-6.0&quot;&gt;&lt;strong&gt;VirtualBox changelog&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">If after installing WSL2 on a system that had VMware or VirtualBox previously installed, you get an error that says something like this one:</summary></entry><entry><title type="html">Rubber Ducky with Digispark ATtiny85</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html" rel="alternate" type="text/html" title="Rubber Ducky with Digispark ATtiny85" /><published>2020-11-06T23:00:00+01:00</published><updated>2020-11-06T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html">&lt;p&gt;Do you want to have a &lt;a href=&quot;https://shop.hak5.org/products/usb-rubber-ducky-deluxe&quot;&gt;&lt;em&gt;Rubber Ducky&lt;/em&gt;&lt;/a&gt; but you don’t want to spend 50$ on it?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How about spending 2$ on a &lt;em&gt;Digispark&lt;/em&gt; and program it yourself?&lt;/strong&gt; If that sounds good, get your hands on one of those and follow these steps.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Notice&lt;/em&gt;: This tutorial is intended to be followed from a Windows 10 system.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-started&quot;&gt;Get started&lt;/h2&gt;
+&lt;p&gt;The first thing is installing the drivers. To do so, go to &lt;a href=&quot;https://github.com/digistump/DigistumpArduino/releases&quot;&gt;&lt;strong&gt;this&lt;/strong&gt;&lt;/a&gt; link and download the installer. Both &lt;em&gt;32&lt;/em&gt; and &lt;em&gt;64&lt;/em&gt; bit architectures are supported.&lt;/p&gt;
+
+&lt;p&gt;Now you can stick the &lt;em&gt;Digispark ATtiny85&lt;/em&gt; in a &lt;em&gt;USB&lt;/em&gt; port and you should hear the Windows notification tone. Now if you go to the Device Manager, a new category named “&lt;em&gt;libusb-win32 Usb Devices&lt;/em&gt;” should appear. That’s good, now the system recognizes the &lt;em&gt;Digispark&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;configure-the-arduino-ide&quot;&gt;Configure the Arduino IDE&lt;/h2&gt;
+&lt;p&gt;Go to &lt;a href=&quot;https://www.arduino.cc/en/software&quot;&gt;&lt;strong&gt;this&lt;/strong&gt;&lt;/a&gt; site and install the IDE, if you didn’t have it already installed on your system.&lt;/p&gt;
+
+&lt;p&gt;Now we have to configure the IDE so it works with out Digispark:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open the IDE and go to &lt;em&gt;File&lt;/em&gt; -&amp;gt; &lt;em&gt;Preferences&lt;/em&gt;.&lt;/p&gt;
+
+    &lt;p&gt;In the field named “&lt;em&gt;Additional Boards Manager URLs&lt;/em&gt;” enter the following line:&lt;/p&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://digistump.com/package_digistump_index.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;As shown in the following image:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/blog/images/additionalurls.png&quot; alt=&quot;AdditionalURLs&quot; title=&quot;AdditionalURLs&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to &lt;em&gt;Tools&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards manager&lt;/em&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/blog/images/boardsmanager.png&quot; alt=&quot;BoardsManager&quot; title=&quot;BoardsManager&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;Select “&lt;em&gt;Contributed&lt;/em&gt;” from the drop-down menu and then install the “&lt;em&gt;Digistump AVR Boards&lt;/em&gt;” package:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/blog/images/avrboards.png&quot; alt=&quot;AVRboards&quot; title=&quot;AVRboards&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now go to &lt;em&gt;Tools&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Digistump AVR Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Digispark (Default - 16.5 mhz)&lt;/em&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/blog/images/digistumpdefault.png&quot; alt=&quot;DigistumpDefault&quot; title=&quot;DigistumpDefault&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;test-if-it-works&quot;&gt;Test if it works&lt;/h2&gt;
+&lt;p&gt;Create a new sketch and paste the following code:&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Creates a digisparked text file in the Desktop&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;#include &quot;DigiKeyboard.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Start&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendKeyStroke&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Open &quot;Run&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendKeyStroke&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KEY_R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MOD_GUI_LEFT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Open &quot;cmd&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cmd /k cd %UserProfile%/Desktop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendKeyStroke&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KEY_ENTER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Create the file&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;echo You have been digisparked :v &amp;gt; digisparked.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendKeyStroke&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KEY_ENTER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Close &quot;cmd&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;exit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendKeyStroke&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KEY_ENTER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;DigiKeyboard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Wait&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(;;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// To wait until the Digispark gets pulled out of the computer&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;What this is going to do is simulate that you press WinKey+R, open “&lt;em&gt;cmd&lt;/em&gt;” and create a file on the desktop named digisparked.txt.&lt;/p&gt;
+
+&lt;p&gt;Go to “&lt;em&gt;Tools&lt;/em&gt;” -&amp;gt; “&lt;em&gt;Port&lt;/em&gt;” and select the serial port that appears in the drop down menu. It usually is “&lt;em&gt;COM0&lt;/em&gt;” or “&lt;em&gt;COM1&lt;/em&gt;”.&lt;/p&gt;
+
+&lt;p&gt;Now click the “&lt;em&gt;Upload&lt;/em&gt;” button and stick the &lt;em&gt;Digispark&lt;/em&gt; in a &lt;em&gt;USB&lt;/em&gt; port within the next 60 seconds. It will flash the code into the &lt;em&gt;Digispark&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Now you can plug your &lt;em&gt;Digispark&lt;/em&gt;, sit back, and get Digisparked!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/digisparkgif.gif&quot; alt=&quot;gif&quot; title=&quot;gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, it only takes about 2 seconds to get the job done.&lt;/p&gt;
+
+&lt;h2 id=&quot;common-errors&quot;&gt;Common errors&lt;/h2&gt;
+&lt;p&gt;If you get this error when compiling the code:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;DigiKeyboard.h: No such file or directory&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Your board was likely changed in the settings when the &lt;em&gt;Arduino IDE&lt;/em&gt; was reopened.&lt;/p&gt;
+
+&lt;p&gt;Go back to “&lt;em&gt;Tools&lt;/em&gt;” -&amp;gt; “&lt;em&gt;Board&lt;/em&gt;” and select “&lt;em&gt;Digispark (Default - 16.5mhz)&lt;/em&gt;”&lt;/p&gt;
+
+&lt;h2 id=&quot;extra&quot;&gt;Extra&lt;/h2&gt;
+&lt;p&gt;There is a &lt;em&gt;GitHub&lt;/em&gt; project named &lt;a href=&quot;https://github.com/toxydose/Duckyspark&quot;&gt;“&lt;em&gt;Duckyspark&lt;/em&gt;”&lt;/a&gt; that converts &lt;em&gt;.duck&lt;/em&gt; scripts to the &lt;em&gt;.ino&lt;/em&gt; format that our &lt;em&gt;Digispark&lt;/em&gt; understands. It’s written in &lt;em&gt;python3&lt;/em&gt; and works well.&lt;/p&gt;
+
+&lt;p&gt;The syntax is as shown below:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 Duckyspark_translator.py &amp;lt;rubber ducky file&amp;gt; &amp;lt;digispark file&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With it, you can take any &lt;em&gt;.duck&lt;/em&gt; script and use it on your &lt;em&gt;Digispark&lt;/em&gt;!&lt;/p&gt;
+
+&lt;h2 id=&quot;more-extra&quot;&gt;More extra&lt;/h2&gt;
+&lt;p&gt;There is a &lt;em&gt;GitHub&lt;/em&gt; project named &lt;a href=&quot;https://github.com/mame82/duck2spark&quot;&gt;“&lt;em&gt;Duck2spark&lt;/em&gt;”&lt;/a&gt; that works somewhat like the previous tool, but this one takes the output of &lt;a href=&quot;https://github.com/hak5darren/USB-Rubber-Ducky/blob/master/Encoder/encoder.jar&quot;&gt;&lt;em&gt;Duckencoder&lt;/em&gt;&lt;/a&gt; (which supports different types of keyboard layouts) and converts it to an Arduino Sketch that you can upload to your &lt;em&gt;Digispark&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;even-more-extra&quot;&gt;Even more extra&lt;/h2&gt;
+&lt;p&gt;If you want to go deep into this, here is a link to the “&lt;em&gt;digikeyboard.h&lt;/em&gt;” file in the official GitHub project of digistump:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://github.com/digistump/DigisparkArduinoIntegration/blob/master/libraries/DigisparkKeyboard/DigiKeyboard.h
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And here is a link to the official “&lt;em&gt;HID usage tables&lt;/em&gt;”:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://www.usb.org/sites/default/files/hut1_21.pdf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And last, this webpage contains lots of &lt;em&gt;.duck&lt;/em&gt; scripts that you can translate to &lt;em&gt;Digispark&lt;/em&gt; using the &lt;em&gt;Duckyspark&lt;/em&gt; tool:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://ducktoolkit.com/userscripts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Do you want to have a Rubber Ducky but you don’t want to spend 50$ on it?</summary></entry><entry><title type="html">Kali Linux on WSL with GUI</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI.html" rel="alternate" type="text/html" title="Kali Linux on WSL with GUI" /><published>2020-10-25T23:00:00+01:00</published><updated>2020-10-25T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI.html">&lt;h2 id=&quot;install-kali-linux&quot;&gt;Install &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;You can install Kali-linux from the Microsoft Store with a few clicks, or alternatively, you can install it &lt;a href=&quot;https://javiervidrua.github.io/jekyll/update/2020/10/17/managing-wsl-distributions.html&quot;&gt;&lt;strong&gt;from the Powershell&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-kali-win-kex&quot;&gt;Install &lt;em&gt;kali-win-kex&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;Now launch &lt;em&gt;Kali&lt;/em&gt; and execute these commands:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;kali-win-kex &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The last two steps can easily be done as shown in this image:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-install.png&quot; alt=&quot;Install&quot; title=&quot;Install&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;run-kex&quot;&gt;Run &lt;em&gt;kex&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;All done! Now you can run (from &lt;em&gt;Kali&lt;/em&gt;) the following command:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kex &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;First you will get something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-start.png&quot; alt=&quot;Start&quot; title=&quot;Start&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-vnc.png&quot; alt=&quot;Vnc&quot; title=&quot;Vnc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And when you enter your password the desktop will appear!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-desktop.png&quot; alt=&quot;Desktop&quot; title=&quot;Desktop&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;use-kali-linux&quot;&gt;Use &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;Now you can open graphical tools like &lt;em&gt;Burpsuite&lt;/em&gt;, &lt;em&gt;Bettercap&lt;/em&gt; or &lt;em&gt;Cherrytree&lt;/em&gt;, without needing to start up a VMware or VirtualBox.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Install Kali linux</summary></entry><entry><title type="html">Productivity in Linux</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html" rel="alternate" type="text/html" title="Productivity in Linux" /><published>2020-10-20T00:00:00+02:00</published><updated>2020-10-20T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html">&lt;!--
+https://www.youtube.com/watch?v=IlK6FNxmRMY
+https://www.youtube.com/watch?v=6OOqROUQ60s
+https://www.youtube.com/watch?v=W8ykZNSLDqE
+https://www.youtube.com/watch?v=azcrPFhaY9k
+--&gt;
+&lt;p&gt;Here are some tricks to increase your productivity when using Linux.&lt;/p&gt;
+
+&lt;h2 id=&quot;tab-completion&quot;&gt;Tab completion&lt;/h2&gt;
+&lt;p&gt;Whenever you’re typing a command, if you hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;tab&amp;gt;&lt;/code&gt;, it will try to autocomplete the command. If nothing happens, try hitting it twice, to make it show you all the possibilities.&lt;/p&gt;
+
+&lt;h2 id=&quot;circle-through-the-history-of-commands-with-the-arrow-keys&quot;&gt;Circle through the history of commands with the arrow keys&lt;/h2&gt;
+&lt;p&gt;This isn’t a Linux specific productivity habit, since it works in every operating system, but I felt that it belongs here.&lt;/p&gt;
+
+&lt;p&gt;You can use the “&lt;em&gt;up&lt;/em&gt;” and “&lt;em&gt;down&lt;/em&gt;” arrow keys to navigate through the history of commands.&lt;/p&gt;
+
+&lt;h2 id=&quot;perform-a-reverse-search&quot;&gt;Perform a reverse search&lt;/h2&gt;
+&lt;p&gt;If you want to search for a command you ran a long ago, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+r&lt;/code&gt; and type some part of it.&lt;/p&gt;
+
+&lt;p&gt;Once you get the command, hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;tab&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;esc&amp;gt;&lt;/code&gt; or the arrow keys to edit it, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;enter&amp;gt;&lt;/code&gt; to run it.&lt;/p&gt;
+
+&lt;h2 id=&quot;readline-arguments&quot;&gt;Readline arguments&lt;/h2&gt;
+&lt;p&gt;If you really want to know about this, check &lt;strong&gt;&lt;a href=&quot;https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Readline-Arguments&quot;&gt;this&lt;/a&gt;&lt;/strong&gt; out.
+If you want to repeat &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Z&lt;/code&gt; 10 times:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alt+1 0 Z
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;It will output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZZZZZZZZZZ&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want to delete the next 5 characters:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alt+- 5 ctrl+d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;It will output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZZZZZ&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;redo-the-last-command-as-root-user&quot;&gt;Redo the last command as root user&lt;/h2&gt;
+&lt;p&gt;If you type a long command, and when you press enter you get a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Permission denied&lt;/code&gt; error message, instead of hitting “&lt;em&gt;up&lt;/em&gt;” and going to the start of the command to type “&lt;em&gt;sudo&lt;/em&gt;”, you can run this instead:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;fix-a-really-long-command-that-you-messed-up-in-your-favourite-editor&quot;&gt;Fix a really long command that you messed up in your favourite editor&lt;/h2&gt;
+&lt;p&gt;If you realize that you have to fix major part of the last command that you typed, you can fix it in your favourite editor and run it with the command:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;fc&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Alternatively, you can use the following key combination:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl+x+e
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;dont-add-command-to-the-history&quot;&gt;Don’t add command to the history&lt;/h2&gt;
+&lt;p&gt;To do this you just need to append a space at the start of the command (note the space at the start):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'test'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;go-to-the-previous-directory&quot;&gt;Go to the previous directory&lt;/h2&gt;
+&lt;p&gt;You can type the following command to go to the previous directory:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;write-to-file-as-root-when-using-vim&quot;&gt;Write to file as root when using vim&lt;/h2&gt;
+&lt;p&gt;Using vim, if you find yourself editting a file and when you try to write the changes you get a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;File not writable&lt;/code&gt; error message, you can do this:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:w &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; %
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;write-to-a-file-in-between-pipes&quot;&gt;Write to a file in between pipes&lt;/h2&gt;
+&lt;p&gt;If you want to log a command to a file, at the same time as keeping the stdout, you can do this:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hola'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; log.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;close-a-terminal-but-keep-all-the-processes-running&quot;&gt;Close a terminal but keep all the processes running&lt;/h2&gt;
+&lt;p&gt;Let’s say that you have used the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;at&lt;/code&gt; command to program something but now you want to close the terminal. If you do so, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;at&lt;/code&gt; command won’t work.&lt;/p&gt;
+
+&lt;p&gt;What you can do is make the process of the terminal disown all of its child processes with the command:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;disown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;reset-a-terminal-that-has-gone-crazy&quot;&gt;Reset a terminal that has gone crazy&lt;/h2&gt;
+&lt;p&gt;Just type:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;reset
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;create-multiple-folders-and-subfolders&quot;&gt;Create multiple folders and subfolders&lt;/h2&gt;
+&lt;p&gt;Let’s say that you wanted to create two directories with 5 folders inside each one. You can do so like this:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;one,two&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1,2,3,4,5&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Note: The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; parameter is to tell &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir&lt;/code&gt; to create the parent directory if it does not exist.&lt;/p&gt;
+
+&lt;h2 id=&quot;quickly-create-a-sequence-of-numbers&quot;&gt;Quickly create a sequence of numbers&lt;/h2&gt;
+&lt;p&gt;There are two main, quick ways of doing so:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1..100&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;seq &lt;/span&gt;1 100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;quickly-cut-and-yank-part-of-the-commands&quot;&gt;Quickly cut and yank part of the commands&lt;/h2&gt;
+&lt;p&gt;Let’s say that you have a long command:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; files.txt | xargs &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee &lt;/span&gt;files-precise.txt | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And you want to only get this:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; files.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;You can navigate to that position and hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+k&lt;/code&gt; to cut the text from there to the end of the line.&lt;/li&gt;
+  &lt;li&gt;You can yank it back using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+y&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;If what you wan to do is cut from there to the start of the line you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+u&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;If you want to kill backwards, word by work, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+w&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;using-less-to-view-the-last-lines-of-a-file-useful-for-logs&quot;&gt;Using less to view the last lines of a file (useful for logs)&lt;/h2&gt;
+&lt;p&gt;Instead of using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail -f &amp;lt;file&amp;gt;&lt;/code&gt; you can use:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;less +F &amp;lt;file&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This will start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; at the end of the file.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;If you want to be able to move up or down, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+c&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;If you want to attach less to the end of the file again, hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shift+f&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;If you didn’t run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less +F&lt;/code&gt;, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shitf+g&lt;/code&gt; to go to the end of the file.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;quickly-access-the-arguments&quot;&gt;Quickly access the arguments&lt;/h2&gt;
+&lt;p&gt;You can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;atl+.&lt;/code&gt; to circle through the arguments used in previous commands instead of typing them.&lt;/p&gt;
+
+&lt;p&gt;This is useful, for example, if you typed a really long path to change directories.&lt;/p&gt;
+
+&lt;h2 id=&quot;go-to-the-beginning-of-the-line&quot;&gt;Go to the beginning of the line&lt;/h2&gt;
+&lt;p&gt;You can hit:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl+a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And this will bring the cursor to the beginning of the line.&lt;/p&gt;
+
+&lt;h2 id=&quot;piping-the-output-of-grep-to-less&quot;&gt;Piping the output of grep to less&lt;/h2&gt;
+&lt;p&gt;In many situations you’ll find yourself grepping the output of a command, and sometimes it can be a little bit too much. You can pipe it to less so you can scroll up and down.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/log/dpkg.log | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'installed'&lt;/span&gt; | less
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;searching-for-files-or-directories-using-find-and-grep&quot;&gt;Searching for files or directories using find and grep&lt;/h2&gt;
+&lt;p&gt;If you need to search for somthing you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt; to do so.&lt;/p&gt;
+
+&lt;p&gt;Let’s say that you want to find a file named “&lt;em&gt;secretFile&lt;/em&gt;”&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'secretFile'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: The first argument is the directory that contains what you want to search.&lt;/p&gt;
+
+&lt;p&gt;If you want to search for a directory named “&lt;em&gt;secretDirectory&lt;/em&gt;”, you can do so like this:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; d | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'secretDirectory'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;using-the-man-pages&quot;&gt;Using the man pages&lt;/h2&gt;
+&lt;p&gt;There are man pages for almost every command and for many system functions in Linux, so if you don’t know how to use some tool or C function, try using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;If you don’t remember the name of the command you want to use, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt; for that:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;man &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; compare strings
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;use-regular-expressions&quot;&gt;Use regular expressions&lt;/h2&gt;
+&lt;p&gt;These are some of the most common flavours of regular expressions:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;   -&amp;gt; Grouping
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; | &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; -&amp;gt; Grouping with or.
+&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;    -&amp;gt; Character classes.
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;     -&amp;gt; Zero or more &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lazy&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
++     -&amp;gt; One or more &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;greedy&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;     -&amp;gt; Any character but newline.
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;    -&amp;gt; End of line.
+^     -&amp;gt; Beginning of line.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;use-the-search-mode&quot;&gt;Use the search mode&lt;/h2&gt;
+&lt;p&gt;When using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt;, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; and enter the search mode.&lt;/p&gt;
+
+&lt;p&gt;Then, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shift+n&lt;/code&gt; to go to the next or the previous occurrence of the text you searched.&lt;/p&gt;
+
+&lt;h2 id=&quot;learn-to-solve-a-problem&quot;&gt;Learn to solve a problem&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Understand the problem. Drawing is a good way to make this step easier. Trying to explain the problem to other person is a good way too.&lt;/li&gt;
+  &lt;li&gt;Divide the problem into smaller problems. Make a check list. Make sure the problems are small enough, don’t make them too big.&lt;/li&gt;
+  &lt;li&gt;If you get stuck, take it as a challenge.&lt;/li&gt;
+  &lt;li&gt;If all of this doesn’t work, try starting over. You don’t necessarily need to delete everything, you can comment everything.&lt;/li&gt;
+  &lt;li&gt;Practise allday everyday.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;run-a-command-for-each-line-of-the-output-of-another-command&quot;&gt;Run a command for each line of the output of another command&lt;/h2&gt;
+&lt;p&gt;You just need to pipe the output into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xargs &amp;lt;command&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; .png | xargs &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;use-git-for-source-control&quot;&gt;Use git for source control&lt;/h2&gt;
+&lt;p&gt;If you dont know what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; is, drop everything you’re doing right now and learn it immediately.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Here are some tricks to increase your productivity when using Linux.</summary></entry><entry><title type="html">Managing WSL distributions</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions.html" rel="alternate" type="text/html" title="Managing WSL distributions" /><published>2020-10-18T00:00:00+02:00</published><updated>2020-10-18T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions.html">&lt;p&gt;You can manage your &lt;em&gt;WSL&lt;/em&gt; distributions from the Powershell, with a just a few simple commands.&lt;/p&gt;
+
+&lt;h2 id=&quot;listing-the-distributions-installed&quot;&gt;Listing the distributions installed&lt;/h2&gt;
+&lt;p&gt;To list the distributions that are currently installed, run:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This will output something like this:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                 &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STATE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Distribution-name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;exporting-distributions&quot;&gt;Exporting distributions&lt;/h2&gt;
+&lt;p&gt;If you want to export a distribution, very much like creating a snapshot if you were using &lt;em&gt;VMWare&lt;/em&gt;, you can run:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--export&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename.tar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This will dump the distribution named “distribution-name” to a file called “filename.tar”.&lt;/p&gt;
+
+&lt;h2 id=&quot;importing-distributions&quot;&gt;Importing distributions&lt;/h2&gt;
+&lt;p&gt;Now, if you want to import the previously exported distribution, you can run:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;new-distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-installation-path&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename.tar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;launching-distributions&quot;&gt;Launching distributions&lt;/h2&gt;
+&lt;p&gt;If you want to launch a distro from &lt;em&gt;Powershell&lt;/em&gt;, you can run:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;changing-the-version-of-a-distribution&quot;&gt;Changing the version of a distribution&lt;/h2&gt;
+&lt;p&gt;If you want to change the version of &lt;em&gt;WSL&lt;/em&gt; that a distribution uses run:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--set-version&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;setting-the-default-distribution&quot;&gt;Setting the default distribution&lt;/h2&gt;
+&lt;p&gt;You can set the default distribution to be used when typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl&lt;/code&gt; in the &lt;em&gt;Powershell&lt;/em&gt; by running:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--setdefault&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;unregistering-removing-distributions&quot;&gt;Unregistering (removing) distributions&lt;/h2&gt;
+&lt;p&gt;To unregister a distribution you can run:&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--unregister&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STATE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debian&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--export&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-ready-to-go.tar&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;\debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;\debian-ready-to-go.tar&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--setdefault&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;              &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STATE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debian&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--unregister&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Removing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;the&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registry...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You can manage your WSL distributions from the Powershell, with a just a few simple commands.</summary></entry><entry><title type="html">LISP cheat sheet (in spanish)</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html" rel="alternate" type="text/html" title="LISP cheat sheet (in spanish)" /><published>2020-10-17T00:00:00+02:00</published><updated>2020-10-17T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html">&lt;h2 id=&quot;primitivas-fundamentales&quot;&gt;Primitivas fundamentales&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;setf&lt;/em&gt; - asigna valores a una lista&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;atom&lt;/em&gt; - te dice si algo es átomo o no&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;print&lt;/em&gt; - sacar algo por pantalla&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;[-] Error crítico: Explosión inminente! D:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;format&lt;/em&gt; - sacar texto y datos por pantalla (como &lt;em&gt;printf&lt;/em&gt; en &lt;em&gt;C&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;~% Variable cadena tiene valor ~s ~%&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cadena&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;operaciones-con-listas&quot;&gt;Operaciones con listas&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;first&lt;/em&gt; - devuelve un átomo que tiene como elemento el primer elemento de la lista&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;rest&lt;/em&gt; - devuelve una lista con todos los elementos menos el primero&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;last&lt;/em&gt; - devuelve una lista con el ultimo elemento&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;append&lt;/em&gt; - combina los elementos de todas las listas&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;remove&lt;/em&gt; - elimina un elemento de una lista&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;list&lt;/em&gt; - hace una lista con lo que le pases&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;cons&lt;/em&gt; - hace una lista con el primer elemento, y añade esa lista creada a otra lista seguida del resto de los elementos (1 2) -&amp;gt; ((1) 2)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;length&lt;/em&gt; - devuelve el número de elementos de una lista&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;reverse&lt;/em&gt; - invierte el orden de los elementos de una lista&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;assoc&lt;/em&gt; - como un hashmap&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;setf&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;supra&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;motor&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;2JZ-GTE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;turbo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;GT-40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;assoc&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'motor&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;supra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;procedimientos&quot;&gt;Procedimientos&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;defun&lt;/em&gt; - definir funciones&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;miFuncion&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;parametro1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parametro2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cons&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parametro1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parametro2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;condicionales&quot;&gt;Condicionales&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;member&lt;/em&gt; - verifica si el primer argumento forma parte del segundo - devuelve una lista a partir de ese elemento (incluído) en la lista en la que buscar&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;atom&lt;/em&gt; - es un átomo?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;numberp&lt;/em&gt; - es un número?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;symbolp&lt;/em&gt; - es un símbolo?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;listp&lt;/em&gt; - es una lista?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;null&lt;/em&gt; - el argumento es una lista vacía? - acepta lo que sea&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;endp&lt;/em&gt; - el argumentos es una lista vacía? - solamente acepta listas&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;Conlusión&lt;/strong&gt;
+  () = ‘() = NIL = ‘NIL -&amp;gt; &lt;strong&gt;todos son átomos&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;zerop&lt;/em&gt; - es cero?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;plusp&lt;/em&gt; - es positivo?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;minusp&lt;/em&gt; - es negativo?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;evenp&lt;/em&gt; - es par?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;oddp&lt;/em&gt; - es impar?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;&amp;gt;&lt;/em&gt; - orden descendente en todos los parámetros?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;&amp;lt;&lt;/em&gt; - orden ascendente en todos los parámetros?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;=&lt;/em&gt; - los argumentos son el mismo número?&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;equalp&lt;/em&gt; - los argumentos son iguales?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;eq&lt;/em&gt; - “los argumentos ocupan la misma cantidad de memoria?”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;and&lt;/em&gt; - como en C&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;or&lt;/em&gt; - como en C&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;not&lt;/em&gt; - como en C&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;if&lt;/em&gt; - como en C&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;comparacion&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;hazEsto&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;siCierto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;hazEsto&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;siFalso&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;when&lt;/em&gt; - solo parte de lo cierto&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;unless&lt;/em&gt; - solo parte de lo falso&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;cond&lt;/em&gt; - como el switch en C, Java y el case en Bash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparacion1&lt;/span&gt;
+		&lt;span class=&quot;nv&quot;&gt;hazEsto1&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparacion2&lt;/span&gt;
+		&lt;span class=&quot;nv&quot;&gt;hazEsto2&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparacionN&lt;/span&gt;
+		&lt;span class=&quot;nv&quot;&gt;hazEstoN&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hazEstoPorDefecto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;recursividad&quot;&gt;Recursividad&lt;/h2&gt;
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;factorial&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;factorial&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fibonacci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond&lt;/span&gt;	&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fibonacci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fibonacci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;iteratividad-necesario-dar-valor-a-resultado&quot;&gt;Iteratividad (necesario dar valor a resultado)&lt;/h2&gt;
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dolist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;elemento&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;lista&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resultado&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resultado&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;prog-controlar-flujo-de-ejecución--variables-locales&quot;&gt;Prog: Controlar flujo de ejecución + variables locales&lt;/h2&gt;
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;prog&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;var1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;var2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;setf&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;valor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;valor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;cómo-hacer-la-práctica&quot;&gt;Cómo hacer la práctica&lt;/h2&gt;
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;es-variable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;eq&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;NIL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;En CLISP todas las variables son globales excepto los parámetros que reciben las funciones&lt;/strong&gt;&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Primitivas fundamentales setf - asigna valores a una lista atom - te dice si algo es átomo o no print - sacar algo por pantalla</summary></entry><entry><title type="html">Google hacking cheat sheet</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/03/google-hacking-cheat-sheet.html" rel="alternate" type="text/html" title="Google hacking cheat sheet" /><published>2020-10-03T00:00:00+02:00</published><updated>2020-10-03T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/03/google-hacking-cheat-sheet</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/03/google-hacking-cheat-sheet.html">&lt;h2 id=&quot;google-search-basics&quot;&gt;Google search basics&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Google&lt;/em&gt; indexed entire web pages instead of just titles and descriptions. That’s the reason you can do comprehensive searches based upon key (query) words.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Google&lt;/em&gt;’s Boolean default is the &lt;em&gt;AND operator&lt;/em&gt;. That means if you enter words without modifiers, &lt;em&gt;Google&lt;/em&gt; will search for all of them.&lt;/p&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34&lt;/code&gt;: &lt;em&gt;Google&lt;/em&gt; will search for all the words.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan OR gtr OR r34&lt;/code&gt;: This specifies that either word is acceptable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan (gtr OR r34)&lt;/code&gt;: This specifies that you can have:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan r34&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;but never &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34&lt;/code&gt; nor &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gtr r34&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan (gtr | r34)&lt;/code&gt;: The same as the last one, using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OR&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr -r34&lt;/code&gt;: This will search for everything that has &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr&lt;/code&gt; but does not have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r34&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;google-syntax-words&quot;&gt;Google syntax words&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Google&lt;/em&gt; has a special syntax that allows the user to do more specific searches. Some of the possible modifiers that you can use are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Site&lt;/code&gt;: Allows to search either a site or a top-level domain (&lt;em&gt;TLD&lt;/em&gt;). Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 site:'forocoches'&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 site:'es'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Intitle&lt;/code&gt;: This searches for the keywords in the title of the web pages. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 intitle:'cars'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inurl&lt;/code&gt;: This restricts your search to the &lt;em&gt;URLs&lt;/em&gt; of the web pages. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 inurl: cars&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Intext&lt;/code&gt;: This searches only on the body of the text (ignores title, url and links). Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 intext:'good condition'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inanchor&lt;/code&gt;: Searches for text in a page’s link anchors. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 inanchor:'forocoches'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Link&lt;/code&gt;: Returns a list of pages linking to the specified &lt;em&gt;URL&lt;/em&gt;: Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 link:'forocoches.es'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cache&lt;/code&gt;: Finds a copy of the page that &lt;em&gt;Google&lt;/em&gt; indexed even if that page is no longer available. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 cache:'forocoches.es'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Filetype&lt;/code&gt;: Searches the extensions. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 filetype:'png'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Related&lt;/code&gt;: Finds pages that are related to the specified page. Good way to find categories of pages. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 related:'forocoches.es'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Info&lt;/code&gt;: Page of links to more information about the specified &lt;em&gt;URL&lt;/em&gt;. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 info:'forocoches.es'&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;phonebook&lt;/code&gt;: Looks up phone numbers. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 phonebook:'Jon Doe CA'&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Google search basics Google indexed entire web pages instead of just titles and descriptions. That’s the reason you can do comprehensive searches based upon key (query) words.</summary></entry><entry><title type="html">Port forwarding and tunneling</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html" rel="alternate" type="text/html" title="Port forwarding and tunneling" /><published>2020-09-24T00:00:00+02:00</published><updated>2020-09-24T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html">&lt;p&gt;&lt;em&gt;Port redirection&lt;/em&gt;, &lt;em&gt;tunneling&lt;/em&gt; and &lt;em&gt;traffic encapsulation&lt;/em&gt; are a &lt;strong&gt;must-know&lt;/strong&gt; if you are a &lt;em&gt;sysadmin&lt;/em&gt; or &lt;em&gt;pentester&lt;/em&gt;, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, &lt;strong&gt;access restricted networkt, bypass firewall protections and much more&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s start talking about &lt;em&gt;port forwarding&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;1---port-forwardingredirection&quot;&gt;1 - Port forwarding/redirection&lt;/h2&gt;
+&lt;p&gt;Let’s explain &lt;em&gt;port forwarding&lt;/em&gt; using a simple example:&lt;/p&gt;
+
+&lt;p&gt;Suppose that you are at work on your computer, and you want to navigate to &lt;em&gt;Github&lt;/em&gt;, but you can’t because &lt;strong&gt;there is a firewall that only allows communications on port 123 (NTP)&lt;/strong&gt;&lt;em&gt;. You try to go to *Github&lt;/em&gt; but the requests get dropped by the firewall and the page doesn’t load.&lt;/p&gt;
+
+&lt;p&gt;So what do you do?&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;On your local linux machine, you install the tool &lt;strong&gt;&lt;em&gt;rinetd&lt;/em&gt;&lt;/strong&gt; with the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt install rinetd&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;You open &lt;em&gt;/etc/rinetd.conf&lt;/em&gt; with your favorite editor.&lt;/li&gt;
+  &lt;li&gt;Suposing that your work IP is &lt;em&gt;1.2.3.4&lt;/em&gt;, the IP of the &lt;em&gt;Github&lt;/em&gt; webpage is &lt;em&gt;5.6.7.8&lt;/em&gt; and the IP of your home machine is &lt;em&gt;a.b.c.d&lt;/em&gt;, you add the following line:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#bindadress    bindport    connectaddress  connectport
+ 1.2.3.4       123         5.6.7.8         80
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;That line tells your home system to redirect (&lt;i&gt;forward&lt;/i&gt;) the packets that come from 1.2.3.4 on port 123 (the port that the firewall allows) to 5.6.7.8 on port 80, essentially &lt;strong&gt;redirecting the requests you make from your computer at work (on port 123) to your machine at home (on port 123), to the Github webpage (on port 80)&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now, while being at work, you can navigate to &lt;em&gt;GitHub&lt;/em&gt; by going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://a.b.c.d:123&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;2---ssh-tunneling&quot;&gt;2 - SSH Tunneling&lt;/h2&gt;
+
+&lt;p&gt;Like the name says, &lt;em&gt;SSH tunneling&lt;/em&gt; is creating encrypted (secure) “tunnels” using the SSH protocol. This, for instance, can be used to &lt;strong&gt;encrypt traffic that goes over an insecure network&lt;/strong&gt;, therefore making it secure.&lt;/p&gt;
+
+&lt;h3 id=&quot;21---local-port-forwarding&quot;&gt;2.1 - Local port forwarding&lt;/h3&gt;
+&lt;p&gt;Let’s use the same example as with port forwarding.&lt;/p&gt;
+
+&lt;p&gt;Instead of installing &lt;em&gt;rinetd&lt;/em&gt;, you do the following things:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;You set up an &lt;strong&gt;&lt;em&gt;SSH server&lt;/em&gt;&lt;/strong&gt; on your local linux machine, to listen on port 123 (the one that is allowed by the firewall between you and your computer at work). This can be done editting the configuration file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/ssh/sshd_config&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;On your work computer, you run this command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh user@a.b.c.d -p 123 -L 8080:5.6.7.8:80&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What that command does is:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Connect to your home machine (&lt;em&gt;a.b.c.d&lt;/em&gt;) via &lt;em&gt;SSH&lt;/em&gt; (with or without ssh-key, it doesn’t matter).&lt;/li&gt;
+  &lt;li&gt;Open the port 8080 on your work computer.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Redirect the requests to the port 8080 on your work computer through SSH to your home machine, and then through the port 80 to the GitHub (&lt;em&gt;5.6.7.8&lt;/em&gt;) webpage&lt;/strong&gt;, and the same thing but backwards with the webpage responses.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This, apart from being more practical than the previous example (because it is more likely to have an SSH server than having &lt;em&gt;rinetd&lt;/em&gt; installed on your system), &lt;strong&gt;it encrypts all the traffic between your work and your home computer&lt;/strong&gt;, thus making it safe, even if the network is insecure.&lt;/p&gt;
+
+&lt;p&gt;Now, while being at work, you can navigate to &lt;em&gt;GitHub&lt;/em&gt; by going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://127.0.0.1:8080&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;22---remote-port-forwarding&quot;&gt;2.2 - Remote port forwarding&lt;/h3&gt;
+&lt;p&gt;We’ll change up a little bit the previous example to explain remote port forwarding.&lt;/p&gt;
+
+&lt;p&gt;Let’s say that there is an &lt;em&gt;FTP&lt;/em&gt; server (running on port 21) in the corporate network, and a coworker asks me if I can help him with a bug in the &lt;em&gt;FTP&lt;/em&gt; server that he’s having trouble solving.
+Right now I can’t help him, because &lt;strong&gt;the firewall blocks all connections that don’t go through port 123&lt;/strong&gt;, and the FTP server is listening on port 21.&lt;/p&gt;
+
+&lt;p&gt;What I can do is this:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;As the previous example, set up an &lt;strong&gt;&lt;em&gt;SSH server&lt;/em&gt;&lt;/strong&gt; on your home machine that will listen on port 123.&lt;/li&gt;
+  &lt;li&gt;Tell my coworker to run the following commmand: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh user@a.b.c.d -p 123 -R 21:127.0.0.1:21&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What this is going to do is create an &lt;strong&gt;&lt;em&gt;SSH&lt;/em&gt; tunnel&lt;/strong&gt; that will communicate a remote port in my home machine (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;21:&lt;/code&gt;) with the local port (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:21&lt;/code&gt;) on the corporate server (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Now I can access the corporate &lt;em&gt;FTP&lt;/em&gt; server running on port 21 from my machine with this command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ftp 127.0.0.1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;23---dynamic-port-forwarding&quot;&gt;2.3 - Dynamic port forwarding&lt;/h3&gt;
+&lt;p&gt;We have now seen local and remote port forwarding, and those are really useful features of the SSH protocol, &lt;strong&gt;but what happens if you need to open a range of ports?&lt;/strong&gt; In that situation they aren’t very practical, because you will need to be running as many commands as ports you’d like to forward.&lt;/p&gt;
+
+&lt;p&gt;For those situations there’s yet another feature, that feature is &lt;strong&gt;dynamic port forwarding&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;To be able to use this feature, you will need to have a proxy server too. One that I like using is &lt;strong&gt;&lt;em&gt;proxychains&lt;/em&gt;&lt;/strong&gt;. You can install it by running the command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt install proxychains&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note: You can change the behaviour of &lt;em&gt;proxychains&lt;/em&gt; modifying the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/proxychains.conf&lt;/code&gt;, by default, it listens on port 9050, the &lt;em&gt;Tor&lt;/em&gt; port.&lt;/p&gt;
+
+&lt;p&gt;Now that we’re set up, let’s use an example to explain dynamic port forwarding.&lt;/p&gt;
+
+&lt;p&gt;Let’s suppose that the coworker of the last example now calls us because he needs help diagnosing two servers that are not working properly. &lt;strong&gt;Each server has various services that we’ll need to check&lt;/strong&gt;, so trying to do this kind of job using remote port forwarding would take a long time and you would have to run a lot of commands. So instead of that, you use dynamic port forwarding:&lt;/p&gt;
+
+&lt;p&gt;The first thing to do is to tell my coworker to run this command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh user@a.b.c.d -p 123 -f -N -D 9050&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Notes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt;” makes the session go to background. Useful for port forwarding.&lt;/li&gt;
+  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-N&lt;/code&gt;” tells the &lt;em&gt;SSH&lt;/em&gt; client that we won’t be sending commands. Useful for port forwarding.&lt;/li&gt;
+  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-D &amp;lt;port&amp;gt;&lt;/code&gt;” tells the &lt;em&gt;SSH&lt;/em&gt; client that we’ll be doing dynamic port forwarding on the specified port.&lt;/li&gt;
+  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p 123&lt;/code&gt;” is used because the firewall only allows that port and we have the &lt;em&gt;SSH server&lt;/em&gt; listening on that port too.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now &lt;strong&gt;I’m connected to the corporate network via my local port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;9050&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, if the IP of the first server is &lt;em&gt;10.10.5.11&lt;/em&gt;, I can ssh in preceding the ssh command with “proxychains”: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proxychains ssh admin@10.10.5.11&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;And, for example, if you wanted to check the &lt;em&gt;http&lt;/em&gt; service of that server, you can do that by runnning the command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proxychains firefox&lt;/code&gt;. &lt;strong&gt;It will open firefox through &lt;em&gt;proxychains&lt;/em&gt;&lt;/strong&gt;, and now you could navigate to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://10.10.5.11/&lt;/code&gt;, because now you have access to everything that is inside of the internal, corporate network.&lt;/p&gt;
+
+&lt;p&gt;You could even run an &lt;em&gt;nmap&lt;/em&gt; scan, but I will warn you that &lt;em&gt;nmap&lt;/em&gt; through &lt;em&gt;proxychains&lt;/em&gt; takes a really long time to finish.&lt;/p&gt;
+
+&lt;p&gt;If you want &lt;strong&gt;a pentesting example case of dynamic port forwarding&lt;/strong&gt;, check &lt;a href=&quot;https://netsec.ws/?p=278&quot;&gt;&lt;strong&gt;this&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more.</summary></entry><entry><title type="html">Software versioning with Semantic Versioning 2.0.0</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0-copia.html" rel="alternate" type="text/html" title="Software versioning with Semantic Versioning 2.0.0" /><published>2020-09-23T00:00:00+02:00</published><updated>2020-09-23T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0%20-%20copia</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0-copia.html">&lt;p&gt;If you are a developer, you should learn &lt;em&gt;software versioning&lt;/em&gt;, so your products follow the naming conventions and it is easy to track dependencies.&lt;/p&gt;
+
+&lt;p&gt;That said, I recommend you learn &lt;a href=&quot;https://semver.org/&quot;&gt;&lt;strong&gt;Semantic Versioning 2.0.0&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;All you have to do to learn it is read the webpage provided above, and &lt;strong&gt;in 15 minutes&lt;/strong&gt; you will be good to go!&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">If you are a developer, you should learn software versioning, so your products follow the naming conventions and it is easy to track dependencies.</summary></entry></feed>

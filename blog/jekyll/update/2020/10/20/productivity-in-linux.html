@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Productivity in Linux | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Productivity in Linux" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here are some tricks to increase your productivity when using Linux." />
+<meta property="og:description" content="Here are some tricks to increase your productivity when using Linux." />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-20T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Productivity in Linux" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html"},"datePublished":"2020-10-20T00:00:00+02:00","url":"https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html","description":"Here are some tricks to increase your productivity when using Linux.","headline":"Productivity in Linux","dateModified":"2020-10-20T00:00:00+02:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Productivity in Linux</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-10-20T00:00:00+02:00" itemprop="datePublished">Oct 20, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+https://www.youtube.com/watch?v=IlK6FNxmRMY
+https://www.youtube.com/watch?v=6OOqROUQ60s
+https://www.youtube.com/watch?v=W8ykZNSLDqE
+https://www.youtube.com/watch?v=azcrPFhaY9k
+-->
+<p>Here are some tricks to increase your productivity when using Linux.</p>
+
+<h2 id="tab-completion">Tab completion</h2>
+<p>Whenever you’re typing a command, if you hit <code class="language-plaintext highlighter-rouge">&lt;tab&gt;</code>, it will try to autocomplete the command. If nothing happens, try hitting it twice, to make it show you all the possibilities.</p>
+
+<h2 id="circle-through-the-history-of-commands-with-the-arrow-keys">Circle through the history of commands with the arrow keys</h2>
+<p>This isn’t a Linux specific productivity habit, since it works in every operating system, but I felt that it belongs here.</p>
+
+<p>You can use the “<em>up</em>” and “<em>down</em>” arrow keys to navigate through the history of commands.</p>
+
+<h2 id="perform-a-reverse-search">Perform a reverse search</h2>
+<p>If you want to search for a command you ran a long ago, you can hit <code class="language-plaintext highlighter-rouge">ctrl+r</code> and type some part of it.</p>
+
+<p>Once you get the command, hit <code class="language-plaintext highlighter-rouge">&lt;tab&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;esc&gt;</code> or the arrow keys to edit it, or <code class="language-plaintext highlighter-rouge">&lt;enter&gt;</code> to run it.</p>
+
+<h2 id="readline-arguments">Readline arguments</h2>
+<p>If you really want to know about this, check <strong><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Readline-Arguments">this</a></strong> out.
+If you want to repeat <code class="language-plaintext highlighter-rouge">Z</code> 10 times:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alt+1 0 Z
+</code></pre></div></div>
+<p>It will output <code class="language-plaintext highlighter-rouge">ZZZZZZZZZZ</code></p>
+
+<p>If you want to delete the next 5 characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alt+- 5 ctrl+d
+</code></pre></div></div>
+<p>It will output <code class="language-plaintext highlighter-rouge">ZZZZZ</code></p>
+
+<h2 id="redo-the-last-command-as-root-user">Redo the last command as root user</h2>
+<p>If you type a long command, and when you press enter you get a <code class="language-plaintext highlighter-rouge">Permission denied</code> error message, instead of hitting “<em>up</em>” and going to the start of the command to type “<em>sudo</em>”, you can run this instead:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="o">!!</span>
+</code></pre></div></div>
+
+<h2 id="fix-a-really-long-command-that-you-messed-up-in-your-favourite-editor">Fix a really long command that you messed up in your favourite editor</h2>
+<p>If you realize that you have to fix major part of the last command that you typed, you can fix it in your favourite editor and run it with the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">fc</span>
+</code></pre></div></div>
+<p>Alternatively, you can use the following key combination:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctrl+x+e
+</code></pre></div></div>
+
+<h2 id="dont-add-command-to-the-history">Don’t add command to the history</h2>
+<p>To do this you just need to append a space at the start of the command (note the space at the start):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">echo</span> <span class="s1">'test'</span>
+</code></pre></div></div>
+
+<h2 id="go-to-the-previous-directory">Go to the previous directory</h2>
+<p>You can type the following command to go to the previous directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> -
+</code></pre></div></div>
+
+<h2 id="write-to-file-as-root-when-using-vim">Write to file as root when using vim</h2>
+<p>Using vim, if you find yourself editting a file and when you try to write the changes you get a <code class="language-plaintext highlighter-rouge">File not writable</code> error message, you can do this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:w <span class="o">!</span><span class="nb">sudo tee</span> %
+</code></pre></div></div>
+
+<h2 id="write-to-a-file-in-between-pipes">Write to a file in between pipes</h2>
+<p>If you want to log a command to a file, at the same time as keeping the stdout, you can do this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'hola'</span> | <span class="nb">tee</span> <span class="nt">-a</span> log.txt
+</code></pre></div></div>
+
+<h2 id="close-a-terminal-but-keep-all-the-processes-running">Close a terminal but keep all the processes running</h2>
+<p>Let’s say that you have used the <code class="language-plaintext highlighter-rouge">at</code> command to program something but now you want to close the terminal. If you do so, the <code class="language-plaintext highlighter-rouge">at</code> command won’t work.</p>
+
+<p>What you can do is make the process of the terminal disown all of its child processes with the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">disown</span> <span class="nt">-a</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span>
+</code></pre></div></div>
+
+<h2 id="reset-a-terminal-that-has-gone-crazy">Reset a terminal that has gone crazy</h2>
+<p>Just type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reset
+</code></pre></div></div>
+
+<h2 id="create-multiple-folders-and-subfolders">Create multiple folders and subfolders</h2>
+<p>Let’s say that you wanted to create two directories with 5 folders inside each one. You can do so like this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="o">{</span>one,two<span class="o">}</span>/<span class="o">{</span>1,2,3,4,5<span class="o">}</span>
+</code></pre></div></div>
+<p>Note: The <code class="language-plaintext highlighter-rouge">-p</code> parameter is to tell <code class="language-plaintext highlighter-rouge">mkdir</code> to create the parent directory if it does not exist.</p>
+
+<h2 id="quickly-create-a-sequence-of-numbers">Quickly create a sequence of numbers</h2>
+<p>There are two main, quick ways of doing so:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>1..100<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">seq </span>1 100
+</code></pre></div></div>
+
+<h2 id="quickly-cut-and-yank-part-of-the-commands">Quickly cut and yank part of the commands</h2>
+<p>Let’s say that you have a long command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> | <span class="nb">tee</span> <span class="nt">-a</span> files.txt | xargs <span class="nb">ls</span> <span class="nt">-l</span> | <span class="nb">tee </span>files-precise.txt | <span class="nb">wc</span> <span class="nt">-l</span>
+</code></pre></div></div>
+<p>And you want to only get this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> | <span class="nb">tee</span> <span class="nt">-a</span> files.txt
+</code></pre></div></div>
+<ul>
+  <li>You can navigate to that position and hit <code class="language-plaintext highlighter-rouge">ctrl+k</code> to cut the text from there to the end of the line.</li>
+  <li>You can yank it back using <code class="language-plaintext highlighter-rouge">ctrl+y</code>.</li>
+  <li>If what you wan to do is cut from there to the start of the line you can hit <code class="language-plaintext highlighter-rouge">ctrl+u</code></li>
+  <li>If you want to kill backwards, word by work, you can hit <code class="language-plaintext highlighter-rouge">ctrl+w</code></li>
+</ul>
+
+<h2 id="using-less-to-view-the-last-lines-of-a-file-useful-for-logs">Using less to view the last lines of a file (useful for logs)</h2>
+<p>Instead of using <code class="language-plaintext highlighter-rouge">tail -f &lt;file&gt;</code> you can use:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>less +F &lt;file&gt;
+</code></pre></div></div>
+<p>This will start <code class="language-plaintext highlighter-rouge">less</code> at the end of the file.</p>
+<ul>
+  <li>If you want to be able to move up or down, you can hit <code class="language-plaintext highlighter-rouge">ctrl+c</code>.</li>
+  <li>If you want to attach less to the end of the file again, hit <code class="language-plaintext highlighter-rouge">shift+f</code></li>
+  <li>If you didn’t run <code class="language-plaintext highlighter-rouge">less +F</code>, you can hit <code class="language-plaintext highlighter-rouge">shitf+g</code> to go to the end of the file.</li>
+</ul>
+
+<h2 id="quickly-access-the-arguments">Quickly access the arguments</h2>
+<p>You can hit <code class="language-plaintext highlighter-rouge">atl+.</code> to circle through the arguments used in previous commands instead of typing them.</p>
+
+<p>This is useful, for example, if you typed a really long path to change directories.</p>
+
+<h2 id="go-to-the-beginning-of-the-line">Go to the beginning of the line</h2>
+<p>You can hit:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctrl+a
+</code></pre></div></div>
+<p>And this will bring the cursor to the beginning of the line.</p>
+
+<h2 id="piping-the-output-of-grep-to-less">Piping the output of grep to less</h2>
+<p>In many situations you’ll find yourself grepping the output of a command, and sometimes it can be a little bit too much. You can pipe it to less so you can scroll up and down.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /var/log/dpkg.log | <span class="nb">grep</span> <span class="s1">'installed'</span> | less
+</code></pre></div></div>
+
+<h2 id="searching-for-files-or-directories-using-find-and-grep">Searching for files or directories using find and grep</h2>
+<p>If you need to search for somthing you can use <code class="language-plaintext highlighter-rouge">find</code> and <code class="language-plaintext highlighter-rouge">grep</code> to do so.</p>
+
+<p>Let’s say that you want to find a file named “<em>secretFile</em>”</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> f | <span class="nb">grep</span> <span class="s1">'secretFile'</span>
+</code></pre></div></div>
+
+<p>Note: The first argument is the directory that contains what you want to search.</p>
+
+<p>If you want to search for a directory named “<em>secretDirectory</em>”, you can do so like this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> d | <span class="nb">grep</span> <span class="s1">'secretDirectory'</span>
+</code></pre></div></div>
+
+<h2 id="using-the-man-pages">Using the man pages</h2>
+<p>There are man pages for almost every command and for many system functions in Linux, so if you don’t know how to use some tool or C function, try using the <code class="language-plaintext highlighter-rouge">man</code> command.</p>
+
+<p>If you don’t remember the name of the command you want to use, you can use <code class="language-plaintext highlighter-rouge">man</code> for that:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>man <span class="nt">-k</span> compare strings
+</code></pre></div></div>
+
+<h2 id="use-regular-expressions">Use regular expressions</h2>
+<p>These are some of the most common flavours of regular expressions:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span> <span class="o">)</span>   -&gt; Grouping
+<span class="o">(</span> | <span class="o">)</span> -&gt; Grouping with or.
+<span class="o">[]</span>    -&gt; Character classes.
+<span class="k">*</span>     -&gt; Zero or more <span class="o">(</span>lazy<span class="o">)</span><span class="nb">.</span>
++     -&gt; One or more <span class="o">(</span>greedy<span class="o">)</span><span class="nb">.</span>
+<span class="nb">.</span>     -&gt; Any character but newline.
+<span class="nv">$ </span>    -&gt; End of line.
+^     -&gt; Beginning of line.
+</code></pre></div></div>
+
+<h2 id="use-the-search-mode">Use the search mode</h2>
+<p>When using <code class="language-plaintext highlighter-rouge">less</code>, you can hit <code class="language-plaintext highlighter-rouge">/</code> and enter the search mode.</p>
+
+<p>Then, you can hit <code class="language-plaintext highlighter-rouge">n</code> and <code class="language-plaintext highlighter-rouge">shift+n</code> to go to the next or the previous occurrence of the text you searched.</p>
+
+<h2 id="learn-to-solve-a-problem">Learn to solve a problem</h2>
+<ol>
+  <li>Understand the problem. Drawing is a good way to make this step easier. Trying to explain the problem to other person is a good way too.</li>
+  <li>Divide the problem into smaller problems. Make a check list. Make sure the problems are small enough, don’t make them too big.</li>
+  <li>If you get stuck, take it as a challenge.</li>
+  <li>If all of this doesn’t work, try starting over. You don’t necessarily need to delete everything, you can comment everything.</li>
+  <li>Practise allday everyday.</li>
+</ol>
+
+<h2 id="run-a-command-for-each-line-of-the-output-of-another-command">Run a command for each line of the output of another command</h2>
+<p>You just need to pipe the output into <code class="language-plaintext highlighter-rouge">xargs &lt;command&gt;</code>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> | <span class="nb">grep</span> .png | xargs <span class="nb">ls</span> <span class="nt">-l</span>
+</code></pre></div></div>
+
+<h2 id="use-git-for-source-control">Use git for source control</h2>
+<p>If you dont know what <code class="language-plaintext highlighter-rouge">git</code> is, drop everything you’re doing right now and learn it immediately.</p>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2020/10/20/productivity-in-linux.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

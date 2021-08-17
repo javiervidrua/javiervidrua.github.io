@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Rubber Ducky with Digispark ATtiny85 | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Rubber Ducky with Digispark ATtiny85" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Do you want to have a Rubber Ducky but you don’t want to spend 50$ on it?" />
+<meta property="og:description" content="Do you want to have a Rubber Ducky but you don’t want to spend 50$ on it?" />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-06T23:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Rubber Ducky with Digispark ATtiny85" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html"},"datePublished":"2020-11-06T23:00:00+01:00","url":"https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html","description":"Do you want to have a Rubber Ducky but you don’t want to spend 50$ on it?","headline":"Rubber Ducky with Digispark ATtiny85","dateModified":"2020-11-06T23:00:00+01:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Rubber Ducky with Digispark ATtiny85</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-11-06T23:00:00+01:00" itemprop="datePublished">Nov 6, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Do you want to have a <a href="https://shop.hak5.org/products/usb-rubber-ducky-deluxe"><em>Rubber Ducky</em></a> but you don’t want to spend 50$ on it?</p>
+
+<p><strong>How about spending 2$ on a <em>Digispark</em> and program it yourself?</strong> If that sounds good, get your hands on one of those and follow these steps.</p>
+
+<p><em>Notice</em>: This tutorial is intended to be followed from a Windows 10 system.</p>
+
+<h2 id="get-started">Get started</h2>
+<p>The first thing is installing the drivers. To do so, go to <a href="https://github.com/digistump/DigistumpArduino/releases"><strong>this</strong></a> link and download the installer. Both <em>32</em> and <em>64</em> bit architectures are supported.</p>
+
+<p>Now you can stick the <em>Digispark ATtiny85</em> in a <em>USB</em> port and you should hear the Windows notification tone. Now if you go to the Device Manager, a new category named “<em>libusb-win32 Usb Devices</em>” should appear. That’s good, now the system recognizes the <em>Digispark</em>.</p>
+
+<h2 id="configure-the-arduino-ide">Configure the Arduino IDE</h2>
+<p>Go to <a href="https://www.arduino.cc/en/software"><strong>this</strong></a> site and install the IDE, if you didn’t have it already installed on your system.</p>
+
+<p>Now we have to configure the IDE so it works with out Digispark:</p>
+<ul>
+  <li>
+    <p>Open the IDE and go to <em>File</em> -&gt; <em>Preferences</em>.</p>
+
+    <p>In the field named “<em>Additional Boards Manager URLs</em>” enter the following line:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://digistump.com/package_digistump_index.json
+</code></pre></div>    </div>
+    <p>As shown in the following image:</p>
+
+    <p><img src="/blog/images/additionalurls.png" alt="AdditionalURLs" title="AdditionalURLs" /></p>
+  </li>
+  <li>
+    <p>Go to <em>Tools</em> -&gt; <em>Boards</em> -&gt; <em>Boards manager</em>:</p>
+
+    <p><img src="/blog/images/boardsmanager.png" alt="BoardsManager" title="BoardsManager" /></p>
+
+    <p>Select “<em>Contributed</em>” from the drop-down menu and then install the “<em>Digistump AVR Boards</em>” package:</p>
+
+    <p><img src="/blog/images/avrboards.png" alt="AVRboards" title="AVRboards" /></p>
+  </li>
+  <li>
+    <p>Now go to <em>Tools</em> -&gt; <em>Boards</em> -&gt; <em>Digistump AVR Boards</em> -&gt; <em>Digispark (Default - 16.5 mhz)</em>:</p>
+
+    <p><img src="/blog/images/digistumpdefault.png" alt="DigistumpDefault" title="DigistumpDefault" /></p>
+  </li>
+</ul>
+
+<h2 id="test-if-it-works">Test if it works</h2>
+<p>Create a new sketch and paste the following code:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Creates a digisparked text file in the Desktop</span>
+
+<span class="cp">#include "DigiKeyboard.h"
+</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">(){</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+  <span class="c1">// Start</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+  <span class="c1">// Open "Run"</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_R</span><span class="p">,</span> <span class="n">MOD_GUI_LEFT</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+  <span class="c1">// Open "cmd"</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"cmd /k cd %UserProfile%/Desktop"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+  <span class="c1">// Create the file</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"echo You have been digisparked :v &gt; digisparked.txt"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+  <span class="c1">// Close "cmd"</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"exit"</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">sendKeyStroke</span><span class="p">(</span><span class="n">KEY_ENTER</span><span class="p">);</span>
+  <span class="n">DigiKeyboard</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+  <span class="c1">// Wait</span>
+  <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+    <span class="c1">// To wait until the Digispark gets pulled out of the computer</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>What this is going to do is simulate that you press WinKey+R, open “<em>cmd</em>” and create a file on the desktop named digisparked.txt.</p>
+
+<p>Go to “<em>Tools</em>” -&gt; “<em>Port</em>” and select the serial port that appears in the drop down menu. It usually is “<em>COM0</em>” or “<em>COM1</em>”.</p>
+
+<p>Now click the “<em>Upload</em>” button and stick the <em>Digispark</em> in a <em>USB</em> port within the next 60 seconds. It will flash the code into the <em>Digispark</em>.</p>
+
+<p><strong>Now you can plug your <em>Digispark</em>, sit back, and get Digisparked!</strong></p>
+
+<p><img src="/blog/images/digisparkgif.gif" alt="gif" title="gif" /></p>
+
+<p>As you can see, it only takes about 2 seconds to get the job done.</p>
+
+<h2 id="common-errors">Common errors</h2>
+<p>If you get this error when compiling the code:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"DigiKeyboard.h: No such file or directory"
+</code></pre></div></div>
+<p>Your board was likely changed in the settings when the <em>Arduino IDE</em> was reopened.</p>
+
+<p>Go back to “<em>Tools</em>” -&gt; “<em>Board</em>” and select “<em>Digispark (Default - 16.5mhz)</em>”</p>
+
+<h2 id="extra">Extra</h2>
+<p>There is a <em>GitHub</em> project named <a href="https://github.com/toxydose/Duckyspark">“<em>Duckyspark</em>”</a> that converts <em>.duck</em> scripts to the <em>.ino</em> format that our <em>Digispark</em> understands. It’s written in <em>python3</em> and works well.</p>
+
+<p>The syntax is as shown below:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 Duckyspark_translator.py &lt;rubber ducky file&gt; &lt;digispark file&gt;
+</code></pre></div></div>
+
+<p>With it, you can take any <em>.duck</em> script and use it on your <em>Digispark</em>!</p>
+
+<h2 id="more-extra">More extra</h2>
+<p>There is a <em>GitHub</em> project named <a href="https://github.com/mame82/duck2spark">“<em>Duck2spark</em>”</a> that works somewhat like the previous tool, but this one takes the output of <a href="https://github.com/hak5darren/USB-Rubber-Ducky/blob/master/Encoder/encoder.jar"><em>Duckencoder</em></a> (which supports different types of keyboard layouts) and converts it to an Arduino Sketch that you can upload to your <em>Digispark</em>.</p>
+
+<h2 id="even-more-extra">Even more extra</h2>
+<p>If you want to go deep into this, here is a link to the “<em>digikeyboard.h</em>” file in the official GitHub project of digistump:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/digistump/DigisparkArduinoIntegration/blob/master/libraries/DigisparkKeyboard/DigiKeyboard.h
+</code></pre></div></div>
+
+<p>And here is a link to the official “<em>HID usage tables</em>”:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.usb.org/sites/default/files/hut1_21.pdf
+</code></pre></div></div>
+
+<p>And last, this webpage contains lots of <em>.duck</em> scripts that you can translate to <em>Digispark</em> using the <em>Duckyspark</em> tool:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://ducktoolkit.com/userscripts
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

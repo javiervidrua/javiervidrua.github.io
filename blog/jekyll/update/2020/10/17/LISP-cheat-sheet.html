@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>LISP cheat sheet (in spanish) | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="LISP cheat sheet (in spanish)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Primitivas fundamentales setf - asigna valores a una lista atom - te dice si algo es átomo o no print - sacar algo por pantalla" />
+<meta property="og:description" content="Primitivas fundamentales setf - asigna valores a una lista atom - te dice si algo es átomo o no print - sacar algo por pantalla" />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-17T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="LISP cheat sheet (in spanish)" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html"},"datePublished":"2020-10-17T00:00:00+02:00","url":"https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html","description":"Primitivas fundamentales setf - asigna valores a una lista atom - te dice si algo es átomo o no print - sacar algo por pantalla","headline":"LISP cheat sheet (in spanish)","dateModified":"2020-10-17T00:00:00+02:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">LISP cheat sheet (in spanish)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-10-17T00:00:00+02:00" itemprop="datePublished">Oct 17, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="primitivas-fundamentales">Primitivas fundamentales</h2>
+<ul>
+  <li><em>setf</em> - asigna valores a una lista</li>
+  <li><em>atom</em> - te dice si algo es átomo o no</li>
+  <li><em>print</em> - sacar algo por pantalla</li>
+</ul>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">print</span> <span class="s">"[-] Error crítico: Explosión inminente! D:"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><em>format</em> - sacar texto y datos por pantalla (como <em>printf</em> en <em>C</em>)</li>
+</ul>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">format</span> <span class="no">t</span> <span class="s">"~% Variable cadena tiene valor ~s ~%"</span> <span class="nv">cadena</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="operaciones-con-listas">Operaciones con listas</h2>
+<ul>
+  <li><em>first</em> - devuelve un átomo que tiene como elemento el primer elemento de la lista</li>
+  <li><em>rest</em> - devuelve una lista con todos los elementos menos el primero</li>
+  <li>
+    <p><em>last</em> - devuelve una lista con el ultimo elemento</p>
+  </li>
+  <li><em>append</em> - combina los elementos de todas las listas</li>
+  <li><em>remove</em> - elimina un elemento de una lista</li>
+  <li><em>list</em> - hace una lista con lo que le pases</li>
+  <li>
+    <p><em>cons</em> - hace una lista con el primer elemento, y añade esa lista creada a otra lista seguida del resto de los elementos (1 2) -&gt; ((1) 2)</p>
+  </li>
+  <li><em>length</em> - devuelve el número de elementos de una lista</li>
+  <li>
+    <p><em>reverse</em> - invierte el orden de los elementos de una lista</p>
+  </li>
+  <li><em>assoc</em> - como un hashmap</li>
+</ul>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">setf</span> <span class="nv">supra</span> <span class="o">'</span><span class="p">((</span><span class="nv">motor</span> <span class="nv">2JZ-GTE</span><span class="p">)</span> <span class="p">(</span><span class="nv">turbo</span> <span class="nv">GT-40</span><span class="p">)))</span>
+<span class="p">(</span><span class="nb">assoc</span> <span class="ss">'motor</span> <span class="nv">supra</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="procedimientos">Procedimientos</h2>
+<ul>
+  <li><em>defun</em> - definir funciones</li>
+</ul>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">miFuncion</span>
+	<span class="p">(</span><span class="nv">parametro1</span> <span class="nv">parametro2</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">cons</span>
+		<span class="p">(</span><span class="nb">first</span> <span class="nv">parametro1</span><span class="p">)</span> <span class="p">(</span><span class="nb">last</span> <span class="nv">parametro2</span><span class="p">)</span>
+	<span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<h2 id="condicionales">Condicionales</h2>
+<ul>
+  <li><em>member</em> - verifica si el primer argumento forma parte del segundo - devuelve una lista a partir de ese elemento (incluído) en la lista en la que buscar</li>
+  <li><em>atom</em> - es un átomo?</li>
+  <li><em>numberp</em> - es un número?</li>
+  <li><em>symbolp</em> - es un símbolo?</li>
+  <li><em>listp</em> - es una lista?</li>
+  <li><em>null</em> - el argumento es una lista vacía? - acepta lo que sea</li>
+  <li>
+    <p><em>endp</em> - el argumentos es una lista vacía? - solamente acepta listas</p>
+
+    <p><strong>Conlusión</strong>
+  () = ‘() = NIL = ‘NIL -&gt; <strong>todos son átomos</strong></p>
+  </li>
+  <li><em>zerop</em> - es cero?</li>
+  <li><em>plusp</em> - es positivo?</li>
+  <li><em>minusp</em> - es negativo?</li>
+  <li><em>evenp</em> - es par?</li>
+  <li><em>oddp</em> - es impar?</li>
+  <li><em>&gt;</em> - orden descendente en todos los parámetros?</li>
+  <li>
+    <p><em>&lt;</em> - orden ascendente en todos los parámetros?</p>
+  </li>
+  <li><em>=</em> - los argumentos son el mismo número?</li>
+  <li><em>equalp</em> - los argumentos son iguales?</li>
+  <li>
+    <p><em>eq</em> - “los argumentos ocupan la misma cantidad de memoria?”</p>
+  </li>
+  <li><em>and</em> - como en C</li>
+  <li><em>or</em> - como en C</li>
+  <li>
+    <p><em>not</em> - como en C</p>
+  </li>
+  <li><em>if</em> - como en C</li>
+</ul>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">if</span> <span class="nv">comparacion</span>
+	<span class="p">(</span><span class="nv">hazEsto</span> <span class="nv">siCierto</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">hazEsto</span> <span class="nv">siFalso</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<ul>
+  <li><em>when</em> - solo parte de lo cierto</li>
+  <li>
+    <p><em>unless</em> - solo parte de lo falso</p>
+  </li>
+  <li><em>cond</em> - como el switch en C, Java y el case en Bash</li>
+</ul>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">cond</span>
+	<span class="p">(</span><span class="nv">comparacion1</span>
+		<span class="nv">hazEsto1</span>
+	<span class="p">)</span>
+	<span class="p">(</span><span class="nv">comparacion2</span>
+		<span class="nv">hazEsto2</span>
+	<span class="p">)</span>
+	<span class="o">...</span>
+	<span class="p">(</span><span class="nv">comparacionN</span>
+		<span class="nv">hazEstoN</span>
+	<span class="p">)</span>
+	<span class="p">(</span><span class="nv">T</span> <span class="nv">hazEstoPorDefecto</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="recursividad">Recursividad</h2>
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">factorial</span> <span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">=</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
+		<span class="p">(</span><span class="nb">*</span> <span class="nv">n</span> <span class="p">(</span><span class="nv">factorial</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)))</span>
+	<span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">fibonacci</span> <span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">cond</span>	<span class="p">((</span><span class="nb">=</span> <span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="p">((</span><span class="nb">=</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">1</span><span class="p">)</span>
+		<span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nb">+</span> <span class="p">(</span><span class="nv">fibonacci</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nv">fibonacci</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">n</span> <span class="mi">2</span><span class="p">)))</span>
+	<span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="iteratividad-necesario-dar-valor-a-resultado">Iteratividad (necesario dar valor a resultado)</h2>
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">elemento</span> <span class="nv">lista</span> <span class="nv">resultado</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">+</span> <span class="nv">resultado</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="prog-controlar-flujo-de-ejecución--variables-locales">Prog: Controlar flujo de ejecución + variables locales</h2>
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">prog</span> <span class="p">(</span><span class="nv">var1</span> <span class="nv">var2</span> <span class="o">...</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">setf</span> <span class="nv">valor</span> <span class="p">(</span><span class="nb">+</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+	<span class="p">(</span><span class="nb">return</span> <span class="nv">valor</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="cómo-hacer-la-práctica">Cómo hacer la práctica</h2>
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">es-variable</span> <span class="p">(</span><span class="nv">var</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">cond</span> <span class="p">((</span><span class="nb">atom</span> <span class="nv">var</span><span class="p">)</span> <span class="nv">T</span><span class="p">)</span>
+		<span class="p">((</span><span class="nb">eq</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">var</span><span class="p">)</span> <span class="ss">'?</span><span class="p">)</span> <span class="nv">T</span><span class="p">)</span>
+		<span class="p">(</span><span class="nv">T</span> <span class="nv">NIL</span><span class="p">)</span>
+	<span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>En CLISP todas las variables son globales excepto los parámetros que reciben las funciones</strong></p>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
