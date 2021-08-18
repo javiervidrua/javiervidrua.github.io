@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://javiervidrua.github.io/</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
       <image:image>
@@ -23,8 +23,14 @@
       </image:image>
   </url>
   <url>
+    <loc>https://javiervidrua.github.io/assets/files/cv.pdf</loc>
+    <lastmod>2021-08-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://javiervidrua.github.io/index.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
       <image:image>
@@ -46,13 +52,25 @@
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://javiervidrua.github.io/blog/</loc>
+    <lastmod>2021-08-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/03/google-hacking-cheat-sheet.html</loc>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/11/06/rubber-ducky-with-digispark-attiny85.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
       <image:image>
@@ -77,50 +95,44 @@
       </image:image>
   </url>
   <url>
-    <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/03/google-hacking-cheat-sheet.html</loc>
-    <lastmod>2021-08-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://javiervidrua.github.io/blog/</loc>
-    <lastmod>2021-08-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://javiervidrua.github.io/blog/about/</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/09/19/how-to-create-a-website-with-Jekyll.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0-copia.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html</loc>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
       <image:image>
@@ -137,14 +149,8 @@
       </image:image>
   </url>
   <url>
-    <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html</loc>
-    <lastmod>2021-08-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/11/13/WSL-and-VirtualBox-VMware-at-the-same-time.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
       <image:image>
@@ -154,7 +160,7 @@
   </url>
   <url>
     <loc>https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html</loc>
-    <lastmod>2021-08-17</lastmod>
+    <lastmod>2021-08-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
       <image:image>
