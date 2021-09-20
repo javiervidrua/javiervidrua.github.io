@@ -1,4 +1,119 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-08-17T11:07:31+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Security of software systems</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html" rel="alternate" type="text/html" title="Security of software systems" /><published>2020-12-09T23:00:00+01:00</published><updated>2020-12-09T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html">&lt;p&gt;In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-21T00:01:18+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">DevOps</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps.html" rel="alternate" type="text/html" title="DevOps" /><published>2021-09-20T00:00:00+02:00</published><updated>2021-09-20T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps.html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;DevOps is a set of practises that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. DevOps is complementary with Agile software development; several DevOps aspects came from the Agile methodology. (&lt;a href=&quot;https://en.wikipedia.org/wiki/DevOps&quot;&gt;Wikipedia&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;devops-lifecycle&quot;&gt;DevOps lifecycle&lt;/h2&gt;
+
+&lt;p&gt;It consists of 5 phases that create a loop:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Continuous development&lt;/li&gt;
+  &lt;li&gt;Continuous testing&lt;/li&gt;
+  &lt;li&gt;Continuous integration&lt;/li&gt;
+  &lt;li&gt;Continuous deployment&lt;/li&gt;
+  &lt;li&gt;Continuous monitoring&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;software-development&quot;&gt;Software development&lt;/h2&gt;
+
+&lt;p&gt;Software development has 7 stages:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Plan&lt;/li&gt;
+  &lt;li&gt;Create&lt;/li&gt;
+  &lt;li&gt;Verify&lt;/li&gt;
+  &lt;li&gt;Package&lt;/li&gt;
+  &lt;li&gt;Release&lt;/li&gt;
+  &lt;li&gt;Configure&lt;/li&gt;
+  &lt;li&gt;Monitor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;agile-model&quot;&gt;Agile model&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Analyze&lt;/li&gt;
+  &lt;li&gt;Plan&lt;/li&gt;
+  &lt;li&gt;Design&lt;/li&gt;
+  &lt;li&gt;Build&lt;/li&gt;
+  &lt;li&gt;Test&lt;/li&gt;
+  &lt;li&gt;Review&lt;/li&gt;
+  &lt;li&gt;Launch&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;working-with-scrum&quot;&gt;Working with Scrum&lt;/h2&gt;
+
+&lt;p&gt;There is a product backlog that has all the features to be implemented.&lt;/p&gt;
+
+&lt;p&gt;Every 2-4 weeks a sprint plan is made, and the selected features put in the respective sprint backlog.&lt;/p&gt;
+
+&lt;p&gt;Every time a sprint ends, there is a retrospective. That is a team meeting in which everyone gets to talk about how everything is going and share their thoughts.&lt;/p&gt;
+
+&lt;h2 id=&quot;agile-and-devops&quot;&gt;Agile and DevOps&lt;/h2&gt;
+
+&lt;p&gt;Both agile methodologies and DevOps have things in common:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Early and valuable deliveries of software&lt;/li&gt;
+  &lt;li&gt;Automate everything&lt;/li&gt;
+  &lt;li&gt;Improve team integration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dasa---6-principles-of-devops&quot;&gt;DASA - 6 principles of DevOps&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Customer-centric action&lt;/li&gt;
+  &lt;li&gt;Create with the end in mind&lt;/li&gt;
+  &lt;li&gt;End-to-end responsibility&lt;/li&gt;
+  &lt;li&gt;Cross-functional autonomous teams&lt;/li&gt;
+  &lt;li&gt;Continuous improvement&lt;/li&gt;
+  &lt;li&gt;Automate everything you can&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;devops-tools&quot;&gt;DevOps tools&lt;/h2&gt;
+
+&lt;p&gt;Here is a list of some tools (there are many, many more available) used in DevOps.&lt;/p&gt;
+
+&lt;p&gt;For source code management:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Git&lt;/li&gt;
+  &lt;li&gt;GitHub&lt;/li&gt;
+  &lt;li&gt;GitLab&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For software builds:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Gradle&lt;/li&gt;
+  &lt;li&gt;Maven&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For testing:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Selenium&lt;/li&gt;
+  &lt;li&gt;Junit&lt;/li&gt;
+  &lt;li&gt;Appium&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For integration:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Jenkins&lt;/li&gt;
+  &lt;li&gt;Bamboo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For deployment:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Terraform&lt;/li&gt;
+  &lt;li&gt;Ansible&lt;/li&gt;
+  &lt;li&gt;Chef&lt;/li&gt;
+  &lt;li&gt;Puppet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For monitoring:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nagios&lt;/li&gt;
+  &lt;li&gt;Splunk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For containerization:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Docker&lt;/li&gt;
+  &lt;li&gt;Kubernetes&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Introduction</summary></entry><entry><title type="html">Security of software systems</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html" rel="alternate" type="text/html" title="Security of software systems" /><published>2020-12-09T23:00:00+01:00</published><updated>2020-12-09T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html">&lt;p&gt;In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.&lt;/p&gt;
 
 &lt;h2 id=&quot;01---cryptography&quot;&gt;01 - Cryptography&lt;/h2&gt;
 
@@ -17,7 +132,7 @@
 
 &lt;p&gt;The cleartext is encrypted and decrypted using one key.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-symmetric-cipher.png&quot; alt=&quot;Symmetric cipher diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-symmetric-cipher.png&quot; alt=&quot;Symmetric cipher diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This technique relies on these factors:&lt;/p&gt;
 &lt;ul&gt;
@@ -95,7 +210,7 @@ cleartext:         TREE
 
 &lt;p&gt;The following scheme shows the bit-level algorithm:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-des-diagram.gif&quot; alt=&quot;DES diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-des-diagram.gif&quot; alt=&quot;DES diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The &lt;em&gt;DES&lt;/em&gt; cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:&lt;/p&gt;
 &lt;ol&gt;
@@ -152,7 +267,7 @@ cleartext:         TREE
 
 &lt;p&gt;The basic scheme is presented in the next diagram:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-asymmetric-cipher.png&quot; alt=&quot;Asymmetric cipher diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-asymmetric-cipher.png&quot; alt=&quot;Asymmetric cipher diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Diffie-Hellman&lt;/em&gt; rules:&lt;/p&gt;
 &lt;ul&gt;
@@ -226,7 +341,7 @@ cleartext:         TREE
   &lt;li&gt;Checksum.&lt;/li&gt;
   &lt;li&gt;MAC (Message Authentication Code).&lt;/li&gt;
   &lt;li&gt;Hash + key:
-&lt;img src=&quot;/blog/images/sss-hash+key.PNG&quot; alt=&quot;Hash + key diagram&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;/blog/_site/images/sss-hash+key.PNG&quot; alt=&quot;Hash + key diagram&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;non-repudiation&quot;&gt;Non-repudiation&lt;/h4&gt;
@@ -372,7 +487,7 @@ cleartext:         TREE
   &lt;li&gt;Tunnel mode: &lt;strong&gt;Protects the original IP datagram, this is, everything&lt;/strong&gt;. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-ipsec-modes.PNG&quot; alt=&quot;IPsec working modes&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-ipsec-modes.PNG&quot; alt=&quot;IPsec working modes&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It has three protocols:&lt;/p&gt;
 &lt;ul&gt;
@@ -381,7 +496,7 @@ cleartext:         TREE
   &lt;li&gt;IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-sa-two-way.PNG&quot; alt=&quot;IPsec SA two way&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-sa-two-way.PNG&quot; alt=&quot;IPsec SA two way&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;03---operating-systems-security&quot;&gt;03 - Operating systems security&lt;/h2&gt;
 
@@ -702,7 +817,7 @@ cleartext:         TREE
 
 &lt;p&gt;The following diagram represents the flow of the packets through the chains:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-iptables-tables.jfif&quot; alt=&quot;IPtables tables&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-iptables-tables.jfif&quot; alt=&quot;IPtables tables&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;There are several options that can apply to a packet:&lt;/p&gt;
 &lt;ul&gt;
@@ -764,7 +879,7 @@ cleartext:         TREE
 
 &lt;p&gt;The process of compiling a program written in C/C++ is as shown in the following image:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-compilation-process.png&quot; alt=&quot;Compilation process in C/C++&quot; title=&quot;Compilation process in C/C++&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-compilation-process.png&quot; alt=&quot;Compilation process in C/C++&quot; title=&quot;Compilation process in C/C++&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you compile a C program with the option &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-save-temps&lt;/code&gt;, &lt;em&gt;gcc&lt;/em&gt; won’t delete &lt;em&gt;.i&lt;/em&gt; and &lt;em&gt;.s&lt;/em&gt; files:&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌─[javier@torre]─[~]
@@ -853,7 +968,7 @@ end:    clra
 &lt;/ul&gt;
 
 &lt;p&gt;The following image illustrates the mapping of the registers:
-&lt;img src=&quot;/blog/images/sss-x86-general-purpose-registers.png&quot; alt=&quot;x86 General purpose registers&quot; title=&quot;x86 General purpose registers&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/_site/images/sss-x86-general-purpose-registers.png&quot; alt=&quot;x86 General purpose registers&quot; title=&quot;x86 General purpose registers&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;instruction-pointer-register-on-x86&quot;&gt;Instruction pointer register on x86&lt;/h3&gt;
 
@@ -961,7 +1076,7 @@ end:    clra
 
 &lt;p&gt;The following image illustrates the structure of a C program:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/sss-c-memory-diagram.png&quot; alt=&quot;C program memory diagram&quot; title=&quot;C program memory diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-c-memory-diagram.png&quot; alt=&quot;C program memory diagram&quot; title=&quot;C program memory diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;stack&quot;&gt;Stack&lt;/h3&gt;
 
@@ -1114,7 +1229,7 @@ Disassembly of section .init:
 
     &lt;p&gt;In case of &lt;em&gt;VMware&lt;/em&gt;, they released the 15.5.6 version that solves this problem.&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/images/vmware-15-5-6.PNG&quot; alt=&quot;VMware-15-5-6&quot; title=&quot;VMware-15-5-6&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/vmware-15-5-6.PNG&quot; alt=&quot;VMware-15-5-6&quot; title=&quot;VMware-15-5-6&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;You can get more info about that &lt;a href=&quot;https://blogs.vmware.com/workstation/2020/01/vmware-workstation-tech-preview-20h1.html&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -1144,21 +1259,21 @@ Disassembly of section .init:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;As shown in the following image:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/images/additionalurls.png&quot; alt=&quot;AdditionalURLs&quot; title=&quot;AdditionalURLs&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/additionalurls.png&quot; alt=&quot;AdditionalURLs&quot; title=&quot;AdditionalURLs&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Go to &lt;em&gt;Tools&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards manager&lt;/em&gt;:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/images/boardsmanager.png&quot; alt=&quot;BoardsManager&quot; title=&quot;BoardsManager&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/boardsmanager.png&quot; alt=&quot;BoardsManager&quot; title=&quot;BoardsManager&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;Select “&lt;em&gt;Contributed&lt;/em&gt;” from the drop-down menu and then install the “&lt;em&gt;Digistump AVR Boards&lt;/em&gt;” package:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/images/avrboards.png&quot; alt=&quot;AVRboards&quot; title=&quot;AVRboards&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/avrboards.png&quot; alt=&quot;AVRboards&quot; title=&quot;AVRboards&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Now go to &lt;em&gt;Tools&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Digistump AVR Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Digispark (Default - 16.5 mhz)&lt;/em&gt;:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/images/digistumpdefault.png&quot; alt=&quot;DigistumpDefault&quot; title=&quot;DigistumpDefault&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/digistumpdefault.png&quot; alt=&quot;DigistumpDefault&quot; title=&quot;DigistumpDefault&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1205,7 +1320,7 @@ Disassembly of section .init:
 
 &lt;p&gt;&lt;strong&gt;Now you can plug your &lt;em&gt;Digispark&lt;/em&gt;, sit back, and get Digisparked!&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/digisparkgif.gif&quot; alt=&quot;gif&quot; title=&quot;gif&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/digisparkgif.gif&quot; alt=&quot;gif&quot; title=&quot;gif&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As you can see, it only takes about 2 seconds to get the job done.&lt;/p&gt;
 
@@ -1252,7 +1367,7 @@ Disassembly of section .init:
 
 &lt;p&gt;The last two steps can easily be done as shown in this image:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-install.png&quot; alt=&quot;Install&quot; title=&quot;Install&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-install.png&quot; alt=&quot;Install&quot; title=&quot;Install&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;run-kex&quot;&gt;Run &lt;em&gt;kex&lt;/em&gt;&lt;/h2&gt;
 
@@ -1262,15 +1377,15 @@ Disassembly of section .init:
 
 &lt;p&gt;First you will get something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-start.png&quot; alt=&quot;Start&quot; title=&quot;Start&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-start.png&quot; alt=&quot;Start&quot; title=&quot;Start&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-vnc.png&quot; alt=&quot;Vnc&quot; title=&quot;Vnc&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-vnc.png&quot; alt=&quot;Vnc&quot; title=&quot;Vnc&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And when you enter your password the desktop will appear!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-desktop.png&quot; alt=&quot;Desktop&quot; title=&quot;Desktop&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-desktop.png&quot; alt=&quot;Desktop&quot; title=&quot;Desktop&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;use-kali-linux&quot;&gt;Use &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
 
@@ -1826,8 +1941,4 @@ Right now I can’t help him, because &lt;strong&gt;the firewall blocks all conn
 
 &lt;p&gt;You could even run an &lt;em&gt;nmap&lt;/em&gt; scan, but I will warn you that &lt;em&gt;nmap&lt;/em&gt; through &lt;em&gt;proxychains&lt;/em&gt; takes a really long time to finish.&lt;/p&gt;
 
-&lt;p&gt;If you want &lt;strong&gt;a pentesting example case of dynamic port forwarding&lt;/strong&gt;, check &lt;a href=&quot;https://netsec.ws/?p=278&quot;&gt;&lt;strong&gt;this&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more.</summary></entry><entry><title type="html">Software versioning with Semantic Versioning 2.0.0</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0-copia.html" rel="alternate" type="text/html" title="Software versioning with Semantic Versioning 2.0.0" /><published>2020-09-23T00:00:00+02:00</published><updated>2020-09-23T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0%20-%20copia</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/09/23/software-versioning-with-semantic-versioning-2.0.0-copia.html">&lt;p&gt;If you are a developer, you should learn &lt;em&gt;software versioning&lt;/em&gt;, so your products follow the naming conventions and it is easy to track dependencies.&lt;/p&gt;
-
-&lt;p&gt;That said, I recommend you learn &lt;a href=&quot;https://semver.org/&quot;&gt;&lt;strong&gt;Semantic Versioning 2.0.0&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;All you have to do to learn it is read the webpage provided above, and &lt;strong&gt;in 15 minutes&lt;/strong&gt; you will be good to go!&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">If you are a developer, you should learn software versioning, so your products follow the naming conventions and it is easy to track dependencies.</summary></entry></feed>
+&lt;p&gt;If you want &lt;strong&gt;a pentesting example case of dynamic port forwarding&lt;/strong&gt;, check &lt;a href=&quot;https://netsec.ws/?p=278&quot;&gt;&lt;strong&gt;this&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more.</summary></entry></feed>
