@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-21T12:04:52+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-21T18:29:59+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Ansible is a tool that allows us to automate several things:&lt;/p&gt;
 &lt;ul&gt;
@@ -267,7 +267,7 @@ tmpfs           975M     0  798M   0% /run/user/0
 
 &lt;p&gt;The cleartext is encrypted and decrypted using one key.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-symmetric-cipher.png&quot; alt=&quot;Symmetric cipher diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-symmetric-cipher.png&quot; alt=&quot;Symmetric cipher diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This technique relies on these factors:&lt;/p&gt;
 &lt;ul&gt;
@@ -345,7 +345,7 @@ cleartext:         TREE
 
 &lt;p&gt;The following scheme shows the bit-level algorithm:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-des-diagram.gif&quot; alt=&quot;DES diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-des-diagram.gif&quot; alt=&quot;DES diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The &lt;em&gt;DES&lt;/em&gt; cipher can operate in four different modes, in order to be able to encrypt blocks of data of different lenghts. These modes of operation are the following:&lt;/p&gt;
 &lt;ol&gt;
@@ -402,7 +402,7 @@ cleartext:         TREE
 
 &lt;p&gt;The basic scheme is presented in the next diagram:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-asymmetric-cipher.png&quot; alt=&quot;Asymmetric cipher diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-asymmetric-cipher.png&quot; alt=&quot;Asymmetric cipher diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Diffie-Hellman&lt;/em&gt; rules:&lt;/p&gt;
 &lt;ul&gt;
@@ -476,7 +476,7 @@ cleartext:         TREE
   &lt;li&gt;Checksum.&lt;/li&gt;
   &lt;li&gt;MAC (Message Authentication Code).&lt;/li&gt;
   &lt;li&gt;Hash + key:
-&lt;img src=&quot;/blog/_site/images/sss-hash+key.PNG&quot; alt=&quot;Hash + key diagram&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;/blog/images/sss-hash+key.PNG&quot; alt=&quot;Hash + key diagram&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;non-repudiation&quot;&gt;Non-repudiation&lt;/h4&gt;
@@ -622,7 +622,7 @@ cleartext:         TREE
   &lt;li&gt;Tunnel mode: &lt;strong&gt;Protects the original IP datagram, this is, everything&lt;/strong&gt;. This mode is useful if one of the ends does not support IPsec, e.g firewall, VPN.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-ipsec-modes.PNG&quot; alt=&quot;IPsec working modes&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-ipsec-modes.PNG&quot; alt=&quot;IPsec working modes&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It has three protocols:&lt;/p&gt;
 &lt;ul&gt;
@@ -631,7 +631,7 @@ cleartext:         TREE
   &lt;li&gt;IKE: Security Asociations (SA). One-way relationship. For a two-way communication we use two SA, and one of them establishes the first time that a datagram is interchanged. This converts a connectionless protocol into a connection oriented one.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-sa-two-way.PNG&quot; alt=&quot;IPsec SA two way&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-sa-two-way.PNG&quot; alt=&quot;IPsec SA two way&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;03---operating-systems-security&quot;&gt;03 - Operating systems security&lt;/h2&gt;
 
@@ -952,7 +952,7 @@ cleartext:         TREE
 
 &lt;p&gt;The following diagram represents the flow of the packets through the chains:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-iptables-tables.jfif&quot; alt=&quot;IPtables tables&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-iptables-tables.jfif&quot; alt=&quot;IPtables tables&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;There are several options that can apply to a packet:&lt;/p&gt;
 &lt;ul&gt;
@@ -1014,7 +1014,7 @@ cleartext:         TREE
 
 &lt;p&gt;The process of compiling a program written in C/C++ is as shown in the following image:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-compilation-process.png&quot; alt=&quot;Compilation process in C/C++&quot; title=&quot;Compilation process in C/C++&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-compilation-process.png&quot; alt=&quot;Compilation process in C/C++&quot; title=&quot;Compilation process in C/C++&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you compile a C program with the option &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-save-temps&lt;/code&gt;, &lt;em&gt;gcc&lt;/em&gt; won’t delete &lt;em&gt;.i&lt;/em&gt; and &lt;em&gt;.s&lt;/em&gt; files:&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌─[javier@torre]─[~]
@@ -1103,7 +1103,7 @@ end:    clra
 &lt;/ul&gt;
 
 &lt;p&gt;The following image illustrates the mapping of the registers:
-&lt;img src=&quot;/blog/_site/images/sss-x86-general-purpose-registers.png&quot; alt=&quot;x86 General purpose registers&quot; title=&quot;x86 General purpose registers&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/images/sss-x86-general-purpose-registers.png&quot; alt=&quot;x86 General purpose registers&quot; title=&quot;x86 General purpose registers&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;instruction-pointer-register-on-x86&quot;&gt;Instruction pointer register on x86&lt;/h3&gt;
 
@@ -1211,7 +1211,7 @@ end:    clra
 
 &lt;p&gt;The following image illustrates the structure of a C program:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/sss-c-memory-diagram.png&quot; alt=&quot;C program memory diagram&quot; title=&quot;C program memory diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/sss-c-memory-diagram.png&quot; alt=&quot;C program memory diagram&quot; title=&quot;C program memory diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;stack&quot;&gt;Stack&lt;/h3&gt;
 
@@ -1364,7 +1364,7 @@ Disassembly of section .init:
 
     &lt;p&gt;In case of &lt;em&gt;VMware&lt;/em&gt;, they released the 15.5.6 version that solves this problem.&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/vmware-15-5-6.PNG&quot; alt=&quot;VMware-15-5-6&quot; title=&quot;VMware-15-5-6&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/images/vmware-15-5-6.PNG&quot; alt=&quot;VMware-15-5-6&quot; title=&quot;VMware-15-5-6&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;You can get more info about that &lt;a href=&quot;https://blogs.vmware.com/workstation/2020/01/vmware-workstation-tech-preview-20h1.html&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -1394,21 +1394,21 @@ Disassembly of section .init:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;As shown in the following image:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/additionalurls.png&quot; alt=&quot;AdditionalURLs&quot; title=&quot;AdditionalURLs&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/images/additionalurls.png&quot; alt=&quot;AdditionalURLs&quot; title=&quot;AdditionalURLs&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Go to &lt;em&gt;Tools&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards manager&lt;/em&gt;:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/boardsmanager.png&quot; alt=&quot;BoardsManager&quot; title=&quot;BoardsManager&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/images/boardsmanager.png&quot; alt=&quot;BoardsManager&quot; title=&quot;BoardsManager&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;Select “&lt;em&gt;Contributed&lt;/em&gt;” from the drop-down menu and then install the “&lt;em&gt;Digistump AVR Boards&lt;/em&gt;” package:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/avrboards.png&quot; alt=&quot;AVRboards&quot; title=&quot;AVRboards&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/images/avrboards.png&quot; alt=&quot;AVRboards&quot; title=&quot;AVRboards&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Now go to &lt;em&gt;Tools&lt;/em&gt; -&amp;gt; &lt;em&gt;Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Digistump AVR Boards&lt;/em&gt; -&amp;gt; &lt;em&gt;Digispark (Default - 16.5 mhz)&lt;/em&gt;:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;/blog/_site/images/digistumpdefault.png&quot; alt=&quot;DigistumpDefault&quot; title=&quot;DigistumpDefault&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;/blog/images/digistumpdefault.png&quot; alt=&quot;DigistumpDefault&quot; title=&quot;DigistumpDefault&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1455,7 +1455,7 @@ Disassembly of section .init:
 
 &lt;p&gt;&lt;strong&gt;Now you can plug your &lt;em&gt;Digispark&lt;/em&gt;, sit back, and get Digisparked!&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/digisparkgif.gif&quot; alt=&quot;gif&quot; title=&quot;gif&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/digisparkgif.gif&quot; alt=&quot;gif&quot; title=&quot;gif&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As you can see, it only takes about 2 seconds to get the job done.&lt;/p&gt;
 
@@ -1502,7 +1502,7 @@ Disassembly of section .init:
 
 &lt;p&gt;The last two steps can easily be done as shown in this image:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-install.png&quot; alt=&quot;Install&quot; title=&quot;Install&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-install.png&quot; alt=&quot;Install&quot; title=&quot;Install&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;run-kex&quot;&gt;Run &lt;em&gt;kex&lt;/em&gt;&lt;/h2&gt;
 
@@ -1512,15 +1512,15 @@ Disassembly of section .init:
 
 &lt;p&gt;First you will get something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-start.png&quot; alt=&quot;Start&quot; title=&quot;Start&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-start.png&quot; alt=&quot;Start&quot; title=&quot;Start&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-vnc.png&quot; alt=&quot;Vnc&quot; title=&quot;Vnc&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-vnc.png&quot; alt=&quot;Vnc&quot; title=&quot;Vnc&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And when you enter your password the desktop will appear!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/blog/_site/images/kali-win-kex-desktop.png&quot; alt=&quot;Desktop&quot; title=&quot;Desktop&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-desktop.png&quot; alt=&quot;Desktop&quot; title=&quot;Desktop&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;use-kali-linux&quot;&gt;Use &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
 
