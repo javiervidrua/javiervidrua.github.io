@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Configuration management with Ansible | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Configuration management with Ansible" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Overview" />
+<meta property="og:description" content="Overview" />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-21T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Configuration management with Ansible" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html"},"datePublished":"2021-09-21T00:00:00+02:00","url":"https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html","description":"Overview","headline":"Configuration management with Ansible","dateModified":"2021-09-21T00:00:00+02:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Configuration management with Ansible</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-21T00:00:00+02:00" itemprop="datePublished">Sep 21, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="overview">Overview</h2>
+
+<p>Ansible is a tool that allows us to automate several things:</p>
+<ul>
+  <li>Cloud provisioning</li>
+  <li>Configuration management</li>
+  <li>Application deployment</li>
+  <li>Intra-service orchestration</li>
+</ul>
+
+<p>It is built from the ground up for multi-tier deployments, defining how the systems interact, instead of defining what each one does.</p>
+
+<p>For that, it uses playbooks written in YAML. These playbooks describe the automation jobs.</p>
+
+<h2 id="install">Install</h2>
+
+<p>For Debian based distros, you can use <code class="language-plaintext highlighter-rouge">sudo apt update &amp;&amp; sudo apt install ansible -y</code> to install Ansible on your system.</p>
+
+<h2 id="components">Components</h2>
+
+<p>Ansible has 6 components:</p>
+<ul>
+  <li>Modules</li>
+  <li>Module utilities</li>
+  <li>Plugins</li>
+  <li>Inventory</li>
+  <li>Playbooks</li>
+  <li>Ansible search path</li>
+</ul>
+
+<h2 id="use-example">Use example</h2>
+
+<p>This example supposes you have one Ansible Control Node (where you’ll launch the Ansible playbook) and one or more Ansible hosts (to which the control node will connect) that have the control node’s public SSH key added to the authorized_hosts file.</p>
+
+<p>The first thing is to tell Ansible who are the hosts to connect to. To do so, open /etc/ansible/hosts and add the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[example_servers]
+server1 ansible_host=10.10.10.2
+server2 ansible_host=10.10.10.3
+
+[all:vars]
+ansible_playbook_interpreter=/usr/bin/python3
+</code></pre></div></div>
+
+<p>In the first section, we specify the IPs of the servers, and in the second we make sure that the Python interpreter that Ansible will use is the version 3.x.</p>
+
+<p>Now, you can run the command <code class="language-plaintext highlighter-rouge">ansible-inventory --list -y</code> and it should output something like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Output
+all:
+  children:
+    example_servers:
+      hosts:
+        server1:
+          ansible_host: 10.10.10.2
+          ansible_python_interpreter: /usr/bin/python3
+        server2:
+          ansible_host: 10.10.10.3
+          ansible_python_interpreter: /usr/bin/python3
+    ungrouped: {}
+</code></pre></div></div>
+
+<p>Once that’s done, we can test the connection by running the command <code class="language-plaintext highlighter-rouge">ansible all -m ping -u &lt;user&gt;</code>, in which &lt;user&gt; should be substituted by the user that is authorized by the public SSH on the hosts.</p>
+
+<p>If everything goes well, you should get a similar output to this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server1 | SUCCESS =&gt; {
+    "changed": false, 
+    "ping": "pong"
+}
+server2 | SUCCESS =&gt; {
+    "changed": false, 
+    "ping": "pong"
+}
+</code></pre></div></div>
+
+<p>And with that, you have Ansible configured and ready to go.</p>
+
+<h2 id="ad-hoc-commands">Ad-hoc commands</h2>
+
+<p>Now you can start running ad-hoc commands and playbooks on your servers.</p>
+
+<p>The following is an example of a command that will output the disk usage on each server:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible all -a "df -h" -u &lt;user&gt;
+</code></pre></div></div>
+
+<p>It should give you an output somewhat like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server1 | CHANGED | rc=0 &gt;&gt;
+Filesystem      Size  Used Avail Use% Mounted on
+udev            9.9G     0  3.9G   0% /dev
+tmpfs           998M  624K  798M   1% /run
+/dev/vda1       195G  2.3G  153G   2% /
+tmpfs           5.9G     0  3.9G   0% /dev/shm
+tmpfs           5.9M     0  5.0M   0% /run/lock
+tmpfs           9.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/vda15      155M  3.6M  101M   4% /boot/efi
+tmpfs           975M     0  798M   0% /run/user/0
+
+server2 | CHANGED | rc=0 &gt;&gt;
+Filesystem      Size  Used Avail Use% Mounted on
+udev            9.9G     0  3.9G   0% /dev
+tmpfs           998M  624K  798M   1% /run
+/dev/vda1       195G  2.3G  153G   2% /
+tmpfs           5.9G     0  3.9G   0% /dev/shm
+tmpfs           5.9M     0  5.0M   0% /run/lock
+tmpfs           9.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/vda15      155M  3.6M  101M   4% /boot/efi
+tmpfs           975M     0  798M   0% /run/user/0
+</code></pre></div></div>
+
+<p>An example of a command that will install nmap on all of the servers is <code class="language-plaintext highlighter-rouge">ansible example_servers -m apt -a "name=nmap state=latest" -u &lt;user&gt;</code>.</p>
+
+<p>As you can see, if you want to execute an <code class="language-plaintext highlighter-rouge">apt</code> command, you have to use <code class="language-plaintext highlighter-rouge">-m apt</code> to specify it.</p>
+
+<p>If you only want to execute a shell command, for example, <code class="language-plaintext highlighter-rouge">free -h</code> to see the RAM usage on each server, you would use <code class="language-plaintext highlighter-rouge">ansible example_servers -a "free -h" -u &lt;user&gt;</code>.</p>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

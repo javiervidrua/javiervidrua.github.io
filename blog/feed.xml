@@ -1,4 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-21T10:58:13+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">DevOps</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps.html" rel="alternate" type="text/html" title="DevOps" /><published>2021-09-20T00:00:00+02:00</published><updated>2021-09-20T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps.html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-21T12:04:52+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;Ansible is a tool that allows us to automate several things:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cloud provisioning&lt;/li&gt;
+  &lt;li&gt;Configuration management&lt;/li&gt;
+  &lt;li&gt;Application deployment&lt;/li&gt;
+  &lt;li&gt;Intra-service orchestration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is built from the ground up for multi-tier deployments, defining how the systems interact, instead of defining what each one does.&lt;/p&gt;
+
+&lt;p&gt;For that, it uses playbooks written in YAML. These playbooks describe the automation jobs.&lt;/p&gt;
+
+&lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
+
+&lt;p&gt;For Debian based distros, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt update &amp;amp;&amp;amp; sudo apt install ansible -y&lt;/code&gt; to install Ansible on your system.&lt;/p&gt;
+
+&lt;h2 id=&quot;components&quot;&gt;Components&lt;/h2&gt;
+
+&lt;p&gt;Ansible has 6 components:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Modules&lt;/li&gt;
+  &lt;li&gt;Module utilities&lt;/li&gt;
+  &lt;li&gt;Plugins&lt;/li&gt;
+  &lt;li&gt;Inventory&lt;/li&gt;
+  &lt;li&gt;Playbooks&lt;/li&gt;
+  &lt;li&gt;Ansible search path&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;use-example&quot;&gt;Use example&lt;/h2&gt;
+
+&lt;p&gt;This example supposes you have one Ansible Control Node (where you’ll launch the Ansible playbook) and one or more Ansible hosts (to which the control node will connect) that have the control node’s public SSH key added to the authorized_hosts file.&lt;/p&gt;
+
+&lt;p&gt;The first thing is to tell Ansible who are the hosts to connect to. To do so, open /etc/ansible/hosts and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[example_servers]
+server1 ansible_host=10.10.10.2
+server2 ansible_host=10.10.10.3
+
+[all:vars]
+ansible_playbook_interpreter=/usr/bin/python3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In the first section, we specify the IPs of the servers, and in the second we make sure that the Python interpreter that Ansible will use is the version 3.x.&lt;/p&gt;
+
+&lt;p&gt;Now, you can run the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ansible-inventory --list -y&lt;/code&gt; and it should output something like this:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Output
+all:
+  children:
+    example_servers:
+      hosts:
+        server1:
+          ansible_host: 10.10.10.2
+          ansible_python_interpreter: /usr/bin/python3
+        server2:
+          ansible_host: 10.10.10.3
+          ansible_python_interpreter: /usr/bin/python3
+    ungrouped: {}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once that’s done, we can test the connection by running the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ansible all -m ping -u &amp;lt;user&amp;gt;&lt;/code&gt;, in which &amp;lt;user&amp;gt; should be substituted by the user that is authorized by the public SSH on the hosts.&lt;/p&gt;
+
+&lt;p&gt;If everything goes well, you should get a similar output to this:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server1 | SUCCESS =&amp;gt; {
+    &quot;changed&quot;: false, 
+    &quot;ping&quot;: &quot;pong&quot;
+}
+server2 | SUCCESS =&amp;gt; {
+    &quot;changed&quot;: false, 
+    &quot;ping&quot;: &quot;pong&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And with that, you have Ansible configured and ready to go.&lt;/p&gt;
+
+&lt;h2 id=&quot;ad-hoc-commands&quot;&gt;Ad-hoc commands&lt;/h2&gt;
+
+&lt;p&gt;Now you can start running ad-hoc commands and playbooks on your servers.&lt;/p&gt;
+
+&lt;p&gt;The following is an example of a command that will output the disk usage on each server:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ansible all -a &quot;df -h&quot; -u &amp;lt;user&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It should give you an output somewhat like this:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server1 | CHANGED | rc=0 &amp;gt;&amp;gt;
+Filesystem      Size  Used Avail Use% Mounted on
+udev            9.9G     0  3.9G   0% /dev
+tmpfs           998M  624K  798M   1% /run
+/dev/vda1       195G  2.3G  153G   2% /
+tmpfs           5.9G     0  3.9G   0% /dev/shm
+tmpfs           5.9M     0  5.0M   0% /run/lock
+tmpfs           9.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/vda15      155M  3.6M  101M   4% /boot/efi
+tmpfs           975M     0  798M   0% /run/user/0
+
+server2 | CHANGED | rc=0 &amp;gt;&amp;gt;
+Filesystem      Size  Used Avail Use% Mounted on
+udev            9.9G     0  3.9G   0% /dev
+tmpfs           998M  624K  798M   1% /run
+/dev/vda1       195G  2.3G  153G   2% /
+tmpfs           5.9G     0  3.9G   0% /dev/shm
+tmpfs           5.9M     0  5.0M   0% /run/lock
+tmpfs           9.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/vda15      155M  3.6M  101M   4% /boot/efi
+tmpfs           975M     0  798M   0% /run/user/0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;An example of a command that will install nmap on all of the servers is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ansible example_servers -m apt -a &quot;name=nmap state=latest&quot; -u &amp;lt;user&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As you can see, if you want to execute an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt&lt;/code&gt; command, you have to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-m apt&lt;/code&gt; to specify it.&lt;/p&gt;
+
+&lt;p&gt;If you only want to execute a shell command, for example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free -h&lt;/code&gt; to see the RAM usage on each server, you would use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ansible example_servers -a &quot;free -h&quot; -u &amp;lt;user&amp;gt;&lt;/code&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Overview</summary></entry><entry><title type="html">DevOps</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps.html" rel="alternate" type="text/html" title="DevOps" /><published>2021-09-20T00:00:00+02:00</published><updated>2021-09-20T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/20/DevOps.html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;DevOps is a set of practises that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality. DevOps is complementary with Agile software development; several DevOps aspects came from the Agile methodology. (&lt;a href=&quot;https://en.wikipedia.org/wiki/DevOps&quot;&gt;Wikipedia&lt;/a&gt;)&lt;/p&gt;
 
@@ -113,6 +224,30 @@
 &lt;ul&gt;
   &lt;li&gt;Docker&lt;/li&gt;
   &lt;li&gt;Kubernetes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;configuration-management&quot;&gt;Configuration management&lt;/h2&gt;
+
+&lt;p&gt;Configuration management is a system engineering method that ensures a product’s characteristics remain consistent during its life cycle.&lt;/p&gt;
+
+&lt;p&gt;It provides a &lt;em&gt;configuration model&lt;/em&gt; of the services, assets and infrastructure by recording the relationships between service assets and configuration items.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuration-management-tools&quot;&gt;Configuration management tools&lt;/h3&gt;
+
+&lt;p&gt;They enable deployments to be:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Faster&lt;/li&gt;
+  &lt;li&gt;Scalable&lt;/li&gt;
+  &lt;li&gt;Repeatable&lt;/li&gt;
+  &lt;li&gt;Predictable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some popular tools are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Saltstack: Python based, open source tool used to remotely manage configuration items.&lt;/li&gt;
+  &lt;li&gt;Ansible: Python based, agentless tool.&lt;/li&gt;
+  &lt;li&gt;Chef: Ruby based configuration management tool that has integration with most of the cloud providers.&lt;/li&gt;
+  &lt;li&gt;Puppet: Ruby DSL based tool that enables the use to manage software, systems and network configuration items.&lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Introduction</summary></entry><entry><title type="html">Security of software systems</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html" rel="alternate" type="text/html" title="Security of software systems" /><published>2020-12-09T23:00:00+01:00</published><updated>2020-12-09T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/12/09/security-of-software-systems.html">&lt;p&gt;In this article I will try to explain by my own words every single thing that I learned during my Computer Engineering degree when it comes to security of software systems.&lt;/p&gt;
 
 &lt;h2 id=&quot;01---cryptography&quot;&gt;01 - Cryptography&lt;/h2&gt;
@@ -1844,101 +1979,4 @@ If you want to repeat &lt;code class=&quot;language-plaintext highlighter-rouge&
     &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Info&lt;/code&gt;: Page of links to more information about the specified &lt;em&gt;URL&lt;/em&gt;. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 info:'forocoches.es'&lt;/code&gt;
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;phonebook&lt;/code&gt;: Looks up phone numbers. Example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nissan gtr r34 phonebook:'Jon Doe CA'&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Google search basics Google indexed entire web pages instead of just titles and descriptions. That’s the reason you can do comprehensive searches based upon key (query) words.</summary></entry><entry><title type="html">Port forwarding and tunneling</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html" rel="alternate" type="text/html" title="Port forwarding and tunneling" /><published>2020-09-24T00:00:00+02:00</published><updated>2020-09-24T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/09/24/port-forwarding-and-tunneling.html">&lt;p&gt;&lt;em&gt;Port redirection&lt;/em&gt;, &lt;em&gt;tunneling&lt;/em&gt; and &lt;em&gt;traffic encapsulation&lt;/em&gt; are a &lt;strong&gt;must-know&lt;/strong&gt; if you are a &lt;em&gt;sysadmin&lt;/em&gt; or &lt;em&gt;pentester&lt;/em&gt;, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, &lt;strong&gt;access restricted networkt, bypass firewall protections and much more&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Let’s start talking about &lt;em&gt;port forwarding&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;1---port-forwardingredirection&quot;&gt;1 - Port forwarding/redirection&lt;/h2&gt;
-&lt;p&gt;Let’s explain &lt;em&gt;port forwarding&lt;/em&gt; using a simple example:&lt;/p&gt;
-
-&lt;p&gt;Suppose that you are at work on your computer, and you want to navigate to &lt;em&gt;Github&lt;/em&gt;, but you can’t because &lt;strong&gt;there is a firewall that only allows communications on port 123 (NTP)&lt;/strong&gt;&lt;em&gt;. You try to go to *Github&lt;/em&gt; but the requests get dropped by the firewall and the page doesn’t load.&lt;/p&gt;
-
-&lt;p&gt;So what do you do?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;On your local linux machine, you install the tool &lt;strong&gt;&lt;em&gt;rinetd&lt;/em&gt;&lt;/strong&gt; with the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt install rinetd&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;You open &lt;em&gt;/etc/rinetd.conf&lt;/em&gt; with your favorite editor.&lt;/li&gt;
-  &lt;li&gt;Suposing that your work IP is &lt;em&gt;1.2.3.4&lt;/em&gt;, the IP of the &lt;em&gt;Github&lt;/em&gt; webpage is &lt;em&gt;5.6.7.8&lt;/em&gt; and the IP of your home machine is &lt;em&gt;a.b.c.d&lt;/em&gt;, you add the following line:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#bindadress    bindport    connectaddress  connectport
- 1.2.3.4       123         5.6.7.8         80
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;That line tells your home system to redirect (&lt;i&gt;forward&lt;/i&gt;) the packets that come from 1.2.3.4 on port 123 (the port that the firewall allows) to 5.6.7.8 on port 80, essentially &lt;strong&gt;redirecting the requests you make from your computer at work (on port 123) to your machine at home (on port 123), to the Github webpage (on port 80)&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now, while being at work, you can navigate to &lt;em&gt;GitHub&lt;/em&gt; by going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://a.b.c.d:123&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;2---ssh-tunneling&quot;&gt;2 - SSH Tunneling&lt;/h2&gt;
-
-&lt;p&gt;Like the name says, &lt;em&gt;SSH tunneling&lt;/em&gt; is creating encrypted (secure) “tunnels” using the SSH protocol. This, for instance, can be used to &lt;strong&gt;encrypt traffic that goes over an insecure network&lt;/strong&gt;, therefore making it secure.&lt;/p&gt;
-
-&lt;h3 id=&quot;21---local-port-forwarding&quot;&gt;2.1 - Local port forwarding&lt;/h3&gt;
-&lt;p&gt;Let’s use the same example as with port forwarding.&lt;/p&gt;
-
-&lt;p&gt;Instead of installing &lt;em&gt;rinetd&lt;/em&gt;, you do the following things:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;You set up an &lt;strong&gt;&lt;em&gt;SSH server&lt;/em&gt;&lt;/strong&gt; on your local linux machine, to listen on port 123 (the one that is allowed by the firewall between you and your computer at work). This can be done editting the configuration file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/ssh/sshd_config&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;On your work computer, you run this command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh user@a.b.c.d -p 123 -L 8080:5.6.7.8:80&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;What that command does is:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Connect to your home machine (&lt;em&gt;a.b.c.d&lt;/em&gt;) via &lt;em&gt;SSH&lt;/em&gt; (with or without ssh-key, it doesn’t matter).&lt;/li&gt;
-  &lt;li&gt;Open the port 8080 on your work computer.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Redirect the requests to the port 8080 on your work computer through SSH to your home machine, and then through the port 80 to the GitHub (&lt;em&gt;5.6.7.8&lt;/em&gt;) webpage&lt;/strong&gt;, and the same thing but backwards with the webpage responses.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This, apart from being more practical than the previous example (because it is more likely to have an SSH server than having &lt;em&gt;rinetd&lt;/em&gt; installed on your system), &lt;strong&gt;it encrypts all the traffic between your work and your home computer&lt;/strong&gt;, thus making it safe, even if the network is insecure.&lt;/p&gt;
-
-&lt;p&gt;Now, while being at work, you can navigate to &lt;em&gt;GitHub&lt;/em&gt; by going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://127.0.0.1:8080&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;22---remote-port-forwarding&quot;&gt;2.2 - Remote port forwarding&lt;/h3&gt;
-&lt;p&gt;We’ll change up a little bit the previous example to explain remote port forwarding.&lt;/p&gt;
-
-&lt;p&gt;Let’s say that there is an &lt;em&gt;FTP&lt;/em&gt; server (running on port 21) in the corporate network, and a coworker asks me if I can help him with a bug in the &lt;em&gt;FTP&lt;/em&gt; server that he’s having trouble solving.
-Right now I can’t help him, because &lt;strong&gt;the firewall blocks all connections that don’t go through port 123&lt;/strong&gt;, and the FTP server is listening on port 21.&lt;/p&gt;
-
-&lt;p&gt;What I can do is this:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;As the previous example, set up an &lt;strong&gt;&lt;em&gt;SSH server&lt;/em&gt;&lt;/strong&gt; on your home machine that will listen on port 123.&lt;/li&gt;
-  &lt;li&gt;Tell my coworker to run the following commmand: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh user@a.b.c.d -p 123 -R 21:127.0.0.1:21&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;What this is going to do is create an &lt;strong&gt;&lt;em&gt;SSH&lt;/em&gt; tunnel&lt;/strong&gt; that will communicate a remote port in my home machine (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;21:&lt;/code&gt;) with the local port (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:21&lt;/code&gt;) on the corporate server (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Now I can access the corporate &lt;em&gt;FTP&lt;/em&gt; server running on port 21 from my machine with this command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ftp 127.0.0.1&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;23---dynamic-port-forwarding&quot;&gt;2.3 - Dynamic port forwarding&lt;/h3&gt;
-&lt;p&gt;We have now seen local and remote port forwarding, and those are really useful features of the SSH protocol, &lt;strong&gt;but what happens if you need to open a range of ports?&lt;/strong&gt; In that situation they aren’t very practical, because you will need to be running as many commands as ports you’d like to forward.&lt;/p&gt;
-
-&lt;p&gt;For those situations there’s yet another feature, that feature is &lt;strong&gt;dynamic port forwarding&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;To be able to use this feature, you will need to have a proxy server too. One that I like using is &lt;strong&gt;&lt;em&gt;proxychains&lt;/em&gt;&lt;/strong&gt;. You can install it by running the command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt install proxychains&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Note: You can change the behaviour of &lt;em&gt;proxychains&lt;/em&gt; modifying the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/proxychains.conf&lt;/code&gt;, by default, it listens on port 9050, the &lt;em&gt;Tor&lt;/em&gt; port.&lt;/p&gt;
-
-&lt;p&gt;Now that we’re set up, let’s use an example to explain dynamic port forwarding.&lt;/p&gt;
-
-&lt;p&gt;Let’s suppose that the coworker of the last example now calls us because he needs help diagnosing two servers that are not working properly. &lt;strong&gt;Each server has various services that we’ll need to check&lt;/strong&gt;, so trying to do this kind of job using remote port forwarding would take a long time and you would have to run a lot of commands. So instead of that, you use dynamic port forwarding:&lt;/p&gt;
-
-&lt;p&gt;The first thing to do is to tell my coworker to run this command:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh user@a.b.c.d -p 123 -f -N -D 9050&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Notes:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt;” makes the session go to background. Useful for port forwarding.&lt;/li&gt;
-  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-N&lt;/code&gt;” tells the &lt;em&gt;SSH&lt;/em&gt; client that we won’t be sending commands. Useful for port forwarding.&lt;/li&gt;
-  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-D &amp;lt;port&amp;gt;&lt;/code&gt;” tells the &lt;em&gt;SSH&lt;/em&gt; client that we’ll be doing dynamic port forwarding on the specified port.&lt;/li&gt;
-  &lt;li&gt;”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p 123&lt;/code&gt;” is used because the firewall only allows that port and we have the &lt;em&gt;SSH server&lt;/em&gt; listening on that port too.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Now &lt;strong&gt;I’m connected to the corporate network via my local port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;9050&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;For example, if the IP of the first server is &lt;em&gt;10.10.5.11&lt;/em&gt;, I can ssh in preceding the ssh command with “proxychains”: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proxychains ssh admin@10.10.5.11&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;And, for example, if you wanted to check the &lt;em&gt;http&lt;/em&gt; service of that server, you can do that by runnning the command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proxychains firefox&lt;/code&gt;. &lt;strong&gt;It will open firefox through &lt;em&gt;proxychains&lt;/em&gt;&lt;/strong&gt;, and now you could navigate to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://10.10.5.11/&lt;/code&gt;, because now you have access to everything that is inside of the internal, corporate network.&lt;/p&gt;
-
-&lt;p&gt;You could even run an &lt;em&gt;nmap&lt;/em&gt; scan, but I will warn you that &lt;em&gt;nmap&lt;/em&gt; through &lt;em&gt;proxychains&lt;/em&gt; takes a really long time to finish.&lt;/p&gt;
-
-&lt;p&gt;If you want &lt;strong&gt;a pentesting example case of dynamic port forwarding&lt;/strong&gt;, check &lt;a href=&quot;https://netsec.ws/?p=278&quot;&gt;&lt;strong&gt;this&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Port redirection, tunneling and traffic encapsulation are a must-know if you are a sysadmin or pentester, as they provide the ability to change the direction of the network traffic, and encapsulate a protocol inside a different one, allowing the operator to, for example, access restricted networkt, bypass firewall protections and much more.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Google search basics Google indexed entire web pages instead of just titles and descriptions. That’s the reason you can do comprehensive searches based upon key (query) words.</summary></entry></feed>
