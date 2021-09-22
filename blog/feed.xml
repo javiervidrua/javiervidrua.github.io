@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-22T13:49:04+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerization with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" rel="alternate" type="text/html" title="Containerization with Docker" /><published>2021-09-22T00:00:00+02:00</published><updated>2021-09-22T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization%20with%20Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html">&lt;h2 id=&quot;containerization&quot;&gt;Containerization&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-22T13:59:20+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerization with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" rel="alternate" type="text/html" title="Containerization with Docker" /><published>2021-09-22T00:00:00+02:00</published><updated>2021-09-22T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization%20with%20Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html">&lt;h2 id=&quot;containerization&quot;&gt;Containerization&lt;/h2&gt;
 
-&lt;p&gt;Containerization is a process that consists of packaging code and all of its dependencies, so it can be moved from one execution environment to another and executed quickly and reiably.&lt;/p&gt;
+&lt;p&gt;Containerization is a process that consists of packaging code and all of its dependencies, so it can be moved from one execution environment to another and executed quickly and reliably.&lt;/p&gt;
 
 &lt;p&gt;It is a type of OS virtualization, through which applications run and are isolated in what are called “containers”.&lt;/p&gt;
 
@@ -198,18 +198,18 @@ ansible_playbook_interpreter=/usr/bin/python3
 &lt;p&gt;In the first section, we specify the IPs of the servers, and in the second we make sure that the Python interpreter that Ansible will use is the version 3.x.&lt;/p&gt;
 
 &lt;p&gt;Now, you can run the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ansible-inventory --list -y&lt;/code&gt; and it should output something like this:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Output
-all:
-  children:
-    example_servers:
-      hosts:
-        server1:
-          ansible_host: 10.10.10.2
-          ansible_python_interpreter: /usr/bin/python3
-        server2:
-          ansible_host: 10.10.10.3
-          ansible_python_interpreter: /usr/bin/python3
-    ungrouped: {}
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;Output&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;example_servers&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;hosts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;server1&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ansible_host&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;10.10.10.2&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ansible_python_interpreter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/usr/bin/python3&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;server2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ansible_host&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;10.10.10.3&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ansible_python_interpreter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/usr/bin/python3&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ungrouped&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;{}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Once that’s done, we can test the connection by running the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ansible all -m ping -u &amp;lt;user&amp;gt;&lt;/code&gt;, in which &amp;lt;user&amp;gt; should be substituted by the user that is authorized by the public SSH on the hosts.&lt;/p&gt;

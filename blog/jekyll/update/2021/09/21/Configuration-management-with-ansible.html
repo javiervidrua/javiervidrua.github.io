@@ -93,18 +93,18 @@ ansible_playbook_interpreter=/usr/bin/python3
 <p>In the first section, we specify the IPs of the servers, and in the second we make sure that the Python interpreter that Ansible will use is the version 3.x.</p>
 
 <p>Now, you can run the command <code class="language-plaintext highlighter-rouge">ansible-inventory --list -y</code> and it should output something like this:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Output
-all:
-  children:
-    example_servers:
-      hosts:
-        server1:
-          ansible_host: 10.10.10.2
-          ansible_python_interpreter: /usr/bin/python3
-        server2:
-          ansible_host: 10.10.10.3
-          ansible_python_interpreter: /usr/bin/python3
-    ungrouped: {}
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">Output</span>
+<span class="na">all</span><span class="pi">:</span>
+  <span class="na">children</span><span class="pi">:</span>
+    <span class="na">example_servers</span><span class="pi">:</span>
+      <span class="na">hosts</span><span class="pi">:</span>
+        <span class="na">server1</span><span class="pi">:</span>
+          <span class="na">ansible_host</span><span class="pi">:</span> <span class="s">10.10.10.2</span>
+          <span class="na">ansible_python_interpreter</span><span class="pi">:</span> <span class="s">/usr/bin/python3</span>
+        <span class="na">server2</span><span class="pi">:</span>
+          <span class="na">ansible_host</span><span class="pi">:</span> <span class="s">10.10.10.3</span>
+          <span class="na">ansible_python_interpreter</span><span class="pi">:</span> <span class="s">/usr/bin/python3</span>
+    <span class="na">ungrouped</span><span class="pi">:</span> <span class="pi">{}</span>
 </code></pre></div></div>
 
 <p>Once that’s done, we can test the connection by running the command <code class="language-plaintext highlighter-rouge">ansible all -m ping -u &lt;user&gt;</code>, in which &lt;user&gt; should be substituted by the user that is authorized by the public SSH on the hosts.</p>
