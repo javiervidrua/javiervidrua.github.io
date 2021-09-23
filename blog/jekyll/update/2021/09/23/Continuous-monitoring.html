@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Continuous monitoring | Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Continuous monitoring" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Continuous monitoring" />
+<meta property="og:description" content="Continuous monitoring" />
+<link rel="canonical" href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html" />
+<meta property="og:url" content="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-23T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Continuous monitoring" />
+<script type="application/ld+json">
+{"headline":"Continuous monitoring","dateModified":"2021-09-23T00:00:00+02:00","datePublished":"2021-09-23T00:00:00+02:00","@type":"BlogPosting","url":"https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html"},"description":"Continuous monitoring","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://javiervidrua.github.io/blog/feed.xml" title="Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Continuous monitoring</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-23T00:00:00+02:00" itemprop="datePublished">Sep 23, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="continuous-monitoring">Continuous monitoring</h2>
+
+<p>Continuous monitoring is the ability to detect risk, compliance and security issues in an operation environment.</p>
+
+<h3 id="monitoring-types">Monitoring types</h3>
+
+<p>There are four main monitoring types:</p>
+<ul>
+  <li>Real-time monitoring: CPU statistics, RAM usage, disk usage, I/O operations…</li>
+  <li>Infrastructure monitoring: CPU and memory, network, web servers, app servers, DB servers…</li>
+  <li>Application monitoring: API success or failure, performance metrics count, API accessibility…</li>
+  <li>Network monitoring: Number of packets per second, total bytes transfered…</li>
+</ul>
+
+<h3 id="tools">Tools</h3>
+
+<p>There are a wide variety of continuous monitoring tools. Some of them are:</p>
+<ul>
+  <li>Nagios</li>
+  <li>ELK Stack</li>
+  <li>Datadog</li>
+  <li>Splunk</li>
+  <li>Grafana</li>
+  <li>Ganglia</li>
+  <li>Zabbix</li>
+  <li>Sensu</li>
+  <li>New Relic</li>
+  <li>AWS Cloudwatch</li>
+</ul>
+
+<h2 id="continuous-monitoring-with-nagios">Continuous monitoring with Nagios</h2>
+
+<p>Nagios is an open source continuous monitoring tool that allows for system, network and IT infrastructure monitoring.</p>
+
+<p>It is available in two variants:</p>
+<ul>
+  <li>Nagios core: Open source.</li>
+  <li>Nagios XI: Licensed.</li>
+</ul>
+
+<p>There are some benefits to using Nagios:</p>
+<ul>
+  <li>Nagios finds any type of network issue.</li>
+  <li>Nagios monitors the infrastructure actively.</li>
+  <li>Nagios can facilitate automatic problem resolution.</li>
+  <li>Nagios troubleshoots server performance issues.</li>
+</ul>
+
+<h3 id="nagios-architecture">Nagios architecture</h3>
+
+<p>Nagios uses a client-server architecture, with the server running on a host, and the plugins running in the clients, which are specified for monitoring.</p>
+
+<h3 id="nagios-plugins">Nagios plugins</h3>
+
+<p>Types:</p>
+<ul>
+  <li>Official: What you should tend to use.</li>
+  <li>Community: What you can use.</li>
+  <li>Custom: What you should build and use if there is nothing official or in the community for what you’re trying to do.</li>
+</ul>
+
+<h2 id="elk-stack">ELK stack</h2>
+
+<p>It is an open source, distributed monitoring solution suitable for almost any data source.</p>
+
+<p>It is the acronym for 4 open source projects:</p>
+<ul>
+  <li>Elasticsearch: Distributed search and analytics engine that provides data in real time. Highly scalable, it can store complex data structures.</li>
+  <li>Logstash: Data processing for Elasticsearch.</li>
+  <li>Kibana: Data visualization tool. It provides the GUI for Elasticsearch.</li>
+  <li>Beats: This was added after the initial acronym was created. It a lightweight data collector, installed directly on the data source. There various data collectors:
+    <ul>
+      <li>Filebeat: Sends local file records.</li>
+      <li>Winlogbeat: Sends Windows event logs.</li>
+      <li>Metricbeat: Sends system performance metrics.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The ELK stack is very efficient, and everyday more and more organizations are starting to use it.</p>
+
+  </div><a class="u-url" href="/blog/jekyll/update/2021/09/23/Continuous-monitoring.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/javiervidrua"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">javiervidrua</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,4 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-22T13:59:20+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerization with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" rel="alternate" type="text/html" title="Containerization with Docker" /><published>2021-09-22T00:00:00+02:00</published><updated>2021-09-22T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization%20with%20Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html">&lt;h2 id=&quot;containerization&quot;&gt;Containerization&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-23T20:58:56+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Continuous monitoring</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html" rel="alternate" type="text/html" title="Continuous monitoring" /><published>2021-09-23T00:00:00+02:00</published><updated>2021-09-23T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous%20monitoring</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html">&lt;h2 id=&quot;continuous-monitoring&quot;&gt;Continuous monitoring&lt;/h2&gt;
+
+&lt;p&gt;Continuous monitoring is the ability to detect risk, compliance and security issues in an operation environment.&lt;/p&gt;
+
+&lt;h3 id=&quot;monitoring-types&quot;&gt;Monitoring types&lt;/h3&gt;
+
+&lt;p&gt;There are four main monitoring types:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Real-time monitoring: CPU statistics, RAM usage, disk usage, I/O operations…&lt;/li&gt;
+  &lt;li&gt;Infrastructure monitoring: CPU and memory, network, web servers, app servers, DB servers…&lt;/li&gt;
+  &lt;li&gt;Application monitoring: API success or failure, performance metrics count, API accessibility…&lt;/li&gt;
+  &lt;li&gt;Network monitoring: Number of packets per second, total bytes transfered…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tools&quot;&gt;Tools&lt;/h3&gt;
+
+&lt;p&gt;There are a wide variety of continuous monitoring tools. Some of them are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nagios&lt;/li&gt;
+  &lt;li&gt;ELK Stack&lt;/li&gt;
+  &lt;li&gt;Datadog&lt;/li&gt;
+  &lt;li&gt;Splunk&lt;/li&gt;
+  &lt;li&gt;Grafana&lt;/li&gt;
+  &lt;li&gt;Ganglia&lt;/li&gt;
+  &lt;li&gt;Zabbix&lt;/li&gt;
+  &lt;li&gt;Sensu&lt;/li&gt;
+  &lt;li&gt;New Relic&lt;/li&gt;
+  &lt;li&gt;AWS Cloudwatch&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;continuous-monitoring-with-nagios&quot;&gt;Continuous monitoring with Nagios&lt;/h2&gt;
+
+&lt;p&gt;Nagios is an open source continuous monitoring tool that allows for system, network and IT infrastructure monitoring.&lt;/p&gt;
+
+&lt;p&gt;It is available in two variants:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nagios core: Open source.&lt;/li&gt;
+  &lt;li&gt;Nagios XI: Licensed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are some benefits to using Nagios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nagios finds any type of network issue.&lt;/li&gt;
+  &lt;li&gt;Nagios monitors the infrastructure actively.&lt;/li&gt;
+  &lt;li&gt;Nagios can facilitate automatic problem resolution.&lt;/li&gt;
+  &lt;li&gt;Nagios troubleshoots server performance issues.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;nagios-architecture&quot;&gt;Nagios architecture&lt;/h3&gt;
+
+&lt;p&gt;Nagios uses a client-server architecture, with the server running on a host, and the plugins running in the clients, which are specified for monitoring.&lt;/p&gt;
+
+&lt;h3 id=&quot;nagios-plugins&quot;&gt;Nagios plugins&lt;/h3&gt;
+
+&lt;p&gt;Types:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Official: What you should tend to use.&lt;/li&gt;
+  &lt;li&gt;Community: What you can use.&lt;/li&gt;
+  &lt;li&gt;Custom: What you should build and use if there is nothing official or in the community for what you’re trying to do.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;elk-stack&quot;&gt;ELK stack&lt;/h2&gt;
+
+&lt;p&gt;It is an open source, distributed monitoring solution suitable for almost any data source.&lt;/p&gt;
+
+&lt;p&gt;It is the acronym for 4 open source projects:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Elasticsearch: Distributed search and analytics engine that provides data in real time. Highly scalable, it can store complex data structures.&lt;/li&gt;
+  &lt;li&gt;Logstash: Data processing for Elasticsearch.&lt;/li&gt;
+  &lt;li&gt;Kibana: Data visualization tool. It provides the GUI for Elasticsearch.&lt;/li&gt;
+  &lt;li&gt;Beats: This was added after the initial acronym was created. It a lightweight data collector, installed directly on the data source. There various data collectors:
+    &lt;ul&gt;
+      &lt;li&gt;Filebeat: Sends local file records.&lt;/li&gt;
+      &lt;li&gt;Winlogbeat: Sends Windows event logs.&lt;/li&gt;
+      &lt;li&gt;Metricbeat: Sends system performance metrics.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The ELK stack is very efficient, and everyday more and more organizations are starting to use it.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Continuous monitoring</summary></entry><entry><title type="html">Containerization with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" rel="alternate" type="text/html" title="Containerization with Docker" /><published>2021-09-22T00:00:00+02:00</published><updated>2021-09-22T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization%20with%20Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html">&lt;h2 id=&quot;containerization&quot;&gt;Containerization&lt;/h2&gt;
 
 &lt;p&gt;Containerization is a process that consists of packaging code and all of its dependencies, so it can be moved from one execution environment to another and executed quickly and reliably.&lt;/p&gt;
 
@@ -1937,159 +2016,4 @@ If you want to repeat &lt;code class=&quot;language-plaintext highlighter-rouge&
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--unregister&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Removing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;the&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registry...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You can manage your WSL distributions from the Powershell, with a just a few simple commands.</summary></entry><entry><title type="html">LISP cheat sheet (in spanish)</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html" rel="alternate" type="text/html" title="LISP cheat sheet (in spanish)" /><published>2020-10-17T00:00:00+02:00</published><updated>2020-10-17T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/17/LISP-cheat-sheet.html">&lt;h2 id=&quot;primitivas-fundamentales&quot;&gt;Primitivas fundamentales&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;setf&lt;/em&gt; - asigna valores a una lista&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;atom&lt;/em&gt; - te dice si algo es átomo o no&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;print&lt;/em&gt; - sacar algo por pantalla&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;[-] Error crítico: Explosión inminente! D:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;format&lt;/em&gt; - sacar texto y datos por pantalla (como &lt;em&gt;printf&lt;/em&gt; en &lt;em&gt;C&lt;/em&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;~% Variable cadena tiene valor ~s ~%&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cadena&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;operaciones-con-listas&quot;&gt;Operaciones con listas&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;first&lt;/em&gt; - devuelve un átomo que tiene como elemento el primer elemento de la lista&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;rest&lt;/em&gt; - devuelve una lista con todos los elementos menos el primero&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;last&lt;/em&gt; - devuelve una lista con el ultimo elemento&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;append&lt;/em&gt; - combina los elementos de todas las listas&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;remove&lt;/em&gt; - elimina un elemento de una lista&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;list&lt;/em&gt; - hace una lista con lo que le pases&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;cons&lt;/em&gt; - hace una lista con el primer elemento, y añade esa lista creada a otra lista seguida del resto de los elementos (1 2) -&amp;gt; ((1) 2)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;length&lt;/em&gt; - devuelve el número de elementos de una lista&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;reverse&lt;/em&gt; - invierte el orden de los elementos de una lista&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;assoc&lt;/em&gt; - como un hashmap&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;setf&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;supra&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;motor&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;2JZ-GTE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;turbo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;GT-40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;assoc&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'motor&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;supra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;procedimientos&quot;&gt;Procedimientos&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;defun&lt;/em&gt; - definir funciones&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;miFuncion&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;parametro1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parametro2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cons&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parametro1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parametro2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;condicionales&quot;&gt;Condicionales&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;member&lt;/em&gt; - verifica si el primer argumento forma parte del segundo - devuelve una lista a partir de ese elemento (incluído) en la lista en la que buscar&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;atom&lt;/em&gt; - es un átomo?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;numberp&lt;/em&gt; - es un número?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;symbolp&lt;/em&gt; - es un símbolo?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;listp&lt;/em&gt; - es una lista?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;null&lt;/em&gt; - el argumento es una lista vacía? - acepta lo que sea&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;endp&lt;/em&gt; - el argumentos es una lista vacía? - solamente acepta listas&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;Conlusión&lt;/strong&gt;
-  () = ‘() = NIL = ‘NIL -&amp;gt; &lt;strong&gt;todos son átomos&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;zerop&lt;/em&gt; - es cero?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;plusp&lt;/em&gt; - es positivo?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;minusp&lt;/em&gt; - es negativo?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;evenp&lt;/em&gt; - es par?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;oddp&lt;/em&gt; - es impar?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;&amp;gt;&lt;/em&gt; - orden descendente en todos los parámetros?&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;&amp;lt;&lt;/em&gt; - orden ascendente en todos los parámetros?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;=&lt;/em&gt; - los argumentos son el mismo número?&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;equalp&lt;/em&gt; - los argumentos son iguales?&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;eq&lt;/em&gt; - “los argumentos ocupan la misma cantidad de memoria?”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;and&lt;/em&gt; - como en C&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;or&lt;/em&gt; - como en C&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;not&lt;/em&gt; - como en C&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;if&lt;/em&gt; - como en C&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;comparacion&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;hazEsto&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;siCierto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;hazEsto&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;siFalso&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;when&lt;/em&gt; - solo parte de lo cierto&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;unless&lt;/em&gt; - solo parte de lo falso&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;cond&lt;/em&gt; - como el switch en C, Java y el case en Bash&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparacion1&lt;/span&gt;
-		&lt;span class=&quot;nv&quot;&gt;hazEsto1&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparacion2&lt;/span&gt;
-		&lt;span class=&quot;nv&quot;&gt;hazEsto2&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparacionN&lt;/span&gt;
-		&lt;span class=&quot;nv&quot;&gt;hazEstoN&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hazEstoPorDefecto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;recursividad&quot;&gt;Recursividad&lt;/h2&gt;
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;factorial&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;factorial&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fibonacci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond&lt;/span&gt;	&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fibonacci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fibonacci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;iteratividad-necesario-dar-valor-a-resultado&quot;&gt;Iteratividad (necesario dar valor a resultado)&lt;/h2&gt;
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dolist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;elemento&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;lista&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resultado&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resultado&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;prog-controlar-flujo-de-ejecución--variables-locales&quot;&gt;Prog: Controlar flujo de ejecución + variables locales&lt;/h2&gt;
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;prog&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;var1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;var2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;setf&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;valor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;valor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;cómo-hacer-la-práctica&quot;&gt;Cómo hacer la práctica&lt;/h2&gt;
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;es-variable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;eq&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;NIL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;En CLISP todas las variables son globales excepto los parámetros que reciben las funciones&lt;/strong&gt;&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Primitivas fundamentales setf - asigna valores a una lista atom - te dice si algo es átomo o no print - sacar algo por pantalla</summary></entry></feed>
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You can manage your WSL distributions from the Powershell, with a just a few simple commands.</summary></entry></feed>
