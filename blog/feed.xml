@@ -1,4 +1,151 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-23T20:58:56+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Continuous monitoring</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html" rel="alternate" type="text/html" title="Continuous monitoring" /><published>2021-09-23T00:00:00+02:00</published><updated>2021-09-23T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous%20monitoring</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html">&lt;h2 id=&quot;continuous-monitoring&quot;&gt;Continuous monitoring&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-24T17:23:30+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Continuous orchestration with Kubernetes</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes.html" rel="alternate" type="text/html" title="Continuous orchestration with Kubernetes" /><published>2021-09-24T00:00:00+02:00</published><updated>2021-09-24T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes.html">&lt;h2 id=&quot;continuous-orchestration&quot;&gt;Continuous orchestration&lt;/h2&gt;
+
+&lt;p&gt;Continuous orchestration is the ability to automate the deployment, management, scaling and networking of containers. It responds dynamically to changes in the environment and ensures all deployed container instances get updated if a new version of a service is released.&lt;/p&gt;
+
+&lt;p&gt;There are several tools used for container lifecycle management, like the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Kubernetes&lt;/li&gt;
+  &lt;li&gt;Docker Swarm&lt;/li&gt;
+  &lt;li&gt;Openshift&lt;/li&gt;
+  &lt;li&gt;Apache Mesos&lt;/li&gt;
+  &lt;li&gt;HashiCorp Nomad&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;kubernetes&quot;&gt;Kubernetes&lt;/h2&gt;
+
+&lt;p&gt;Kubernetes is a powerfull open source container orchestration tool. It is also known as “&lt;em&gt;k8s&lt;/em&gt;” or “&lt;em&gt;kube&lt;/em&gt;”.&lt;/p&gt;
+
+&lt;p&gt;It offers several features:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Automatic rollouts and rollbacks&lt;/li&gt;
+  &lt;li&gt;Load balancing&lt;/li&gt;
+  &lt;li&gt;Simple horizontal scaling&lt;/li&gt;
+  &lt;li&gt;Self-healing&lt;/li&gt;
+  &lt;li&gt;Automatic bin packing&lt;/li&gt;
+  &lt;li&gt;Batch execution&lt;/li&gt;
+  &lt;li&gt;Storage orchestration&lt;/li&gt;
+  &lt;li&gt;IPv4 and IPv6 support&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;kubernetes-components&quot;&gt;Kubernetes components&lt;/h3&gt;
+
+&lt;p&gt;A working Kubernetes component is called a cluster. It has two main components that make the architecture of the system:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Control plane: Makes the global decisions about the cluster. It has three components:
+    &lt;ul&gt;
+      &lt;li&gt;kube apiserver&lt;/li&gt;
+      &lt;li&gt;kube scheduler&lt;/li&gt;
+      &lt;li&gt;kube controller manager&lt;/li&gt;
+      &lt;li&gt;etcd: key-value storage.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Compute machines: Also known as nodes. They run several components:
+    &lt;ul&gt;
+      &lt;li&gt;kubelet&lt;/li&gt;
+      &lt;li&gt;kube proxy&lt;/li&gt;
+      &lt;li&gt;container runtime&lt;/li&gt;
+      &lt;li&gt;pod: A sigle instance of an application&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;kubernetes-installation&quot;&gt;Kubernetes installation&lt;/h3&gt;
+
+&lt;p&gt;Note that you must have Docker installed as a prerequisite.&lt;/p&gt;
+
+&lt;p&gt;The following is a script that installs Kubernetes on a system running Ubuntu, and it was made from the information provided &lt;a href=&quot;https://ubuntu.com/kubernetes/install&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;snap &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;microk8s &lt;span class=&quot;nt&quot;&gt;--classic&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;usermod &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-G&lt;/span&gt; microk8s &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo chown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; R &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt; ~/.kube
+su - &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
+microk8s status &lt;span class=&quot;nt&quot;&gt;--wait-ready&lt;/span&gt;
+microk8s &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;dashboard dns ingress
+microk8s kubectl get all &lt;span class=&quot;nt&quot;&gt;--all-namespaces&lt;/span&gt;
+microk8s dashboard-proxy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;kubernetes-basics&quot;&gt;Kubernetes basics&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pods: Collection of one or more containers with shared storage.
+    &lt;ul&gt;
+      &lt;li&gt;They can contain multiple apps, and made up from a template.&lt;/li&gt;
+      &lt;li&gt;They can run on a single container, or on multiple containers.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Labels: key-value pairs that Kubernetes attaches to objects. Some examples are:
+    &lt;ul&gt;
+      &lt;li&gt;“release”:”stable”&lt;/li&gt;
+      &lt;li&gt;“tier”:”frontend”&lt;/li&gt;
+      &lt;li&gt;“track”:”daily”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Selectors: Core grouping primitives. There are two types of selectors:
+    &lt;ul&gt;
+      &lt;li&gt;Equality-based selectors: They use label keys and values.&lt;/li&gt;
+      &lt;li&gt;Set-based selectors: They filter keys according to a set of values.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Controllers: Monitor the state of the cluster. These are the types of controllers:
+    &lt;ul&gt;
+      &lt;li&gt;Replication controller&lt;/li&gt;
+      &lt;li&gt;Daemon set controller&lt;/li&gt;
+      &lt;li&gt;Job controller&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Replica set: Ensures that a set of replica pods is running at any given time.&lt;/li&gt;
+  &lt;li&gt;Deployments and services: Controller that transforms the current state into the intended state. They are used to:
+    &lt;ul&gt;
+      &lt;li&gt;Clean up older replica sets.&lt;/li&gt;
+      &lt;li&gt;Roll out a replica set.&lt;/li&gt;
+      &lt;li&gt;Declare the new state of pods.&lt;/li&gt;
+      &lt;li&gt;Indicate that a rollout is stuck.&lt;/li&gt;
+      &lt;li&gt;Apply multiple fixes to pods.&lt;/li&gt;
+      &lt;li&gt;Facilitate more load.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Services: An abstraction that defines a logical set of pods as well as a policy for accessing them. There are two ways of accessing a service:
+    &lt;ul&gt;
+      &lt;li&gt;DSN method: A name is given to the service when initialized.&lt;/li&gt;
+      &lt;li&gt;Environment variable method: kubelet adds envionment variables for each active service.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Services types:
+    &lt;ul&gt;
+      &lt;li&gt;ClusterIP: Default.&lt;/li&gt;
+      &lt;li&gt;NodePort: Exposes a port.&lt;/li&gt;
+      &lt;li&gt;LoadBalancer: Cloud provider load balancer is used.&lt;/li&gt;
+      &lt;li&gt;ExternalName: Assigns a CNAME.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;kubernetes-best-practises&quot;&gt;Kubernetes best practises&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Update Kubernetes to the latest version&lt;/li&gt;
+  &lt;li&gt;Use Pod Security Policies&lt;/li&gt;
+  &lt;li&gt;Use Kubernetes namespaces&lt;/li&gt;
+  &lt;li&gt;Use Network Policies&lt;/li&gt;
+  &lt;li&gt;Configure the Kubernetes API server securely&lt;/li&gt;
+  &lt;li&gt;Maintain small container images&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;managing-a-kubernetes-cluster&quot;&gt;Managing a Kubernetes cluster&lt;/h3&gt;
+
+&lt;p&gt;Kubernetes provides a cli tool called kubectl that allows us to manage the cluster.&lt;/p&gt;
+
+&lt;p&gt;To initialize the cluster, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo kubeadm init&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To reset the cluster, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo kubeadm reset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To list the nodes and their status, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl get nodes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To create a pod, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl run &amp;lt;podname&amp;gt; --image=&amp;lt;imagename:version&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To get information about a pod, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl describe pods &amp;lt;podname&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To delete a pod, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl delete pods &amp;lt;podname&amp;gt;&lt;/code&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Continuous orchestration</summary></entry><entry><title type="html">Continuous monitoring</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html" rel="alternate" type="text/html" title="Continuous monitoring" /><published>2021-09-23T00:00:00+02:00</published><updated>2021-09-23T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/23/Continuous-monitoring.html">&lt;h2 id=&quot;continuous-monitoring&quot;&gt;Continuous monitoring&lt;/h2&gt;
 
 &lt;p&gt;Continuous monitoring is the ability to detect risk, compliance and security issues in an operation environment.&lt;/p&gt;
 
@@ -77,7 +224,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;The ELK stack is very efficient, and everyday more and more organizations are starting to use it.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Continuous monitoring</summary></entry><entry><title type="html">Containerization with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" rel="alternate" type="text/html" title="Containerization with Docker" /><published>2021-09-22T00:00:00+02:00</published><updated>2021-09-22T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization%20with%20Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html">&lt;h2 id=&quot;containerization&quot;&gt;Containerization&lt;/h2&gt;
+&lt;p&gt;The ELK stack is very efficient, and everyday more and more organizations are starting to use it.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Continuous monitoring</summary></entry><entry><title type="html">Containerization with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" rel="alternate" type="text/html" title="Containerization with Docker" /><published>2021-09-22T00:00:00+02:00</published><updated>2021-09-22T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html">&lt;h2 id=&quot;containerization&quot;&gt;Containerization&lt;/h2&gt;
 
 &lt;p&gt;Containerization is a process that consists of packaging code and all of its dependencies, so it can be moved from one execution environment to another and executed quickly and reliably.&lt;/p&gt;
 
@@ -1961,59 +2108,4 @@ If you want to repeat &lt;code class=&quot;language-plaintext highlighter-rouge&
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;use-git-for-source-control&quot;&gt;Use git for source control&lt;/h2&gt;
-&lt;p&gt;If you dont know what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; is, drop everything you’re doing right now and learn it immediately.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Here are some tricks to increase your productivity when using Linux.</summary></entry><entry><title type="html">Managing WSL distributions</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions.html" rel="alternate" type="text/html" title="Managing WSL distributions" /><published>2020-10-18T00:00:00+02:00</published><updated>2020-10-18T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/18/managing-wsl-distributions.html">&lt;p&gt;You can manage your &lt;em&gt;WSL&lt;/em&gt; distributions from the Powershell, with a just a few simple commands.&lt;/p&gt;
-
-&lt;h2 id=&quot;listing-the-distributions-installed&quot;&gt;Listing the distributions installed&lt;/h2&gt;
-&lt;p&gt;To list the distributions that are currently installed, run:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This will output something like this:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                 &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STATE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Distribution-name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;exporting-distributions&quot;&gt;Exporting distributions&lt;/h2&gt;
-&lt;p&gt;If you want to export a distribution, very much like creating a snapshot if you were using &lt;em&gt;VMWare&lt;/em&gt;, you can run:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--export&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename.tar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This will dump the distribution named “distribution-name” to a file called “filename.tar”.&lt;/p&gt;
-
-&lt;h2 id=&quot;importing-distributions&quot;&gt;Importing distributions&lt;/h2&gt;
-&lt;p&gt;Now, if you want to import the previously exported distribution, you can run:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;new-distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-installation-path&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename.tar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;launching-distributions&quot;&gt;Launching distributions&lt;/h2&gt;
-&lt;p&gt;If you want to launch a distro from &lt;em&gt;Powershell&lt;/em&gt;, you can run:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;changing-the-version-of-a-distribution&quot;&gt;Changing the version of a distribution&lt;/h2&gt;
-&lt;p&gt;If you want to change the version of &lt;em&gt;WSL&lt;/em&gt; that a distribution uses run:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--set-version&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;setting-the-default-distribution&quot;&gt;Setting the default distribution&lt;/h2&gt;
-&lt;p&gt;You can set the default distribution to be used when typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl&lt;/code&gt; in the &lt;em&gt;Powershell&lt;/em&gt; by running:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--setdefault&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;unregistering-removing-distributions&quot;&gt;Unregistering (removing) distributions&lt;/h2&gt;
-&lt;p&gt;To unregister a distribution you can run:&lt;/p&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--unregister&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;distribution-name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STATE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debian&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--export&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-ready-to-go.tar&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;\debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;\debian-ready-to-go.tar&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--setdefault&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;              &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STATE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;           &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debian&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Stopped&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--unregister&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;debian-testing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Removing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;the&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registry...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;C:\Users\x\Desktop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You can manage your WSL distributions from the Powershell, with a just a few simple commands.</summary></entry></feed>
+&lt;p&gt;If you dont know what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; is, drop everything you’re doing right now and learn it immediately.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Here are some tricks to increase your productivity when using Linux.</summary></entry></feed>
