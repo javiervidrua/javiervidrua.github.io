@@ -1,4 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-24T17:23:30+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Continuous orchestration with Kubernetes</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes.html" rel="alternate" type="text/html" title="Continuous orchestration with Kubernetes" /><published>2021-09-24T00:00:00+02:00</published><updated>2021-09-24T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes.html">&lt;h2 id=&quot;continuous-orchestration&quot;&gt;Continuous orchestration&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-25T13:43:34+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerizing an Angular web application with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html" rel="alternate" type="text/html" title="Containerizing an Angular web application with Docker" /><published>2021-09-25T00:00:00+02:00</published><updated>2021-09-25T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html">&lt;h2 id=&quot;description-of-the-project&quot;&gt;Description of the project&lt;/h2&gt;
+
+&lt;p&gt;Deploy an Angular web application in Docker. The Angular web application should be built with the Angular CLI tool and with Docker Compose.&lt;/p&gt;
+
+&lt;h2 id=&quot;steps&quot;&gt;Steps&lt;/h2&gt;
+
+&lt;h3 id=&quot;install-dependencies&quot;&gt;Install dependencies&lt;/h3&gt;
+
+&lt;p&gt;The first step is to install Docker, Docker Compose, Node.js, TypeScript and Angular in our system. To do so, run the following script (tested on a system running Ubuntu 20.04.3):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://get.docker.com &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; get-docker.sh
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh get-docker.sh
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /usr/local/bin/docker-compose
+&lt;span class=&quot;nb&quot;&gt;sudo chmod&lt;/span&gt; +x /usr/local/bin/docker-compose
+&lt;span class=&quot;nb&quot;&gt;sudo ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/local/bin/docker-compose /usr/bin/docker-compose
+curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://deb.nodesource.com/setup_16.x | &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-E&lt;/span&gt; bash -
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; nodejs
+npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;typescript &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt;
+npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @angular/cli
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-the-angular-web-application&quot;&gt;Create the Angular web application&lt;/h3&gt;
+
+&lt;p&gt;To do so, we’ll use the CLI tool to create a new project and open the browser to the what we’re working with:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ng new angular-application
+ng serve &lt;span class=&quot;nt&quot;&gt;--open&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-the-dockerfile&quot;&gt;Create the Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;Now we need to create the Dockerfile. This file will tell Docker to copy the project to the Docker container, build it for production, and install Nginx so we can access the container through port 80.&lt;/p&gt;
+
+&lt;p&gt;Create the file Dockerfile:&lt;/p&gt;
+
+&lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;###############################################################################&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Stage 1: Compile and Build angular codebase&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;###############################################################################&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Use official node image as the base image&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; node:latest as node&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Set the working directory INSIDE OF THE DOCKER CONTAINER&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WORKDIR&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; /angular-application&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Add the source code to app&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; ./angular-application /angular-application&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Install all the dependencies&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Generate the build of the application&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;npm run build &lt;span class=&quot;nt&quot;&gt;--prod&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;###############################################################################&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Stage 2: Serve app with nginx server&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;###############################################################################&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Use official nginx image as the base image&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; nginx:latest&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Copy the build output to replace the default nginx contents.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; --from=node /angular-application/dist/angular-application /usr/share/nginx/html&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Expose port 80&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;EXPOSE&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; 80&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-the-docker-image&quot;&gt;Create the Docker image&lt;/h3&gt;
+
+&lt;p&gt;Now we need to create the Docker image, to see if everything works. To do so, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker image build .&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You should see something like the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/dockerimagebuild.jpg&quot; alt=&quot;DockerImageBuild&quot; title=&quot;DockerImageBuild&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;create-the-docker-compose-file&quot;&gt;Create the Docker Compose file&lt;/h3&gt;
+
+&lt;p&gt;The next step is to create the Docker Compose file, that will allow us to manage the application and make it scalable and portable.&lt;/p&gt;
+
+&lt;p&gt;Create the file docker-compose.yml:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# This file will use the Dockerfile to run a container with that image&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.9&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# build: . will make Docker Compose run 'docker image build .'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# https://stackoverflow.com/questions/29480099/whats-the-difference-between-docker-compose-vs-dockerfile&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80:80&quot;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# If we wanted more services, we'll put them right here&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#redis:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#image: &quot;redis:alpine&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now we can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up&lt;/code&gt; and if we go to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:80&lt;/code&gt; we’ll be able to see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/images/angulartemplate.jpg&quot; alt=&quot;AngularTemplate&quot; title=&quot;AngularTemplate&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To run the service as a daemon, you can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up -d&lt;/code&gt; where &lt;em&gt;-d&lt;/em&gt; stands for &lt;em&gt;detached&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;To stop the execution, you can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose stop&lt;/code&gt; or press Ctrl+C if you didn’t start the service as a daemon.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;With Docker you can create safer and faster applications, and with Docker Compose you can define and run multi-container applications, making them scalable and portable.&lt;/p&gt;
+
+&lt;p&gt;You can check out the source code in my &lt;a href=&quot;https://github.com/javiervidrua/angularindockerdeployment&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Description of the project</summary></entry><entry><title type="html">Continuous orchestration with Kubernetes</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes.html" rel="alternate" type="text/html" title="Continuous orchestration with Kubernetes" /><published>2021-09-24T00:00:00+02:00</published><updated>2021-09-24T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/24/Continuous-orchestration-with-kubernetes.html">&lt;h2 id=&quot;continuous-orchestration&quot;&gt;Continuous orchestration&lt;/h2&gt;
 
 &lt;p&gt;Continuous orchestration is the ability to automate the deployment, management, scaling and networking of containers. It responds dynamically to changes in the environment and ensures all deployed container instances get updated if a new version of a service is released.&lt;/p&gt;
 
@@ -1923,189 +2029,4 @@ Disassembly of section .init:
 
 &lt;h2 id=&quot;use-kali-linux&quot;&gt;Use &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;Now you can open graphical tools like &lt;em&gt;Burpsuite&lt;/em&gt;, &lt;em&gt;Bettercap&lt;/em&gt; or &lt;em&gt;Cherrytree&lt;/em&gt;, without needing to start up a VMware or VirtualBox.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Install Kali linux</summary></entry><entry><title type="html">Productivity in Linux</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html" rel="alternate" type="text/html" title="Productivity in Linux" /><published>2020-10-20T00:00:00+02:00</published><updated>2020-10-20T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/20/productivity-in-linux.html">&lt;!--
-https://www.youtube.com/watch?v=IlK6FNxmRMY
-https://www.youtube.com/watch?v=6OOqROUQ60s
-https://www.youtube.com/watch?v=W8ykZNSLDqE
-https://www.youtube.com/watch?v=azcrPFhaY9k
---&gt;
-&lt;p&gt;Here are some tricks to increase your productivity when using Linux.&lt;/p&gt;
-
-&lt;h2 id=&quot;tab-completion&quot;&gt;Tab completion&lt;/h2&gt;
-&lt;p&gt;Whenever you’re typing a command, if you hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;tab&amp;gt;&lt;/code&gt;, it will try to autocomplete the command. If nothing happens, try hitting it twice, to make it show you all the possibilities.&lt;/p&gt;
-
-&lt;h2 id=&quot;circle-through-the-history-of-commands-with-the-arrow-keys&quot;&gt;Circle through the history of commands with the arrow keys&lt;/h2&gt;
-&lt;p&gt;This isn’t a Linux specific productivity habit, since it works in every operating system, but I felt that it belongs here.&lt;/p&gt;
-
-&lt;p&gt;You can use the “&lt;em&gt;up&lt;/em&gt;” and “&lt;em&gt;down&lt;/em&gt;” arrow keys to navigate through the history of commands.&lt;/p&gt;
-
-&lt;h2 id=&quot;perform-a-reverse-search&quot;&gt;Perform a reverse search&lt;/h2&gt;
-&lt;p&gt;If you want to search for a command you ran a long ago, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+r&lt;/code&gt; and type some part of it.&lt;/p&gt;
-
-&lt;p&gt;Once you get the command, hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;tab&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;esc&amp;gt;&lt;/code&gt; or the arrow keys to edit it, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;enter&amp;gt;&lt;/code&gt; to run it.&lt;/p&gt;
-
-&lt;h2 id=&quot;readline-arguments&quot;&gt;Readline arguments&lt;/h2&gt;
-&lt;p&gt;If you really want to know about this, check &lt;strong&gt;&lt;a href=&quot;https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Readline-Arguments&quot;&gt;this&lt;/a&gt;&lt;/strong&gt; out.
-If you want to repeat &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Z&lt;/code&gt; 10 times:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alt+1 0 Z
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;It will output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZZZZZZZZZZ&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;If you want to delete the next 5 characters:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alt+- 5 ctrl+d
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;It will output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZZZZZ&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;redo-the-last-command-as-root-user&quot;&gt;Redo the last command as root user&lt;/h2&gt;
-&lt;p&gt;If you type a long command, and when you press enter you get a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Permission denied&lt;/code&gt; error message, instead of hitting “&lt;em&gt;up&lt;/em&gt;” and going to the start of the command to type “&lt;em&gt;sudo&lt;/em&gt;”, you can run this instead:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;fix-a-really-long-command-that-you-messed-up-in-your-favourite-editor&quot;&gt;Fix a really long command that you messed up in your favourite editor&lt;/h2&gt;
-&lt;p&gt;If you realize that you have to fix major part of the last command that you typed, you can fix it in your favourite editor and run it with the command:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;fc&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Alternatively, you can use the following key combination:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl+x+e
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;dont-add-command-to-the-history&quot;&gt;Don’t add command to the history&lt;/h2&gt;
-&lt;p&gt;To do this you just need to append a space at the start of the command (note the space at the start):&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'test'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;go-to-the-previous-directory&quot;&gt;Go to the previous directory&lt;/h2&gt;
-&lt;p&gt;You can type the following command to go to the previous directory:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;write-to-file-as-root-when-using-vim&quot;&gt;Write to file as root when using vim&lt;/h2&gt;
-&lt;p&gt;Using vim, if you find yourself editting a file and when you try to write the changes you get a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;File not writable&lt;/code&gt; error message, you can do this:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:w &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; %
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;write-to-a-file-in-between-pipes&quot;&gt;Write to a file in between pipes&lt;/h2&gt;
-&lt;p&gt;If you want to log a command to a file, at the same time as keeping the stdout, you can do this:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hola'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; log.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;close-a-terminal-but-keep-all-the-processes-running&quot;&gt;Close a terminal but keep all the processes running&lt;/h2&gt;
-&lt;p&gt;Let’s say that you have used the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;at&lt;/code&gt; command to program something but now you want to close the terminal. If you do so, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;at&lt;/code&gt; command won’t work.&lt;/p&gt;
-
-&lt;p&gt;What you can do is make the process of the terminal disown all of its child processes with the command:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;disown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;reset-a-terminal-that-has-gone-crazy&quot;&gt;Reset a terminal that has gone crazy&lt;/h2&gt;
-&lt;p&gt;Just type:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;reset
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;create-multiple-folders-and-subfolders&quot;&gt;Create multiple folders and subfolders&lt;/h2&gt;
-&lt;p&gt;Let’s say that you wanted to create two directories with 5 folders inside each one. You can do so like this:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;one,two&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1,2,3,4,5&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Note: The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; parameter is to tell &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir&lt;/code&gt; to create the parent directory if it does not exist.&lt;/p&gt;
-
-&lt;h2 id=&quot;quickly-create-a-sequence-of-numbers&quot;&gt;Quickly create a sequence of numbers&lt;/h2&gt;
-&lt;p&gt;There are two main, quick ways of doing so:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1..100&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;seq &lt;/span&gt;1 100
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;quickly-cut-and-yank-part-of-the-commands&quot;&gt;Quickly cut and yank part of the commands&lt;/h2&gt;
-&lt;p&gt;Let’s say that you have a long command:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; files.txt | xargs &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee &lt;/span&gt;files-precise.txt | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;And you want to only get this:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; files.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;You can navigate to that position and hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+k&lt;/code&gt; to cut the text from there to the end of the line.&lt;/li&gt;
-  &lt;li&gt;You can yank it back using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+y&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If what you wan to do is cut from there to the start of the line you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+u&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;If you want to kill backwards, word by work, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+w&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;using-less-to-view-the-last-lines-of-a-file-useful-for-logs&quot;&gt;Using less to view the last lines of a file (useful for logs)&lt;/h2&gt;
-&lt;p&gt;Instead of using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail -f &amp;lt;file&amp;gt;&lt;/code&gt; you can use:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;less +F &amp;lt;file&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This will start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; at the end of the file.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;If you want to be able to move up or down, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+c&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If you want to attach less to the end of the file again, hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shift+f&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;If you didn’t run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less +F&lt;/code&gt;, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shitf+g&lt;/code&gt; to go to the end of the file.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;quickly-access-the-arguments&quot;&gt;Quickly access the arguments&lt;/h2&gt;
-&lt;p&gt;You can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;atl+.&lt;/code&gt; to circle through the arguments used in previous commands instead of typing them.&lt;/p&gt;
-
-&lt;p&gt;This is useful, for example, if you typed a really long path to change directories.&lt;/p&gt;
-
-&lt;h2 id=&quot;go-to-the-beginning-of-the-line&quot;&gt;Go to the beginning of the line&lt;/h2&gt;
-&lt;p&gt;You can hit:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl+a
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;And this will bring the cursor to the beginning of the line.&lt;/p&gt;
-
-&lt;h2 id=&quot;piping-the-output-of-grep-to-less&quot;&gt;Piping the output of grep to less&lt;/h2&gt;
-&lt;p&gt;In many situations you’ll find yourself grepping the output of a command, and sometimes it can be a little bit too much. You can pipe it to less so you can scroll up and down.&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/log/dpkg.log | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'installed'&lt;/span&gt; | less
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;searching-for-files-or-directories-using-find-and-grep&quot;&gt;Searching for files or directories using find and grep&lt;/h2&gt;
-&lt;p&gt;If you need to search for somthing you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt; to do so.&lt;/p&gt;
-
-&lt;p&gt;Let’s say that you want to find a file named “&lt;em&gt;secretFile&lt;/em&gt;”&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'secretFile'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Note: The first argument is the directory that contains what you want to search.&lt;/p&gt;
-
-&lt;p&gt;If you want to search for a directory named “&lt;em&gt;secretDirectory&lt;/em&gt;”, you can do so like this:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; d | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'secretDirectory'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;using-the-man-pages&quot;&gt;Using the man pages&lt;/h2&gt;
-&lt;p&gt;There are man pages for almost every command and for many system functions in Linux, so if you don’t know how to use some tool or C function, try using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt; command.&lt;/p&gt;
-
-&lt;p&gt;If you don’t remember the name of the command you want to use, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt; for that:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;man &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; compare strings
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;use-regular-expressions&quot;&gt;Use regular expressions&lt;/h2&gt;
-&lt;p&gt;These are some of the most common flavours of regular expressions:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;   -&amp;gt; Grouping
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; | &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; -&amp;gt; Grouping with or.
-&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;    -&amp;gt; Character classes.
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;     -&amp;gt; Zero or more &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lazy&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-+     -&amp;gt; One or more &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;greedy&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;     -&amp;gt; Any character but newline.
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;    -&amp;gt; End of line.
-^     -&amp;gt; Beginning of line.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;use-the-search-mode&quot;&gt;Use the search mode&lt;/h2&gt;
-&lt;p&gt;When using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt;, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; and enter the search mode.&lt;/p&gt;
-
-&lt;p&gt;Then, you can hit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shift+n&lt;/code&gt; to go to the next or the previous occurrence of the text you searched.&lt;/p&gt;
-
-&lt;h2 id=&quot;learn-to-solve-a-problem&quot;&gt;Learn to solve a problem&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Understand the problem. Drawing is a good way to make this step easier. Trying to explain the problem to other person is a good way too.&lt;/li&gt;
-  &lt;li&gt;Divide the problem into smaller problems. Make a check list. Make sure the problems are small enough, don’t make them too big.&lt;/li&gt;
-  &lt;li&gt;If you get stuck, take it as a challenge.&lt;/li&gt;
-  &lt;li&gt;If all of this doesn’t work, try starting over. You don’t necessarily need to delete everything, you can comment everything.&lt;/li&gt;
-  &lt;li&gt;Practise allday everyday.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;run-a-command-for-each-line-of-the-output-of-another-command&quot;&gt;Run a command for each line of the output of another command&lt;/h2&gt;
-&lt;p&gt;You just need to pipe the output into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xargs &amp;lt;command&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; .png | xargs &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;use-git-for-source-control&quot;&gt;Use git for source control&lt;/h2&gt;
-&lt;p&gt;If you dont know what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; is, drop everything you’re doing right now and learn it immediately.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Here are some tricks to increase your productivity when using Linux.</summary></entry></feed>
+&lt;p&gt;Now you can open graphical tools like &lt;em&gt;Burpsuite&lt;/em&gt;, &lt;em&gt;Bettercap&lt;/em&gt; or &lt;em&gt;Cherrytree&lt;/em&gt;, without needing to start up a VMware or VirtualBox.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Install Kali linux</summary></entry></feed>
