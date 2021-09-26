@@ -133,6 +133,19 @@
   <li><code class="language-plaintext highlighter-rouge">docker image save</code>: Saves an image to a .tar archive.</li>
 </ul>
 
+<h3 id="containers">Containers</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">docker container ls</code>: Show the running containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker stop &lt;container_name&gt;</code>: Stop the container named &lt;container_name&gt;.</li>
+</ul>
+
+<h3 id="networks">Networks</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">docker network ls</code>: List the networks.</li>
+</ul>
+
 <h3 id="network-drivers">Network drivers</h3>
 
 <p>Docker has several network drivers available:</p>
@@ -143,6 +156,51 @@
   <li>Macvlan: Some legacy apps demand to be connected to the physical network. This driver can be used to assign a MAC address to each container’s virtual network interface.</li>
   <li>None: Used to completely disable the network on a container.</li>
 </ul>
+
+<h3 id="docker-usage-examples">Docker usage examples</h3>
+
+<p>Build a custom image from a Dockerfile on the current working directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> new_image_name <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Run a Python3 program that’s on the current working directory on a Python3 container and remove the container when the program finishes:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src python:3 python/src/program.py
+</code></pre></div></div>
+
+<p>Start a Python3 container in iteractive mode (open the interpreter shell):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src python:3
+</code></pre></div></div>
+
+<p>Start a Python3 container and open a Bash shell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src python:3 /bin/bash
+</code></pre></div></div>
+
+<p>Create a Dockerfile from the base image of Python3 and add numpy to it, then build the image from the Dockerfile of the current working directory (<em>.</em>):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;</span> Dockerfile <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh">
+FROM python:3
+
+RUN pip3 install numpy
+</span><span class="no">EOF
+</span>docker build <span class="nt">-t</span> &lt;new_image_name&gt; <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Start an Nginx container to serve files of the current working directory, forwarding the port 80 of the host to the port 80 of the container. As Nginx is a web server, it will keep running until we stop it:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/usr/share/nginx/html <span class="nt">-p</span> 80:80 nginx:latest
+</code></pre></div></div>
+
+<p>The same as the last one, but run the container in background mode (<em>-d</em> for <em>daemon</em>):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/usr/share/nginx/html <span class="nt">-p</span> 80:80 <span class="nt">-d</span> nginx:latest
+</code></pre></div></div>
+
+<p>Open a shell on a container running in the background:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container_name&gt; /bin/bash
+</code></pre></div></div>
+
+<p>Create a network, a Mysql container in the background (setting the environment variable MYSQL_ROOT_PASSWORD to ‘root’) and a Node.js container with an open Bash shell. <strong>Note that Docker automatically sets up DNS entries so the containers can communicate with each other using their names</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker network create &lt;network_name&gt;
+docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">--name</span> mysql <span class="nt">--net</span> &lt;network_name&gt; <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="s1">'root'</span> mysql:5.6
+docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--name</span> nodejs <span class="nt">--net</span> &lt;network_name&gt; nodejs:8 /bin/bash
+</code></pre></div></div>
 
 <h2 id="docker-compose">Docker Compose</h2>
 
@@ -165,7 +223,7 @@
 <ol>
   <li>Create a Dockerfile.</li>
   <li>Create docker-compose.yml</li>
-  <li>Run <code class="language-plaintext highlighter-rouge">docker compose up</code>.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">docker-compose up</code>.</li>
 </ol>
 
 <p>The following is a docker-compose.yml example file:</p>
@@ -189,19 +247,143 @@
 
 <p>Here is a list of the basic Docker Compose commands:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">docker compose build</code>: Build or rebuild services.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker componse create</code>: Create containers for a service.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose down</code>: Stop and remove containers and networks.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose kill</code>: Force stop service containers.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose ls</code>: List running compose projects.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose pause</code>: Pause the services.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose ps</code>: List containers.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose restart</code>: Restart containers.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose rm</code>: Removed stopped service containers.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose start</code>: Start services.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose stop</code>: Stop services.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker compose up</code>: Create and start containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose build</code>: Build or rebuild services.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-componse create</code>: Create containers for a service.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose down</code>: Stop and remove containers and networks.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose kill</code>: Force stop service containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose ls</code>: List running compose projects.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose pause</code>: Pause the services.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose ps</code>: List containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose restart</code>: Restart containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose rm</code>: Removed stopped service containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose start</code>: Start services.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose stop</code>: Stop services.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose up</code>: Create and start containers.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose up -d</code>: Create and start containers in the background.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker-compose up -f docker-compose.json</code>: Create and start containers defined in a JSON file.</li>
 </ul>
+
+<h3 id="examples">Examples</h3>
+
+<h4 id="example-1">Example 1</h4>
+
+<p>You can use a JSON file instead of a YML file, but in that case you have to specify to Docker Compose the file that you want to use.</p>
+
+<p>Start a Redis and a Mysql container. <strong>Note that with Docker Compose, the containers that you start at the same time, they will be connected to the same network automatically</strong>.</p>
+
+<p>docker-compose.yml file:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">redis</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis:3.2.12</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./redis:/data</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="na">mysql</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mysql</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:5.6</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./mysql:/var/lib/mysql</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+</code></pre></div></div>
+
+<p>And then run <code class="language-plaintext highlighter-rouge">docker-compose -d up</code> to start the containers in the background.</p>
+
+<h4 id="example-2">Example 2</h4>
+
+<p>Start an Nginx server and a Node.js application, and configure the Nginx to act as a proxy for the nodejs application.</p>
+
+<p>lb.conf file (for Nginx):</p>
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">upstream</span> <span class="n">serv</span>{
+  <span class="n">server</span> <span class="n">nodejs</span>:<span class="m">3000</span>;
+}
+
+<span class="n">server</span> {
+  <span class="n">listen</span> <span class="m">8080</span>;
+  <span class="n">location</span> / {
+    <span class="n">proxy_pass</span> <span class="n">http</span>://<span class="n">serv</span>;
+  }
+}
+</code></pre></div></div>
+
+<p>docker-compose.yml file:</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">nodejs</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">nodejs</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">node:latest</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./app:/opt/app</span>
+    <span class="c1"># Run as soon as the container starts</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">node /opt/app/app.js</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:latest</span>
+    <span class="c1"># Port forwarding</span>
+    <span class="na">port</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">1313:8080"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./nginx/lb.conf:/etc/nginx/conf.d/lb.conf</span>
+    <span class="c1"># Wait until the nodejs service has started, then start the nginx service</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">nodejs</span>
+</code></pre></div></div>
+
+<p>And then run <code class="language-plaintext highlighter-rouge">docker-compose -d up</code> to start the containers in the background.</p>
+
+<h4 id="example-3">Example 3</h4>
+
+<p>The same as the last one, but now use a Dockerfile to build a custom image for the nodejs application, and we start a bunch of nodejs applications and set a load balancer with Nginx.</p>
+
+<p>lb.conf file (for Nginx):</p>
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">upstream</span> <span class="n">serv</span>{
+  <span class="n">server</span> <span class="n">ex3_nodejs_1</span>:<span class="m">3000</span>;
+  <span class="n">server</span> <span class="n">ex3_nodejs_2</span>:<span class="m">3000</span>;
+  <span class="n">server</span> <span class="n">ex3_nodejs_3</span>:<span class="m">3000</span>;
+  <span class="n">server</span> <span class="n">ex3_nodejs_4</span>:<span class="m">3000</span>;
+}
+
+<span class="n">server</span> {
+  <span class="n">listen</span> <span class="m">8080</span>;
+  <span class="n">location</span> / {
+    <span class="n">proxy_pass</span> <span class="n">http</span>://<span class="n">serv</span>;
+  }
+}
+</code></pre></div></div>
+
+<p>Dockerfile:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">FROM node:latest</span>
+</code></pre></div></div>
+
+<p>docker-compose.yml file:</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">nodejs</span><span class="pi">:</span>
+    <span class="c1">#container_name: nodejs</span>
+    <span class="c1"># Use the Dockerfile in the current working directory (.) to build the container image</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./app:/opt/app</span>
+    <span class="c1"># Run as soon as the container starts</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">node /opt/app/app.js</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:latest</span>
+    <span class="c1"># Port forwarding</span>
+    <span class="na">port</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">1313:8080"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./nginx/lb.conf:/etc/nginx/conf.d/lb.conf</span>
+    <span class="c1"># Wait until the nodejs service has started, then start the nginx service</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">nodejs</span>
+</code></pre></div></div>
+
+<p>And then run <code class="language-plaintext highlighter-rouge">docker-compose -d up --scale nodejs=4</code> to start the containers in the background, and start 4 containers of the nodejs application.</p>
 
   </div><a class="u-url" href="/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" hidden></a>
 </article>

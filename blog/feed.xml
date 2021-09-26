@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-25T13:43:34+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerizing an Angular web application with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html" rel="alternate" type="text/html" title="Containerizing an Angular web application with Docker" /><published>2021-09-25T00:00:00+02:00</published><updated>2021-09-25T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html">&lt;h2 id=&quot;description-of-the-project&quot;&gt;Description of the project&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-26T11:05:27+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerizing an Angular web application with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html" rel="alternate" type="text/html" title="Containerizing an Angular web application with Docker" /><published>2021-09-25T00:00:00+02:00</published><updated>2021-09-25T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html">&lt;h2 id=&quot;description-of-the-project&quot;&gt;Description of the project&lt;/h2&gt;
 
 &lt;p&gt;Deploy an Angular web application in Docker. The Angular web application should be built with the Angular CLI tool and with Docker Compose.&lt;/p&gt;
 
@@ -416,6 +416,19 @@ microk8s dashboard-proxy
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker image save&lt;/code&gt;: Saves an image to a .tar archive.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;containers&quot;&gt;Containers&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker container ls&lt;/code&gt;: Show the running containers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker stop &amp;lt;container_name&amp;gt;&lt;/code&gt;: Stop the container named &amp;lt;container_name&amp;gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;networks&quot;&gt;Networks&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker network ls&lt;/code&gt;: List the networks.&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&quot;network-drivers&quot;&gt;Network drivers&lt;/h3&gt;
 
 &lt;p&gt;Docker has several network drivers available:&lt;/p&gt;
@@ -426,6 +439,51 @@ microk8s dashboard-proxy
   &lt;li&gt;Macvlan: Some legacy apps demand to be connected to the physical network. This driver can be used to assign a MAC address to each container’s virtual network interface.&lt;/li&gt;
   &lt;li&gt;None: Used to completely disable the network on a container.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h3 id=&quot;docker-usage-examples&quot;&gt;Docker usage examples&lt;/h3&gt;
+
+&lt;p&gt;Build a custom image from a Dockerfile on the current working directory:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; new_image_name &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run a Python3 program that’s on the current working directory on a Python3 container and remove the container when the program finishes:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/src python:3 python/src/program.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Start a Python3 container in iteractive mode (open the interpreter shell):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/src python:3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Start a Python3 container and open a Bash shell:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/src python:3 /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a Dockerfile from the base image of Python3 and add numpy to it, then build the image from the Dockerfile of the current working directory (&lt;em&gt;.&lt;/em&gt;):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Dockerfile &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;EOF&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+FROM python:3
+
+RUN pip3 install numpy
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF
+&lt;/span&gt;docker build &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; &amp;lt;new_image_name&amp;gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Start an Nginx container to serve files of the current working directory, forwarding the port 80 of the host to the port 80 of the container. As Nginx is a web server, it will keep running until we stop it:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/usr/share/nginx/html &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 80:80 nginx:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The same as the last one, but run the container in background mode (&lt;em&gt;-d&lt;/em&gt; for &lt;em&gt;daemon&lt;/em&gt;):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/usr/share/nginx/html &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 80:80 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; nginx:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Open a shell on a container running in the background:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &amp;lt;container_name&amp;gt; /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a network, a Mysql container in the background (setting the environment variable MYSQL_ROOT_PASSWORD to ‘root’) and a Node.js container with an open Bash shell. &lt;strong&gt;Note that Docker automatically sets up DNS entries so the containers can communicate with each other using their names&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker network create &amp;lt;network_name&amp;gt;
+docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; mysql &lt;span class=&quot;nt&quot;&gt;--net&lt;/span&gt; &amp;lt;network_name&amp;gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt; mysql:5.6
+docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; nodejs &lt;span class=&quot;nt&quot;&gt;--net&lt;/span&gt; &amp;lt;network_name&amp;gt; nodejs:8 /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;docker-compose&quot;&gt;Docker Compose&lt;/h2&gt;
 
@@ -448,7 +506,7 @@ microk8s dashboard-proxy
 &lt;ol&gt;
   &lt;li&gt;Create a Dockerfile.&lt;/li&gt;
   &lt;li&gt;Create docker-compose.yml&lt;/li&gt;
-  &lt;li&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose up&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;The following is a docker-compose.yml example file:&lt;/p&gt;
@@ -472,19 +530,143 @@ microk8s dashboard-proxy
 
 &lt;p&gt;Here is a list of the basic Docker Compose commands:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose build&lt;/code&gt;: Build or rebuild services.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker componse create&lt;/code&gt;: Create containers for a service.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose down&lt;/code&gt;: Stop and remove containers and networks.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose kill&lt;/code&gt;: Force stop service containers.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose ls&lt;/code&gt;: List running compose projects.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose pause&lt;/code&gt;: Pause the services.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose ps&lt;/code&gt;: List containers.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose restart&lt;/code&gt;: Restart containers.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose rm&lt;/code&gt;: Removed stopped service containers.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose start&lt;/code&gt;: Start services.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose stop&lt;/code&gt;: Stop services.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker compose up&lt;/code&gt;: Create and start containers.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Containerization</summary></entry><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose build&lt;/code&gt;: Build or rebuild services.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-componse create&lt;/code&gt;: Create containers for a service.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose down&lt;/code&gt;: Stop and remove containers and networks.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose kill&lt;/code&gt;: Force stop service containers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose ls&lt;/code&gt;: List running compose projects.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose pause&lt;/code&gt;: Pause the services.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose ps&lt;/code&gt;: List containers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose restart&lt;/code&gt;: Restart containers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose rm&lt;/code&gt;: Removed stopped service containers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose start&lt;/code&gt;: Start services.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose stop&lt;/code&gt;: Stop services.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up&lt;/code&gt;: Create and start containers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up -d&lt;/code&gt;: Create and start containers in the background.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up -f docker-compose.json&lt;/code&gt;: Create and start containers defined in a JSON file.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;examples&quot;&gt;Examples&lt;/h3&gt;
+
+&lt;h4 id=&quot;example-1&quot;&gt;Example 1&lt;/h4&gt;
+
+&lt;p&gt;You can use a JSON file instead of a YML file, but in that case you have to specify to Docker Compose the file that you want to use.&lt;/p&gt;
+
+&lt;p&gt;Start a Redis and a Mysql container. &lt;strong&gt;Note that with Docker Compose, the containers that you start at the same time, they will be connected to the same network automatically&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;docker-compose.yml file:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;redis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis:3.2.12&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./redis:/data&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mysql&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mysql:5.6&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./mysql:/var/lib/mysql&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose -d up&lt;/code&gt; to start the containers in the background.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-2&quot;&gt;Example 2&lt;/h4&gt;
+
+&lt;p&gt;Start an Nginx server and a Node.js application, and configure the Nginx to act as a proxy for the nodejs application.&lt;/p&gt;
+
+&lt;p&gt;lb.conf file (for Nginx):&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;upstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serv&lt;/span&gt;{
+  &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodejs&lt;/span&gt;:&lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;;
+}
+
+&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; {
+  &lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt;;
+  &lt;span class=&quot;n&quot;&gt;location&lt;/span&gt; / {
+    &lt;span class=&quot;n&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;://&lt;span class=&quot;n&quot;&gt;serv&lt;/span&gt;;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;docker-compose.yml file:&lt;/p&gt;
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;nodejs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nodejs&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node:latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./app:/opt/app&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Run as soon as the container starts&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node /opt/app/app.js&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;nginx&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nginx&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nginx:latest&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Port forwarding&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1313:8080&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./nginx/lb.conf:/etc/nginx/conf.d/lb.conf&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Wait until the nodejs service has started, then start the nginx service&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nodejs&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose -d up&lt;/code&gt; to start the containers in the background.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-3&quot;&gt;Example 3&lt;/h4&gt;
+
+&lt;p&gt;The same as the last one, but now use a Dockerfile to build a custom image for the nodejs application, and we start a bunch of nodejs applications and set a load balancer with Nginx.&lt;/p&gt;
+
+&lt;p&gt;lb.conf file (for Nginx):&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;upstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serv&lt;/span&gt;{
+  &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex3_nodejs_1&lt;/span&gt;:&lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;;
+  &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex3_nodejs_2&lt;/span&gt;:&lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;;
+  &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex3_nodejs_3&lt;/span&gt;:&lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;;
+  &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex3_nodejs_4&lt;/span&gt;:&lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;;
+}
+
+&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; {
+  &lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt;;
+  &lt;span class=&quot;n&quot;&gt;location&lt;/span&gt; / {
+    &lt;span class=&quot;n&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;://&lt;span class=&quot;n&quot;&gt;serv&lt;/span&gt;;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dockerfile:&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;FROM node:latest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;docker-compose.yml file:&lt;/p&gt;
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;nodejs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#container_name: nodejs&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Use the Dockerfile in the current working directory (.) to build the container image&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./app:/opt/app&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Run as soon as the container starts&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node /opt/app/app.js&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;nginx&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nginx&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nginx:latest&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Port forwarding&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1313:8080&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./nginx/lb.conf:/etc/nginx/conf.d/lb.conf&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Wait until the nodejs service has started, then start the nginx service&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nodejs&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose -d up --scale nodejs=4&lt;/code&gt; to start the containers in the background, and start 4 containers of the nodejs application.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Containerization</summary></entry><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Ansible is a tool that allows us to automate several things:&lt;/p&gt;
 &lt;ul&gt;
