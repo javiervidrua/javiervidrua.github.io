@@ -385,6 +385,53 @@ docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class=
 
 <p>And then run <code class="language-plaintext highlighter-rouge">docker-compose -d up --scale nodejs=4</code> to start the containers in the background, and start 4 containers of the nodejs application.</p>
 
+<h2 id="docker-swarm-mode">Docker Swarm Mode</h2>
+
+<p>Swarm Mode is a cluster management and orchestration tool that’s embedded right in the Docker Engine. If you know what Kubernetes is, the best way to describe Swarm Mode is to think about it as a Kubernetes alternative that’s easier to use and that I would recommend for simple applications that are not too complex to manage.</p>
+
+<p>Comparing it to Docker Compose, and its ability to define and run containers, you can define and run Swarm service stacks.</p>
+
+<p>If you want detailed information, check the <a href="https://docs.docker.com/engine/swarm/">official page</a>.</p>
+
+<h3 id="key-concepts">Key concepts</h3>
+
+<h4 id="node">Node</h4>
+
+<p>A node is an <strong>instance of a Docker Engine that takes part in the swarm</strong>. You can have one or more on a single computer, but usually they are distributed across multiple machines. There are two types:</p>
+<ul>
+  <li>Manager node: Dispatches the work (tasks) to the worker nodes. By default, they act as worker nodes too.</li>
+  <li>Worker node: Receives and execute tasks dispatched from the manager nodes. It notifies the manager of the current state of operation periodically.</li>
+</ul>
+
+<h4 id="service">Service</h4>
+
+<p>It is the <strong>definition of the tasks that will get executed</strong>.</p>
+
+<p>A service specification dictates the container image to use and the commands to execute inside the running containers.</p>
+
+<p>In the replicated services model, the swarm manager sends replica tasks to the worker nodes, and for global services, the swarm runs one task for the service on every node of the cluster.</p>
+
+<h4 id="task">Task</h4>
+
+<p>It is made of a container and the commands to run inside said container. It is the <strong>minimum unit of swarm</strong>. Once a task gets assigned to a node, it can only run on the assigned node.</p>
+
+<h4 id="load-balancing">Load balancing</h4>
+
+<p>The manager node uses <strong>ingress load balancing</strong>, so the services you want are made available to the Internet. If a port is not specified, is uses a port from the range 30000-32767.</p>
+
+<p>Like Docker Compose, Swarm Mode automatically assigns DNS records to each service, and uses internal load balancing to distribute requests between the services based on the DNS names.</p>
+
+<h3 id="getting-started">Getting started</h3>
+
+<p>In order to be able to use Swarm Mode there are several prerequisites that need to be satisfied:</p>
+<ul>
+  <li>Three Linux hosts that can communicate over a network, with Docker installed.</li>
+  <li>The IP address of the manager. You should use a fixed IP address for the manager as all nodes in the swarm need to connect to it.</li>
+  <li>The ports 2377, 7946 and 4789 (and 50 if you plan to use <code class="language-plaintext highlighter-rouge">--opt encrypted</code> to use secure connections between the machines) open and allowed by default.</li>
+</ul>
+
+<p>More coming soon.</p>
+
   </div><a class="u-url" href="/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" hidden></a>
 </article>
 

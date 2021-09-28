@@ -1,4 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-26T11:05:27+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Containerizing an Angular web application with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html" rel="alternate" type="text/html" title="Containerizing an Angular web application with Docker" /><published>2021-09-25T00:00:00+02:00</published><updated>2021-09-25T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html">&lt;h2 id=&quot;description-of-the-project&quot;&gt;Description of the project&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-28T17:53:12+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Vagrant</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant.html" rel="alternate" type="text/html" title="Vagrant" /><published>2021-09-28T00:00:00+02:00</published><updated>2021-09-28T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant.html">&lt;h2 id=&quot;what-is-vagrant&quot;&gt;What is Vagrant&lt;/h2&gt;
+
+&lt;p&gt;Vagrant (by HashiCorp) is a tool that lets you manage and build virtual machine environments in a simple and easy way.&lt;/p&gt;
+
+&lt;p&gt;It lowers the development setup time, increases production parity and completely eliminates the situations where something works on one machine but not on the others.&lt;/p&gt;
+
+&lt;p&gt;It uses virtual machine providers like VMware, VirtualBox or AWS to name a few, and provisioning tools to install and configure the software on the virtual machine.&lt;/p&gt;
+
+&lt;p&gt;For that, it uses a Vagrantfile, which describes the type of machine and the steps to configure it and provision it.&lt;/p&gt;
+
+&lt;p&gt;For provisioning the virtual machines, boxes are used. If you know what Docker is, boxes are like Docker images, that you can download from &lt;a href=&quot;https://app.vagrantup.com/boxes/search&quot;&gt;here&lt;/a&gt; and use for free.&lt;/p&gt;
+
+&lt;p&gt;It allows and makes easy to do cool stuff like folder sharing between the host and the virtual machines.&lt;/p&gt;
+
+&lt;p&gt;For more detailed information, you can check the &lt;a href=&quot;https://www.vagrantup.com/docs&quot;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Check the &lt;a href=&quot;https://www.vagrantup.com/downloads&quot;&gt;official webpage&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;For more examples, check &lt;a href=&quot;https://learn.hashicorp.com/tutorials/vagrant/getting-started-index?in=vagrant/getting-started&quot;&gt;this&lt;/a&gt; out.&lt;/p&gt;
+
+&lt;h3 id=&quot;initialize-a-virtual-machine&quot;&gt;Initialize a virtual machine&lt;/h3&gt;
+
+&lt;p&gt;The following command will create the Vagrantfile, which contains a default configuration for an Ubuntu bionic system.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant init hashicorp/bionic64
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you have a project with a Vagrantfile, you can initialize it by running:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;start-the-virtual-machine&quot;&gt;Start the virtual machine&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;suspend-the-virtual-machine&quot;&gt;Suspend the virtual machine&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant &lt;span class=&quot;nb&quot;&gt;suspend&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;destroy-the-virtual-machine&quot;&gt;Destroy the virtual machine&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant destroy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh-into-the-machine&quot;&gt;SSH into the machine&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant ssh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-a-box-to-your-vagrantfile&quot;&gt;Install a box to your Vagrantfile&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant box add ubuntu/trusty64
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;list-the-downloaded-boxes&quot;&gt;List the downloaded boxes&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant box list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;remove-a-downloaded-box&quot;&gt;Remove a downloaded box&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant box remove ubuntu/trusty64
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;folder-sharing&quot;&gt;Folder sharing&lt;/h3&gt;
+
+&lt;p&gt;By default, Vagrant shares your project directory to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/vagrant&lt;/code&gt; directory on the guest machine.&lt;/p&gt;
+
+&lt;h3 id=&quot;provision-a-virtual-machine&quot;&gt;Provision a virtual machine&lt;/h3&gt;
+
+&lt;p&gt;You can write the scripts that will be launched when provisioning the virtual machine. For example, the following is a script that will install the Apache web server in the virtual machine and start serving the files on the project directory:&lt;/p&gt;
+
+&lt;p&gt;bootstrap.sh:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;
+apt-get update
+apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; apache2
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; /var/www &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; /var/www
+  &lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-fs&lt;/span&gt; /vagrant /var/www
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Vagrantfile:&lt;/p&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Vagrant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;box&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hashicorp/bionic64&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;provision&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:shell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;path: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;bootstrap.sh&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;reload-the-virtual-machine-for-updates-to-the-vagrantfile&quot;&gt;Reload the virtual machine (for updates to the Vagrantfile)&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant reload &lt;span class=&quot;nt&quot;&gt;--provision&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">What is Vagrant</summary></entry><entry><title type="html">Containerizing an Angular web application with Docker</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html" rel="alternate" type="text/html" title="Containerizing an Angular web application with Docker" /><published>2021-09-25T00:00:00+02:00</published><updated>2021-09-25T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/25/Containerizing-an-Angular-web-application-with-Docker.html">&lt;h2 id=&quot;description-of-the-project&quot;&gt;Description of the project&lt;/h2&gt;
 
 &lt;p&gt;Deploy an Angular web application in Docker. The Angular web application should be built with the Angular CLI tool and with Docker Compose.&lt;/p&gt;
 
@@ -666,7 +763,54 @@ docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&qu
       &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nodejs&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;And then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose -d up --scale nodejs=4&lt;/code&gt; to start the containers in the background, and start 4 containers of the nodejs application.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Containerization</summary></entry><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;And then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose -d up --scale nodejs=4&lt;/code&gt; to start the containers in the background, and start 4 containers of the nodejs application.&lt;/p&gt;
+
+&lt;h2 id=&quot;docker-swarm-mode&quot;&gt;Docker Swarm Mode&lt;/h2&gt;
+
+&lt;p&gt;Swarm Mode is a cluster management and orchestration tool that’s embedded right in the Docker Engine. If you know what Kubernetes is, the best way to describe Swarm Mode is to think about it as a Kubernetes alternative that’s easier to use and that I would recommend for simple applications that are not too complex to manage.&lt;/p&gt;
+
+&lt;p&gt;Comparing it to Docker Compose, and its ability to define and run containers, you can define and run Swarm service stacks.&lt;/p&gt;
+
+&lt;p&gt;If you want detailed information, check the &lt;a href=&quot;https://docs.docker.com/engine/swarm/&quot;&gt;official page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;key-concepts&quot;&gt;Key concepts&lt;/h3&gt;
+
+&lt;h4 id=&quot;node&quot;&gt;Node&lt;/h4&gt;
+
+&lt;p&gt;A node is an &lt;strong&gt;instance of a Docker Engine that takes part in the swarm&lt;/strong&gt;. You can have one or more on a single computer, but usually they are distributed across multiple machines. There are two types:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Manager node: Dispatches the work (tasks) to the worker nodes. By default, they act as worker nodes too.&lt;/li&gt;
+  &lt;li&gt;Worker node: Receives and execute tasks dispatched from the manager nodes. It notifies the manager of the current state of operation periodically.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;service&quot;&gt;Service&lt;/h4&gt;
+
+&lt;p&gt;It is the &lt;strong&gt;definition of the tasks that will get executed&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A service specification dictates the container image to use and the commands to execute inside the running containers.&lt;/p&gt;
+
+&lt;p&gt;In the replicated services model, the swarm manager sends replica tasks to the worker nodes, and for global services, the swarm runs one task for the service on every node of the cluster.&lt;/p&gt;
+
+&lt;h4 id=&quot;task&quot;&gt;Task&lt;/h4&gt;
+
+&lt;p&gt;It is made of a container and the commands to run inside said container. It is the &lt;strong&gt;minimum unit of swarm&lt;/strong&gt;. Once a task gets assigned to a node, it can only run on the assigned node.&lt;/p&gt;
+
+&lt;h4 id=&quot;load-balancing&quot;&gt;Load balancing&lt;/h4&gt;
+
+&lt;p&gt;The manager node uses &lt;strong&gt;ingress load balancing&lt;/strong&gt;, so the services you want are made available to the Internet. If a port is not specified, is uses a port from the range 30000-32767.&lt;/p&gt;
+
+&lt;p&gt;Like Docker Compose, Swarm Mode automatically assigns DNS records to each service, and uses internal load balancing to distribute requests between the services based on the DNS names.&lt;/p&gt;
+
+&lt;h3 id=&quot;getting-started&quot;&gt;Getting started&lt;/h3&gt;
+
+&lt;p&gt;In order to be able to use Swarm Mode there are several prerequisites that need to be satisfied:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Three Linux hosts that can communicate over a network, with Docker installed.&lt;/li&gt;
+  &lt;li&gt;The IP address of the manager. You should use a fixed IP address for the manager as all nodes in the swarm need to connect to it.&lt;/li&gt;
+  &lt;li&gt;The ports 2377, 7946 and 4789 (and 50 if you plan to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--opt encrypted&lt;/code&gt; to use secure connections between the machines) open and allowed by default.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More coming soon.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Containerization</summary></entry><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Ansible is a tool that allows us to automate several things:&lt;/p&gt;
 &lt;ul&gt;
@@ -2177,38 +2321,4 @@ Disassembly of section .init:
 
 &lt;p&gt;And last, this webpage contains lots of &lt;em&gt;.duck&lt;/em&gt; scripts that you can translate to &lt;em&gt;Digispark&lt;/em&gt; using the &lt;em&gt;Duckyspark&lt;/em&gt; tool:&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://ducktoolkit.com/userscripts
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Do you want to have a Rubber Ducky but you don’t want to spend 50$ on it?</summary></entry><entry><title type="html">Kali Linux on WSL with GUI</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI.html" rel="alternate" type="text/html" title="Kali Linux on WSL with GUI" /><published>2020-10-25T23:00:00+01:00</published><updated>2020-10-25T23:00:00+01:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2020/10/25/Kali-Linux-on-WSL-with-GUI.html">&lt;h2 id=&quot;install-kali-linux&quot;&gt;Install &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
-
-&lt;p&gt;You can install Kali-linux from the Microsoft Store with a few clicks, or alternatively, you can install it &lt;a href=&quot;https://javiervidrua.github.io/jekyll/update/2020/10/17/managing-wsl-distributions.html&quot;&gt;&lt;strong&gt;from the Powershell&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;install-kali-win-kex&quot;&gt;Install &lt;em&gt;kali-win-kex&lt;/em&gt;&lt;/h2&gt;
-
-&lt;p&gt;Now launch &lt;em&gt;Kali&lt;/em&gt; and execute these commands:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;kali-win-kex &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The last two steps can easily be done as shown in this image:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-install.png&quot; alt=&quot;Install&quot; title=&quot;Install&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;run-kex&quot;&gt;Run &lt;em&gt;kex&lt;/em&gt;&lt;/h2&gt;
-
-&lt;p&gt;All done! Now you can run (from &lt;em&gt;Kali&lt;/em&gt;) the following command:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kex &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;First you will get something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-start.png&quot; alt=&quot;Start&quot; title=&quot;Start&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-vnc.png&quot; alt=&quot;Vnc&quot; title=&quot;Vnc&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;And when you enter your password the desktop will appear!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/images/kali-win-kex-desktop.png&quot; alt=&quot;Desktop&quot; title=&quot;Desktop&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;use-kali-linux&quot;&gt;Use &lt;em&gt;Kali linux&lt;/em&gt;&lt;/h2&gt;
-
-&lt;p&gt;Now you can open graphical tools like &lt;em&gt;Burpsuite&lt;/em&gt;, &lt;em&gt;Bettercap&lt;/em&gt; or &lt;em&gt;Cherrytree&lt;/em&gt;, without needing to start up a VMware or VirtualBox.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Install Kali linux</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Do you want to have a Rubber Ducky but you don’t want to spend 50$ on it?</summary></entry></feed>
