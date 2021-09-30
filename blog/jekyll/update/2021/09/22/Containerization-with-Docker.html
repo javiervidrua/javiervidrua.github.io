@@ -116,6 +116,8 @@
 <span class="nb">sudo </span>sh get-docker.sh
 </code></pre></div></div>
 
+<p>To get the configuration of the system, run <code class="language-plaintext highlighter-rouge">docker info</code>.</p>
+
 <h3 id="images">Images</h3>
 
 <p>To create a Docker Image, you can write a Dockerfile using a simple syntax that defines the steps required to set everything up.</p>
@@ -137,7 +139,7 @@
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">docker container ls</code>: Show the running containers.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker stop &lt;container_name&gt;</code>: Stop the container named &lt;container_name&gt;.</li>
+  <li><code class="language-plaintext highlighter-rouge">docker container stop &lt;container_name&gt;</code>: Stop the container named &lt;container_name&gt;.</li>
 </ul>
 
 <h3 id="networks">Networks</h3>
@@ -430,7 +432,106 @@ docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class=
   <li>The ports 2377, 7946 and 4789 (and 50 if you plan to use <code class="language-plaintext highlighter-rouge">--opt encrypted</code> to use secure connections between the machines) open and allowed by default.</li>
 </ul>
 
-<p>More coming soon.</p>
+<h4 id="creating-a-swarm">Creating a swarm</h4>
+
+<p>Once those requirements are met, you can create a swarm. To do so, connect to the manager node and run the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm init <span class="nt">--advertise-addr</span> &lt;manager_IP&gt;
+</code></pre></div></div>
+
+<p>That will output something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Swarm initialized: current node (xi3zvyg3wgnv04jz0z36b9kyn) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-0yjkvziblj2nuwz35cl9uc7evx3p93onhbxan66gz7wsvwi7tp-02kyqwtgpjotdbzqh0bu1nj2g 10.10.10.10:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+</code></pre></div></div>
+
+<p>If you clear the terminal, you can get the join command for a worker by running <code class="language-plaintext highlighter-rouge">docker swarm join-token worker</code>.</p>
+
+<p>Now we can run the following command to check the status of the nodes:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node <span class="nb">ls</span>
+</code></pre></div></div>
+
+<p>It will output something like (note the *, it means that Docker is connected to it):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+xi3zvyg3wgnv04jz0z36b9kyn *   ubuntu     Ready     Active         Leader           20.10.8
+</code></pre></div></div>
+
+<h4 id="adding-worker-nodes-to-the-swarm">Adding worker nodes to the swarm</h4>
+
+<p>You can run the join command provided when the swarm was initialized on the worker nodes to join the swarm. In my case:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm <span class="nb">join</span> <span class="nt">--token</span> SWMTKN-1-0yjkvziblj2nuwz35cl9uc7evx3p93onhbxan66gz7wsvwi7tp-02kyqwtgpjotdbzqh0bu1nj2g 10.10.10.10:2377
+</code></pre></div></div>
+
+<p>And it will output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This node joined a swarm as a worker.
+</code></pre></div></div>
+
+<p>Now, on the manager node, we can run <code class="language-plaintext highlighter-rouge">docker node ls</code>, and we should see the new node there:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+xi3zvyg3wgnv04jz0z36b9kyn *   ubuntu         Ready     Active         Leader           20.10.8
+yox9u6ux9aom7w5mtal5woqog     ubuntuserver   Ready     Active                          20.10.8
+</code></pre></div></div>
+
+<h4 id="deploying-a-service-to-the-swarm">Deploying a service to the swarm</h4>
+
+<p>From the manager node, create a service:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create <span class="nt">--replicas</span> 1 <span class="nt">--name</span> <span class="nb">test </span>alpine ping docker.com
+</code></pre></div></div>
+
+<p>That will create a service named “test”, with 1 replica, using the image python tagged 3 that runs the command <code class="language-plaintext highlighter-rouge">ping docker.com</code>.</p>
+
+<p>Now you can inspect the services running with the command <code class="language-plaintext highlighter-rouge">docker service ls</code>.</p>
+
+<h4 id="inspecting-a-service">Inspecting a service</h4>
+
+<p>Run the following command to get the output in JSON format:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service inspect &lt;ID&gt;
+</code></pre></div></div>
+
+<p>Add <code class="language-plaintext highlighter-rouge">--pretty</code> to the above command to get a more readable output.</p>
+
+<p>To see which nodes are running the service, run <code class="language-plaintext highlighter-rouge">docker service ps &lt;service_name | service_ID&gt;</code>. Either way, it will output something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID             NAME      IMAGE           NODE      DESIRED STATE   CURRENT STATE           ERROR     PORTS
+7ihrx5jn31fr   test.1    alpine:latest   ubuntu    Running         Running 5 minutes ago
+</code></pre></div></div>
+
+<h4 id="scaling-the-service">Scaling the service</h4>
+
+<p>Scaling a service is really easy with Swarm Mode, just run <code class="language-plaintext highlighter-rouge">docker service scale &lt;service_name | service_ID&gt;=&lt;number_of_replicas&gt;</code>.</p>
+
+<p>It will output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test scaled to 3
+overall progress: 3 out of 3 tasks 
+1/3: running   [==================================================&gt;] 
+2/3: running   [==================================================&gt;] 
+3/3: running   [==================================================&gt;] 
+verify: Service converged
+</code></pre></div></div>
+
+<p>Now if we list the containers of the service with <code class="language-plaintext highlighter-rouge">docker service ps &lt;service_name | service_ID&gt;</code>, we get:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID             NAME      IMAGE           NODE           DESIRED STATE   CURRENT STATE            ERROR     PORTS
+7ihrx5jn31fr   test.1    alpine:latest   ubuntu         Running         Running 11 minutes ago             
+z6ctn65c04h6   test.2    alpine:latest   ubuntuserver   Running         Running 32 seconds ago             
+ahmdt70a0je5   test.3    alpine:latest   ubuntuserver   Running         Running 32 seconds ago
+</code></pre></div></div>
+
+<h4 id="deleting-a-service">Deleting a service</h4>
+
+<p>Run the command <code class="language-plaintext highlighter-rouge">docker service rm &lt;service_name | service_ID&gt;</code>.</p>
+
+<p>It will take a few seconds (30s) for the containers to be cleaned up. You can check the state with the command <code class="language-plaintext highlighter-rouge">docker container ls</code> or with <code class="language-plaintext highlighter-rouge">docker ps</code>.</p>
+
+<h4 id="more-detailed-info">More detailed info</h4>
+
+<p>Check these pages:</p>
+<ul>
+  <li><a href="https://docs.docker.com/engine/swarm/networking/#configure-service-discovery">https://docs.docker.com/engine/swarm/networking/#configure-service-discovery</a></li>
+  <li><a href="https://docs.docker.com/engine/swarm/ingress/">https://docs.docker.com/engine/swarm/ingress/</a></li>
+</ul>
 
   </div><a class="u-url" href="/blog/jekyll/update/2021/09/22/Containerization-with-Docker.html" hidden></a>
 </article>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-28T17:53:12+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Vagrant</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant.html" rel="alternate" type="text/html" title="Vagrant" /><published>2021-09-28T00:00:00+02:00</published><updated>2021-09-28T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant.html">&lt;h2 id=&quot;what-is-vagrant&quot;&gt;What is Vagrant&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://javiervidrua.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://javiervidrua.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-09-30T10:51:24+02:00</updated><id>https://javiervidrua.github.io/blog/feed.xml</id><title type="html">Blog</title><subtitle></subtitle><entry><title type="html">Vagrant</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant.html" rel="alternate" type="text/html" title="Vagrant" /><published>2021-09-28T00:00:00+02:00</published><updated>2021-09-28T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/28/Vagrant.html">&lt;h2 id=&quot;what-is-vagrant&quot;&gt;What is Vagrant&lt;/h2&gt;
 
 &lt;p&gt;Vagrant (by HashiCorp) is a tool that lets you manage and build virtual machine environments in a simple and easy way.&lt;/p&gt;
 
@@ -496,6 +496,8 @@ microk8s dashboard-proxy
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh get-docker.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;p&gt;To get the configuration of the system, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker info&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
 
 &lt;p&gt;To create a Docker Image, you can write a Dockerfile using a simple syntax that defines the steps required to set everything up.&lt;/p&gt;
@@ -517,7 +519,7 @@ microk8s dashboard-proxy
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker container ls&lt;/code&gt;: Show the running containers.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker stop &amp;lt;container_name&amp;gt;&lt;/code&gt;: Stop the container named &amp;lt;container_name&amp;gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker container stop &amp;lt;container_name&amp;gt;&lt;/code&gt;: Stop the container named &amp;lt;container_name&amp;gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;networks&quot;&gt;Networks&lt;/h3&gt;
@@ -810,7 +812,106 @@ docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&qu
   &lt;li&gt;The ports 2377, 7946 and 4789 (and 50 if you plan to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--opt encrypted&lt;/code&gt; to use secure connections between the machines) open and allowed by default.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;More coming soon.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Containerization</summary></entry><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+&lt;h4 id=&quot;creating-a-swarm&quot;&gt;Creating a swarm&lt;/h4&gt;
+
+&lt;p&gt;Once those requirements are met, you can create a swarm. To do so, connect to the manager node and run the following command:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker swarm init &lt;span class=&quot;nt&quot;&gt;--advertise-addr&lt;/span&gt; &amp;lt;manager_IP&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That will output something like:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Swarm initialized: current node (xi3zvyg3wgnv04jz0z36b9kyn) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-0yjkvziblj2nuwz35cl9uc7evx3p93onhbxan66gz7wsvwi7tp-02kyqwtgpjotdbzqh0bu1nj2g 10.10.10.10:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you clear the terminal, you can get the join command for a worker by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker swarm join-token worker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now we can run the following command to check the status of the nodes:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker node &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It will output something like (note the *, it means that Docker is connected to it):&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ID                            HOSTNAME   STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+xi3zvyg3wgnv04jz0z36b9kyn *   ubuntu     Ready     Active         Leader           20.10.8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;adding-worker-nodes-to-the-swarm&quot;&gt;Adding worker nodes to the swarm&lt;/h4&gt;
+
+&lt;p&gt;You can run the join command provided when the swarm was initialized on the worker nodes to join the swarm. In my case:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker swarm &lt;span class=&quot;nb&quot;&gt;join&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--token&lt;/span&gt; SWMTKN-1-0yjkvziblj2nuwz35cl9uc7evx3p93onhbxan66gz7wsvwi7tp-02kyqwtgpjotdbzqh0bu1nj2g 10.10.10.10:2377
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And it will output:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;This node joined a swarm as a worker.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, on the manager node, we can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker node ls&lt;/code&gt;, and we should see the new node there:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+xi3zvyg3wgnv04jz0z36b9kyn *   ubuntu         Ready     Active         Leader           20.10.8
+yox9u6ux9aom7w5mtal5woqog     ubuntuserver   Ready     Active                          20.10.8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;deploying-a-service-to-the-swarm&quot;&gt;Deploying a service to the swarm&lt;/h4&gt;
+
+&lt;p&gt;From the manager node, create a service:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker service create &lt;span class=&quot;nt&quot;&gt;--replicas&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;alpine ping docker.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That will create a service named “test”, with 1 replica, using the image python tagged 3 that runs the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ping docker.com&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can inspect the services running with the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker service ls&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;inspecting-a-service&quot;&gt;Inspecting a service&lt;/h4&gt;
+
+&lt;p&gt;Run the following command to get the output in JSON format:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker service inspect &amp;lt;ID&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--pretty&lt;/code&gt; to the above command to get a more readable output.&lt;/p&gt;
+
+&lt;p&gt;To see which nodes are running the service, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker service ps &amp;lt;service_name | service_ID&amp;gt;&lt;/code&gt;. Either way, it will output something like:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ID             NAME      IMAGE           NODE      DESIRED STATE   CURRENT STATE           ERROR     PORTS
+7ihrx5jn31fr   test.1    alpine:latest   ubuntu    Running         Running 5 minutes ago
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;scaling-the-service&quot;&gt;Scaling the service&lt;/h4&gt;
+
+&lt;p&gt;Scaling a service is really easy with Swarm Mode, just run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker service scale &amp;lt;service_name | service_ID&amp;gt;=&amp;lt;number_of_replicas&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It will output:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;test scaled to 3
+overall progress: 3 out of 3 tasks 
+1/3: running   [==================================================&amp;gt;] 
+2/3: running   [==================================================&amp;gt;] 
+3/3: running   [==================================================&amp;gt;] 
+verify: Service converged
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now if we list the containers of the service with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker service ps &amp;lt;service_name | service_ID&amp;gt;&lt;/code&gt;, we get:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ID             NAME      IMAGE           NODE           DESIRED STATE   CURRENT STATE            ERROR     PORTS
+7ihrx5jn31fr   test.1    alpine:latest   ubuntu         Running         Running 11 minutes ago             
+z6ctn65c04h6   test.2    alpine:latest   ubuntuserver   Running         Running 32 seconds ago             
+ahmdt70a0je5   test.3    alpine:latest   ubuntuserver   Running         Running 32 seconds ago
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;deleting-a-service&quot;&gt;Deleting a service&lt;/h4&gt;
+
+&lt;p&gt;Run the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker service rm &amp;lt;service_name | service_ID&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It will take a few seconds (30s) for the containers to be cleaned up. You can check the state with the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker container ls&lt;/code&gt; or with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker ps&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;more-detailed-info&quot;&gt;More detailed info&lt;/h4&gt;
+
+&lt;p&gt;Check these pages:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/engine/swarm/networking/#configure-service-discovery&quot;&gt;https://docs.docker.com/engine/swarm/networking/#configure-service-discovery&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/engine/swarm/ingress/&quot;&gt;https://docs.docker.com/engine/swarm/ingress/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">Containerization</summary></entry><entry><title type="html">Configuration management with Ansible</title><link href="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html" rel="alternate" type="text/html" title="Configuration management with Ansible" /><published>2021-09-21T00:00:00+02:00</published><updated>2021-09-21T00:00:00+02:00</updated><id>https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible</id><content type="html" xml:base="https://javiervidrua.github.io/blog/jekyll/update/2021/09/21/Configuration-management-with-ansible.html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Ansible is a tool that allows us to automate several things:&lt;/p&gt;
 &lt;ul&gt;
