@@ -166,15 +166,15 @@
 </code></pre></div></div>
 
 <p>Run a Python3 program that’s on the current working directory on a Python3 container and remove the container when the program finishes:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src python:3 python/src/program.py
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/src python:3 python/src/program.py
 </code></pre></div></div>
 
 <p>Start a Python3 container in iteractive mode (open the interpreter shell):</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src python:3
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/src python:3
 </code></pre></div></div>
 
 <p>Start a Python3 container and open a Bash shell:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/src python:3 /bin/bash
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/src python:3 /bin/bash
 </code></pre></div></div>
 
 <p>Create a Dockerfile from the base image of Python3 and add numpy to it, then build the image from the Dockerfile of the current working directory (<em>.</em>):</p>
@@ -187,11 +187,11 @@ RUN pip3 install numpy
 </code></pre></div></div>
 
 <p>Start an Nginx container to serve files of the current working directory, forwarding the port 80 of the host to the port 80 of the container. As Nginx is a web server, it will keep running until we stop it:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/usr/share/nginx/html <span class="nt">-p</span> 80:80 nginx:latest
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/usr/share/nginx/html <span class="nt">-p</span> 80:80 nginx:latest
 </code></pre></div></div>
 
 <p>The same as the last one, but run the container in background mode (<em>-d</em> for <em>daemon</em>):</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/usr/share/nginx/html <span class="nt">-p</span> 80:80 <span class="nt">-d</span> nginx:latest
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/usr/share/nginx/html <span class="nt">-p</span> 80:80 <span class="nt">-d</span> nginx:latest
 </code></pre></div></div>
 
 <p>Open a shell on a container running in the background:</p>
